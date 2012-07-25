@@ -5,7 +5,3 @@ one:
   category: MyString
   user: one (User)
 
-two:
-  description: yourText
-  category: yourString
-  user: two (User)
