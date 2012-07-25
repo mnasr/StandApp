@@ -1,5 +1,5 @@
 class EntriesController < ApplicationController
-  before_filter :authenticate_user!
+#before_filter :authenticate_user!
 
   # GET /entries
   # GET /entries.json
