@@ -46,4 +46,4 @@ class EntriesControllerTest < ActionController::TestCase
 
     assert_redirected_to entries_path
   end
-end
+end 

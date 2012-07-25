@@ -3,11 +3,9 @@
 one:
   description: MyText
   category: MyString
-  user_id: 1
-  ticket_id: 1
+  user: one (User)
 
 two:
-  description: MyText
-  category: MyString
-  user_id: 1
-  ticket_id: 1
+  description: yourText
+  category: yourString
+  user: two (User)
