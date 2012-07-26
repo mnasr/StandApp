@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20120724071239) do
 
   create_table "users", :force => true do |t|
     t.string   "fullname"
+    t.boolean  "admin"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "email",                  :default => "", :null => false
