@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :fullname
   validates_format_of :email, :with => /^([^@\s]+)@((?:[monaqasat]+\.)+[a-z]{2,})$/i
+
 end

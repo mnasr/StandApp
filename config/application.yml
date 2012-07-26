@@ -1,0 +1,11 @@
+defaults: &defaults
+  scrum_master_period: 2
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
