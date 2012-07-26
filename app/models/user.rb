@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :fullname, :admin
+  validates_format_of :email, :with => /^([^@\s]+)@((?:[monaqasat]+\.)+[a-z]{2,})$/i
+
   before_destroy :ensure_an_admin_remains
   has_many :entries 
 
@@ -19,4 +21,4 @@ class User < ActiveRecord::Base
       self.errors.add(:base, "Cant delete the last user that is also an admin")
     end
   end
-end   
+end

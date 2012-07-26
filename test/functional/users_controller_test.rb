@@ -38,8 +38,14 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should update user" do
-    put :update, :id => @user, :user => { :email => @user.email, :fullname => @user.fullname }
+    put :update, :id => @user, :user => { :email => "mnasr@monaqasat.com" }
     assert_redirected_to user_path(assigns(:user))
+  end
+
+  test "should not be able to update user" do
+    put :update, :id => @user, :user => { :email => "mnasr@hotmail.com" }
+    assert ! @user.valid?
+    assert_equal ["Email is invalid"], @user.errors.full_messages
   end
 
   test "should destroy user" do
