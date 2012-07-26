@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724071239) do
+ActiveRecord::Schema.define(:version => 20120726103642) do
 
   create_table "entries", :force => true do |t|
     t.text     "description"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(:version => 20120724071239) do
     t.integer  "ticket_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "tracks", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
