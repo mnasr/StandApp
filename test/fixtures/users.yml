@@ -3,7 +3,14 @@
 one:
   fullname: MyString
   email: MyString
+  admin: false
 
 two:
-  fullname: MString
-  email: MString
+  fullname: yourstring
+  email: yourstring
+  admin: false
+
+three:
+  fullname: Admin
+  email: admin@example.com
+  admin: true

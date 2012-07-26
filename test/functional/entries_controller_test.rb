@@ -3,6 +3,7 @@ require 'test_helper'
 class EntriesControllerTest < ActionController::TestCase
   setup do
     @entry = entries(:one)
+    @user = User.create(:email => "example@monaqasat.com", :fullname => "Bryan Adams", :password => "12345678", :password_confirmation => "12345678")
   end
 
   test "should get index" do
@@ -18,10 +19,16 @@ class EntriesControllerTest < ActionController::TestCase
 
   test "should create entry" do
     assert_difference('Entry.count') do
-      post :create, :entry => { :category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @entry.user_id }
+      post :create, :entry => { :category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @user.id }
     end
 
     assert_redirected_to entry_path(assigns(:entry))
+  end
+
+  test "should not be able to create an entry for the same user" do
+    assert_difference('Entry.count', 0) do
+      post :create, :entry => { :category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @entry.user_id }
+    end
   end
 
   test "should show entry" do
@@ -46,4 +53,4 @@ class EntriesControllerTest < ActionController::TestCase
 
     assert_redirected_to entries_path
   end
-end
+end 
