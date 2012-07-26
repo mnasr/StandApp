@@ -17,7 +17,7 @@
 
 <p>
   <b>Ticket:</b>
-  <%= @entry.ticket_id %>
+  <%= link_to(@entry.ticket_id, format_ticket_id_to_url(@entry.ticket_id)) %>
 </p>
 
 
