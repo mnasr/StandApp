@@ -9,7 +9,7 @@ gem 'sqlite3'
 
 gem 'json'
  
-gem 'settingslogic'
+gem 'settingslogic', '2.0.8'
 
 # Gems used only for assets and not required
 # in production environments by default.
