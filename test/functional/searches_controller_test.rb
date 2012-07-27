@@ -10,6 +10,9 @@ class SearchesControllerTest < ActionController::TestCase
     post :create, :search => "nasr@monaqasat.com"
     assert assigns(:results)
   end
-end
- 
-
+    test "search result should not be empty" do
+  	post :create, :search => ""
+    assert_equal 0, results.size
+    
+    end
+end 
