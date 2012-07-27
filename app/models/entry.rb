@@ -2,6 +2,10 @@ class Entry < ActiveRecord::Base
   attr_accessible :category, :description, :ticket_id, :user_id
   belongs_to :user
 
+  validates :description, :presence => true
+  validates :category, :presence => true
+  validates :user_id, :presence => true
+
   validates :user_id, :uniqueness => {:message => 'has already an entry for today. Come back tomorrow'}, :unless => :records_for_today?
 
   private
