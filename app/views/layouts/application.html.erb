@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>StandApp</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-<%= yield %>
+	<head>
+	  <title>StandApp</title>
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
+		<% if user_signed_in? %>
+			<div>Welcome <%= link_to current_user.email, current_user %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %></div>
+		<% end %>
 
-</body>
+		<p id="notice"><%= notice %></p>
+		<p id="alert"><%= alert %></p>
+		<%= yield %>
+
+	</body>
 </html>
