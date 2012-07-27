@@ -3,7 +3,7 @@ module EntriesHelper
 		if ticket_id.blank?
 			return ""
 		end
-		ticket_url = "http://dev.nuserv.com/issues/"
+		ticket_url = Settings.redmine_url
 		ticket_url = ticket_url + ticket_id.to_s
 		ticket_url
 	end

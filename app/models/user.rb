@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :tracks
 
   def self.scrum_master
-    Track.where("start_date > ? AND end_date < ?", Time.now.beginning_of_week, Time.now.end_of_week + 1.week).first.user
+    Track.where("start_date > ? AND end_date < ?", Time.now.beginning_of_week, Time.now.end_of_week + Settings.scrum_master_period.to_i.week).first.user
   end
 
   def pick_user_as_new_scrum_master
@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
     track = self.tracks.last
     if track.end_date <= DateTime.now
       new_scrum_master_id = pick_user_as_new_scrum_master
-      Track.create(:start_date => track.end_date, :end_date => (track.end_date + 1.week), :user_id => new_scrum_master_id)
+      Track.create(:start_date => track.end_date, :end_date => (track.end_date + Settings.scrum_master_period.to_i.week), :user_id => new_scrum_master_id)
     end 
   end 
 
