@@ -4,6 +4,7 @@ class EntriesControllerTest < ActionController::TestCase
   setup do
     @entry = entries(:one)
     @user = User.create(:email => "example@monaqasat.com", :fullname => "Bryan Adams", :password => "12345678", :password_confirmation => "12345678")
+    sign_in @user
   end
 
   test "should get index" do
