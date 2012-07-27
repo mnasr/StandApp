@@ -7,4 +7,8 @@ module EntriesHelper
 		ticket_url = ticket_url + ticket_id.to_s
 		ticket_url
 	end
+  
+  def all_users
+    @users = User.all
+  end
 end

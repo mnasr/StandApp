@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :category %><br />
-    <%= f.text_field :category %>
+    <%= f.select(:category, Entry::CATEGORIES, {:prompt => 'Select a category'}) %>
   </div>
   <div class="field">
     <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
+    <%= f.select(:user_id, all_users.map{|user| [user.email, user.id]}, {:prompt => 'Select a user'}) %>
   </div>
   <div class="field">
     <%= f.label :ticket_id %><br />

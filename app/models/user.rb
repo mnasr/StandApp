@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
 
   def check_and_assign_if_date_expired
     track = self.tracks.first
-    if track.end_date <= DateTime.now
+    if track.present? && track.end_date <= DateTime.now
       new_scrum_master_id = pick_user_as_new_scrum_master
       Track.create(:start_date => track.end_date, :end_date => (track.end_date + Settings.scrum_master_period.to_i.week), :user_id => new_scrum_master_id)
     end 

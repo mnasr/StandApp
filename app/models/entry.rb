@@ -1,4 +1,5 @@
 class Entry < ActiveRecord::Base
+  CATEGORIES = ["Bug", "Chore", "Feature", "Support", "R&D"]
   attr_accessible :category, :description, :ticket_id, :user_id
   belongs_to :user
 
