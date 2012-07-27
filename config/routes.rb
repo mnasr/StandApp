@@ -1,6 +1,8 @@
 StandApp::Application.routes.draw do
   devise_for :users
 
+  resource :search
+
   resources :entries
 
   resources :users

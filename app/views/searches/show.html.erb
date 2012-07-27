@@ -1,0 +1,17 @@
+<h1>Results</h1>
+
+<table>
+  <tr>
+    <th>Found <%= pluralize(@results.size, "result") %></th>
+  </tr>
+
+<% @results.each do |result| %>
+  <tr>
+		<% if result.is_a?(User)%>
+			<td>User: <%= result.email %></td>
+		<% elsif result.is_a?(Entry) %>
+			<td>Entry: <%= result.description %></td>
+		<% end %>
+  </tr>
+<% end %>
+</table>
