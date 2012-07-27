@@ -24,9 +24,6 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to users_url
   end
 
-  #test "check if user is an admin" do
-   # assert 
-
   test "should show user" do
     get :show, :id => @user
     assert_response :success
