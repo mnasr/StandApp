@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   before_destroy :ensure_an_admin_remains
   has_many :entries
   has_many :tracks
+  
 
   def self.scrum_master
     track = Track.where("start_date > ? AND end_date < ?", Time.now.beginning_of_week, Time.now.end_of_week + Settings.scrum_master_period.to_i.week).first

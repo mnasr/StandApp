@@ -9,7 +9,15 @@ class Entry < ActiveRecord::Base
 
   validates :user_id, :uniqueness => {:message => 'has already an entry for today. Come back tomorrow'}, :unless => :records_for_today?
 
-  private
+
+  def self.check_and_send_an_email_for_user_with_no_entry
+    users = User.all
+    users.each do | t |
+      usersid = t.records_for_today?
+    end 
+  end
+
+
   def records_for_today?
     Entry.exists?(:user_id => self.user_id, :created_at => Time.now.day)
   end

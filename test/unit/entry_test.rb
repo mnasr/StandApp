@@ -17,5 +17,10 @@ class EntryTest < ActiveSupport::TestCase
     entry = Entry.create
     assert_equal ["Description can't be blank", "Category can't be blank", "User can't be blank"], entry.errors.full_messages
   end
+
+  test "Should only get users with no entry" do
+     assert_equal nil, Entry.check_and_send_an_email_for_user_with_no_entry
+  end 
+
 end 
 
