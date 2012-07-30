@@ -41,9 +41,11 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should not be able to update user" do
-    put :update, :id => @user, :user => { :email => "mnasr@hotmail.com" }
-    assert ! @user.valid?
-    assert_equal ["Email is invalid"], @user.errors.full_messages
+    user_with_invalid_email = users(:two)
+    
+    put :update, :id => user_with_invalid_email, :user => { :email => "mnasr@hotmail.com" }
+    assert ! user_with_invalid_email.valid?
+    assert_equal ["Email is invalid"], user_with_invalid_email.errors.full_messages
   end
 
   test "should destroy user" do
