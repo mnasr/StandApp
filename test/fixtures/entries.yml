@@ -2,6 +2,12 @@
 
 one:
   description: MyText
-  category: MyString
-  user: one (User)
+  category: chore
+  user_id: one
+  created_at: <%= (Time.now).to_s(:db) %>
 
+two:
+  description: MyText
+  category: bug
+  user_id: two
+  created_at: <%= (Time.now).to_s(:db) %>

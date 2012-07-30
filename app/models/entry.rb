@@ -22,14 +22,7 @@ class Entry < ActiveRecord::Base
 
 
   def self.check_for_users_with_no_entries
-    users = User.pluck(:id)
-    users.each do |user|
-      entry = Entry.exists?(created_at: Time.now.day)
-       if (entry == false)
-        users_we = users
-        puts users
-      end
-    end 
+    (User.all - User.joins(:entries).where(["entries.created_at >= ?", Time.now.at_midnight]).all)
   end
 
   def records_for_today?

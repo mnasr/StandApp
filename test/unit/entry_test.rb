@@ -22,15 +22,22 @@ class EntryTest < ActiveSupport::TestCase
   test "Should send email after 12 for late users" do 
      mail = MailReminder.late(@user)
      assert_equal "StandApp Reminder", mail.subject
-     assert_equal ["dave@example.org"], mail.to
+     assert_equal ["nasr@monaqasat.com"], mail.to
      assert_equal ["depot@example.com"], mail.from
   end
 
   test "should return [] if all users created entries today" do
-     assert_equal [], Entry.check_for_users_with_no_entries
+    assert_equal [], Entry.check_for_users_with_no_entries
+  end
+
+  test "should return a single user when all other users have created entries today" do
+    @user.entries.create
+    @user_two.entries.create
+    assert_equal [users(:three)], Entry.check_for_users_with_no_entries
   end
 
   test "should return a list of users who did not create entries today" do
-     assert Entry.check_for_users_with_no_entries.include?(@user_two)
+    User.all.each {|user| user.entries.delete_all }
+    assert Entry.check_for_users_with_no_entries.include?(@user_two)
   end
 end
