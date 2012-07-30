@@ -7,8 +7,8 @@ class MailReminder < ActionMailer::Base
   #
   #   en.mail_reminder.late.subject
   #
-  def late
-  	mail to: "to@example.org"
-
+  def late(user)
+   @user = user
+   mail to: user.email, subject: "StandApp Reminder"
   end
 end

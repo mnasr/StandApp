@@ -10,13 +10,27 @@ class Entry < ActiveRecord::Base
   validates :user_id, :uniqueness => {:message => 'has already an entry for today. Come back tomorrow'}, :unless => :records_for_today?
 
 
-  def self.check_and_send_an_email_for_user_with_no_entry
-    users = User.all
-    users.each do | t |
-      usersid = t.records_for_today?
-    end 
+  def self.send_email_on_late_submission
+    if Time.now.hour > Settings.deadline_time
+      late_users = User.all 
+      late_users = late_users.check_for_users_with_no_entries
+      late_users.each do |v|
+        MailReminder.late(v).deliver
+      end 
+    end  
   end
 
+
+  def self.check_for_users_with_no_entries
+    users = User.pluck(:id)
+    users.each do |user|
+      entry = Entry.exists?(created_at: Time.now.day)
+       if (entry == false)
+        users_we = users
+        puts users
+      end
+    end 
+  end
 
   def records_for_today?
     Entry.exists?(:user_id => self.user_id, :created_at => Time.now.day)

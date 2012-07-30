@@ -1,6 +1,7 @@
 defaults: &defaults
   scrum_master_period: 1
   redmine_url: "http://dev.nuserv.com/issues/"
+  deadline_time: 11
 
 development:
   <<: *defaults
