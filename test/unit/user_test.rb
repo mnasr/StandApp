@@ -33,10 +33,9 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "return nil if there are no scrum masters assigned" do
-    Track.delete_all
+    @track.update_attributes(start_date: Time.now - 2.weeks, end_date: Time.now - 1.weeks)
   	assert_equal nil, User.scrum_master
   end
-  
 
   test "assign new scrum master if expired" do
   	@track.update_attributes(:start_date => Time.now - 3.weeks, :end_date => Time.now - 2.weeks, :user_id => @user.id)

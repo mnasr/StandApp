@@ -2,15 +2,15 @@
 
 one:
   fullname: MyString
-  email: MyString
+  email: nasr@monaqasat.com
   admin: false
 
 two:
   fullname: yourstring
-  email: yourstring
+  email: mona@hotmail.com
   admin: false
 
 three:
   fullname: Admin
-  email: admin@example.com
+  email: admin@monaqasat.com
   admin: true

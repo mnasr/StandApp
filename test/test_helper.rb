@@ -3,6 +3,9 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
+  use_transactional_fixtures = true
+  use_instantiated_fixtures = false
+ 
   fixtures :all
 end
 

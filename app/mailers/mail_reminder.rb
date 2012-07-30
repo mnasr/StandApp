@@ -8,9 +8,7 @@ class MailReminder < ActionMailer::Base
   #   en.mail_reminder.late.subject
   #
   def late
-
-   mail to: "to@example.org"
-
+  	mail to: "to@example.org"
 
   end
 end

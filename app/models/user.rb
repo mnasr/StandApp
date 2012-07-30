@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   
 
   def self.scrum_master
-    track = Track.where("start_date > ? AND end_date < ?", Time.now.beginning_of_week, Time.now.end_of_week + Settings.scrum_master_period.to_i.week).first
+    track = Track.where("start_date >= ? AND end_date <= ?", Time.now.beginning_of_week, Time.now + Settings.scrum_master_period.to_i.week).first
     track.user if track.present?
   end
 
