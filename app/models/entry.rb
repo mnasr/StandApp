@@ -22,7 +22,10 @@ class Entry < ActiveRecord::Base
 
 
   def self.check_for_users_with_no_entries
-    (User.all - User.joins(:entries).where(["entries.created_at >= ?", Time.now.at_midnight]).all)
+     #User.joins(:entries).where(["entries.created_at >= ?", Time.now.at_midnight]).all
+
+     (User.all - User.find(:all, :include => :entries,:joins => "INNER JOIN entries ON user_id = entries.user_id"))
+
   end
 
   def records_for_today?
