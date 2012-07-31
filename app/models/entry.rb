@@ -9,6 +9,7 @@ class Entry < ActiveRecord::Base
 
   validates :user_id, :uniqueness => {:message => 'has already an entry for today. Come back tomorrow'}, :unless => :records_for_today?
 
+  scope :today, where('created_at >= ? AND created_at <= ?', Date.today.beginning_of_day, Date.today.end_of_day)
 
   def self.send_email_on_late_submission
     if Time.now.hour > Settings.deadline_time
@@ -17,15 +18,13 @@ class Entry < ActiveRecord::Base
       late_users.each do |v|
         MailReminder.late(v).deliver
       end 
-    end  
+    end
   end
 
-
   def self.check_for_users_with_no_entries
-     #User.joins(:entries).where(["entries.created_at >= ?", Time.now.at_midnight]).all
-
-     (User.all - User.find(:all, :include => :entries,:joins => "INNER JOIN entries ON user_id = entries.user_id"))
-
+    User.all.select do |user|
+      user.entries.today.blank?
+    end
   end
 
   def records_for_today?

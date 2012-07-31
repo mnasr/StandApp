@@ -2,11 +2,8 @@ require 'test_helper'
 
 class EntryTest < ActiveSupport::TestCase
   setup do
-    @current_time = Time.now
     @user = users(:one)
     @user_two = users(:two)
-    @entry = entries(:one)
-    @entry.update_attribute(:user, @user)
   end
 
   test "A user should not be able to have more than one entry for the same day" do
@@ -31,8 +28,8 @@ class EntryTest < ActiveSupport::TestCase
   end
 
   test "should return a single user when all other users have created entries today" do
-    @user.entries.create
-    @user_two.entries.create
+    entry = users(:three).entries.first
+    entry.update_attribute(:created_at, 2.days.ago)
     assert_equal [users(:three)], Entry.check_for_users_with_no_entries
   end
 
