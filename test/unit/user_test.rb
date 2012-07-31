@@ -40,11 +40,13 @@ class UserTest < ActiveSupport::TestCase
 
   test "should validate unique email" do
     user1 = User.new(:email => "mona@monaqasat.com", :fullname => "Mona Nasr", :password => "secret", :password_confirmation => "secret")
-    user1.errors[:email]
+    user2 = User.new(:email => "mona@monaqasat.com", :fullname => "M Nasr", :password => "secret", :password_confirmation => "secret")
+    user2.errors[:email]
   end
 
   test "should validate unique fullname" do
-    user2 = User.new(:email => "mona@monaqasat.com", :fullname => "Mona Nasr", :password => "secret", :password_confirmation => "secret")
+    user1 = User.new(:email => "mona@monaqasat.com", :fullname => "Mona Nasr", :password => "secret", :password_confirmation => "secret")
+    user2 = User.new(:email => "nasr@monaqasat.com", :fullname => "Mona Nasr", :password => "secret", :password_confirmation => "secret")
     user2.errors[:fullname]
   end
 
