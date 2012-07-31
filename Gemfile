@@ -1,6 +1,7 @@
-source :rubygems
+source 'http://rubygems.org'
 
-gem 'rails', '3.2.6'
+ruby '1.9.3'
+gem  'rails', '3.2.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -25,6 +26,7 @@ end
 
 gem 'jquery-rails'
 gem 'devise'
+gem 'heroku'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
