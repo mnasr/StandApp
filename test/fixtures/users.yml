@@ -1,16 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
 one:
+  id: 1
   fullname: MyString
   email: nasr@monaqasat.com
   admin: false
 
 two:
+  id: 2
   fullname: yourstring
   email: mona@hotmail.com
   admin: false
 
 three:
+  id: 3
   fullname: Admin
   email: admin@monaqasat.com
   admin: true
