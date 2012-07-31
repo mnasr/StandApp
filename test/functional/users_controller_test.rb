@@ -21,8 +21,6 @@ class UsersControllerTest < ActionController::TestCase
     assert_difference('User.count') do
       post :create, :user => { :email => "costa@monaqasat.com", :fullname => "costa", :password => "12345678", :password_confirmation => "12345678" }
     end
-    
-    assert_redirected_to users_url
   end
 
   test "should show user" do
@@ -37,7 +35,6 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should update user" do
     put :update, :id => @user, :user => { :email => "mnasr@monaqasat.com" }
-    assert_redirected_to user_path(assigns(:user))
   end
 
   test "should not be able to update user" do
