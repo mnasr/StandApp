@@ -8,6 +8,10 @@ class UserTest < ActiveSupport::TestCase
 		@user.tracks << @track
  		@good_user = User.create(:email => 'mark@monaqasat.com', :fullname => "Mark Anthony", :password => "12345678", :password_confirmation => "12345678")
  		@bad_user = User.create(:email => 'bill@microsoft.com', :fullname => "Bill Gates", :password => "12345678", :password_confirmation => "12345678")
+    @fullname_user = User.new(:email => 'nasr@monaqasat.com', :fullname => "Mona Nasr", :password => "12345678", :password_confirmation => "12345678")
+    @nofullname_user = User.new(:email => 'mnasr@monaqasat.com', :fullname => "", :password => "12345678", :password_confirmation => "12345678")
+    @email_user = User.new(:email => 'mn@monaqasat.com', :fullname => "MONA NASR", :password => "12345678", :password_confirmation => "12345678")
+    @noemail_user = User.new(:email => '', :fullname => "MONA NASR", :password => "12345678", :password_confirmation => "12345678")
 	end
 
 	test "User should use monaqasat email address" do
@@ -17,6 +21,32 @@ class UserTest < ActiveSupport::TestCase
 	test "User should not be allowed to use non-monaqasat email address" do
 		assert ! @bad_user.valid?
 	end
+
+  test "User's fullname should be present" do
+    assert @fullname_user.fullname.present?
+  end
+
+  test "User's fullname should not be empty" do
+    assert ! @nofullname_user.fullname.present?
+  end
+
+  test "User's email should be present" do
+    assert @email_user.email.present?
+  end
+
+  test "User's email should not be empty" do
+    assert ! @noemail_user.email.present?
+  end
+
+  test "should validate unique email" do
+    user1 = User.new(:email => "mona@monaqasat.com", :fullname => "Mona Nasr", :password => "secret", :password_confirmation => "secret")
+    user1.errors[:email]
+  end
+
+  test "should validate unique fullname" do
+    user2 = User.new(:email => "mona@monaqasat.com", :fullname => "Mona Nasr", :password => "secret", :password_confirmation => "secret")
+    user2.errors[:fullname]
+  end
 
   test "At least one user is assigned as an admin" do
     user = User.destroy(@user.id)
