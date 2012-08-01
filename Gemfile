@@ -31,6 +31,7 @@ end
 
 gem 'jquery-rails'
 gem 'devise'
+
 gem 'heroku'
 gem 'twitter-bootstrap-rails'
 
