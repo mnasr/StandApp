@@ -28,6 +28,6 @@ class Entry < ActiveRecord::Base
   end
 
   def records_for_today?
-    Entry.exists?(:user_id => self.user_id, :created_at => Time.now.day)
+    Entry.exists?(:user_id => self.user_id, :created_at => Date.today)
   end
 end

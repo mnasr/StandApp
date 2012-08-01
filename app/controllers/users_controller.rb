@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  #before_filter :authenticate_user!
+  before_filter :check_if_admin
   # GET /users
   # GET /users.json
   def index
@@ -86,5 +86,12 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  def check_if_admin
+     if current_user.admin.blank? 
+       redirect_to entries_path, :alert => 'You are not allowed to access users content.'
+     end
   end
 end
