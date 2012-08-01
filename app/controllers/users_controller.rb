@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :check_if_admin
-  # GET /users
-  # GET /users.json
+ 
+before_filter :check_if_admin
+
   def index
     @users = User.all
 

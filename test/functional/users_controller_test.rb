@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
+  
   setup do
-    @user = users(:one)
+    @user = users(:three)
     sign_in @user
   end
 
@@ -21,7 +22,6 @@ class UsersControllerTest < ActionController::TestCase
     assert_difference('User.count') do
       post :create, :user => { :email => "costa@monaqasat.com", :fullname => "costa", :password => "12345678", :password_confirmation => "12345678" }
     end
-    
     assert_redirected_to users_url
   end
 
@@ -29,6 +29,7 @@ class UsersControllerTest < ActionController::TestCase
     get :show, :id => @user
     assert_response :success
   end
+
 
   test "should get edit" do
     get :edit, :id => @user
@@ -50,6 +51,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should destroy user" do
     assert_difference('User.count', -1) do
+      session[:user_id] = @user.id
       delete :destroy, :id => @user
     end
 
