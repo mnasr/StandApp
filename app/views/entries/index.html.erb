@@ -15,7 +15,7 @@
   <tr>
     <td><%= entry.description %></td>
     <td><%= entry.category %></td>
-    <td><%= entry.user_id %></td>
+    <td><%= entry.user.email %></td>
     <td><%= entry.ticket_id %></td>
     <td><%= link_to 'Show', entry %></td>
     <td><%= link_to 'Edit', edit_entry_path(entry) %></td>
