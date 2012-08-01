@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>StandApp</title>
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
+		<% if user_signed_in? %>
+			<div>Welcome <%= link_to current_user.email, current_user %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %></div>
+		<% end %>
+		
+		<div id="navigation">
+			<ul>
+				<li><%= link_to "All entries", entries_path %></li>
+				<li><%= link_to "All users", users_path %></li>
+				<li><%= link_to "Search", new_search_path %></li>
+			</ul>
+		</div>
+
+		<p id="notice"><%= notice %></p>
+		<p id="alert"><%= alert %></p>
+		<%= yield %>
+
+	</body>
+</html>
