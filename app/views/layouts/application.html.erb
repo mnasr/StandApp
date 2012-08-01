@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "StandApp" %></title>
-    
+
 
     <%= csrf_meta_tags %>
 
@@ -50,12 +50,17 @@
           <div class="container-fluid nav-collapse">
            <div id="navigation">
             <div class="wrapper wrapper-home">
-            <ul class="nav">
-             <li><%= link_to "All entries", entries_path %></li>
-             <li><%= link_to "All users", users_path %></li>
-             <li><%= link_to "Search", new_search_path %></li>
-            </ul>
-          </div>
+              <ul class="nav">
+               <li><%= link_to "All entries", entries_path %></li>
+               <li><%= link_to "All users", users_path %></li>
+               <li><%= link_to "Search", new_search_path %></li>
+              </ul>
+            </div>
+            <% if user_signed_in? %>
+              <div class="authorization-menu">
+                Welcome <%= link_to current_user.email, current_user %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %>
+              </div>
+            <% end %>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -64,14 +69,13 @@
 
     <div class="container">
       <div class="row-fluid">
-        <div class="span4">
-        <% if user_signed_in? %>
-      <div>Welcome <%= link_to current_user.email, current_user %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %></div>
-    <% end %>
+        <div class="span12">
+          
+
           <p id="notice"><%= notice %></p>
           <p id="alert"><%= alert %></p>
-          <%= yield %>
         </div>
+        <%= yield %>
       </div><!--/row-->
 
       <footer>

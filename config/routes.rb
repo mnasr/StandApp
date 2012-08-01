@@ -7,6 +7,8 @@ StandApp::Application.routes.draw do
 
   resources :users
 
+  match '/entries/:id/edit' => 'entries#edit', :via => :post
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
