@@ -57,7 +57,7 @@
               </ul>
             </div>
             <% if user_signed_in? %>
-              <div class="authorization-menu">
+              <div class="authoriza-menu">
                 Welcome <%= link_to current_user.email, current_user %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %>
               </div>
             <% end %>
