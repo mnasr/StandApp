@@ -42,12 +42,8 @@ StandApp::Application.configure do
   config.action_mailer.smtp_settings = {
                                                 address:"smtp.gmail.com",
                                                 port:587,
-                                                domain:"domain.of.sender.net",
                                                 authentication: "plain",
-                                                user_name:"dave",
-                                                password: "secret",
+                                                user_name:"careers@beirutrb.org",
+                                                password: "monaqasat2012",
                                                 enable_starttls_auto: true }
-
-
-
 end
