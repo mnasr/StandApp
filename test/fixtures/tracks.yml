@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  user_id: one
+  user_id: 1
   start_date: <%= (Time.now - 4.weeks).to_s(:db) %>
   end_date: <%= (Time.now - 3.weeks).to_s(:db) %>
 
 two:
-  user_id: three
+  user_id: 3
   start_date: <%= (Time.now.beginning_of_week).to_s(:db) %>
   end_date: <%= (Time.now).to_s(:db) %>

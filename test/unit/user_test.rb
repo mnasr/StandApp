@@ -79,4 +79,12 @@ class UserTest < ActiveSupport::TestCase
   	assert_not_equal @user, User.scrum_master
  
   end
+
+  test "user is scrum master" do
+    assert @user.is_scrum_master?
+  end
+
+  test "user is not scrum master" do
+    assert ! users(:one).is_scrum_master?
+  end
 end

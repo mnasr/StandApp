@@ -10,8 +10,8 @@
     <%= f.select(:category, Entry::CATEGORIES, {:prompt => 'Select a category'}) %>
   </div>
   <div class="field">
-    <%= f.label :user_email %><br />
-    <%= f.select(:user_email, all_users.map{|user| [user.email, user.id]}, {:prompt => 'Select a user'}) %>
+    <%= f.label :user_id %><br />
+    <%= f.select(:user_id, all_users.map{|user| [user.email, user.id]}, {:prompt => 'Select a user'}) %>
   </div>
   <div class="field">
     <%= f.label :ticket_id %><br />

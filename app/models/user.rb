@@ -15,10 +15,10 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates_format_of :email, :with => /^([^@\s]+)@((?:[monaqasat]+\.)+[a-z]{2,})$/i
   before_destroy :ensure_an_admin_remains
+  
   has_many :entries
   has_many :tracks
-  
-  
+  has_many :absences
 
   def self.scrum_master
     track = Track.where("start_date >= ? AND end_date <= ?", Time.now.beginning_of_week, Time.now + Settings.scrum_master_period.to_i.week).first
@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
     user_ids.sample
   end
 
+  def is_scrum_master?
+    self == User.scrum_master
+  end
+    
   private 
 
   def ensure_an_admin_remains
@@ -46,4 +50,5 @@ class User < ActiveRecord::Base
       self.errors.add(:base, "Cant delete the last user that is also an admin")
     end
   end
+
 end

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
  
-before_filter :check_if_admin
+before_filter :check_if_admin, :except => [:index]
+before_filter :check_if_scrum_master, :only => [:index]
 
   def index
     @users = User.all
@@ -90,8 +91,14 @@ before_filter :check_if_admin
   
   private
   def check_if_admin
-     if current_user.admin.blank? 
-       redirect_to entries_path, :alert => 'You are not allowed to access users content.'
-     end
+    if current_user.admin.blank?
+      redirect_to entries_path, :alert => 'You are not allowed to access users content.'
+    end
+  end
+
+  def check_if_scrum_master
+    if current_user.is_scrum_master?
+      redirect_to entries_path, :alert => 'Only the scrum master is allowed to access users'
+    end
   end
 end
