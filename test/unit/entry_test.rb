@@ -42,4 +42,4 @@ class EntryTest < ActiveSupport::TestCase
     Entry.send_email_on_late_submission
     assert_equal 1, MailReminder.deliveries.size
   end
-endw
+end 
