@@ -11,7 +11,7 @@
   </div>
   <div class="field">
     <%= f.label :user_id %><br />
-    <%= f.select(:user_id, all_users.map{|user| [user.email, user.id]}, {:prompt => 'Select a user'}) %>
+    <%= f.select(:user_id, all_users.map{|user| [user.email, user.id]}, :selected => current_user.id ) %>
   </div>
   <div class="field">
     <%= f.label :ticket_id %><br />

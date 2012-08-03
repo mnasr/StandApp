@@ -4,7 +4,7 @@ class EntriesController < ApplicationController
   # GET /entries.json
   def index
     @entries = Entry.all
-
+    @title   = "Listing entries"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @entries }

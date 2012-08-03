@@ -16,13 +16,6 @@ class EntryTest < ActiveSupport::TestCase
     assert_equal ["Description can't be blank", "Category can't be blank", "User can't be blank"], entry.errors.full_messages
   end
 
-  test "Should send email after 12 for late users" do 
-     mail = MailReminder.late(@user)
-     assert_equal "StandApp Reminder", mail.subject
-     assert_equal ["nasr@monaqasat.com"], mail.to
-     assert_equal ["depot@example.com"], mail.from
-  end
-
   test "should return [] if all users created entries today" do
     assert_equal [], Entry.check_for_users_with_no_entries
   end
@@ -37,4 +30,16 @@ class EntryTest < ActiveSupport::TestCase
     User.all.each {|user| user.entries.delete_all }
     assert Entry.check_for_users_with_no_entries.include?(@user_two)
   end
-end
+  
+  test "should send an email for late users" do
+    Entry.send_email_on_late_submission
+    assert_equal 0, MailReminder.deliveries.size
+  end
+  
+  test "Should send only 1 email" do
+    entry = users(:three).entries.first
+    entry.update_attribute(:created_at, 2.days.ago)
+    Entry.send_email_on_late_submission
+    assert_equal 1, MailReminder.deliveries.size
+  end
+endw

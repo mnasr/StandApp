@@ -8,6 +8,7 @@ gem  'rails', '3.2.7'
 group :development, :test do
   gem 'sqlite3'
 end
+
 group :production do
   gem 'pg'
 end
@@ -32,6 +33,8 @@ gem 'jquery-rails'
 gem 'devise'
 
 gem 'heroku'
+gem 'twitter-bootstrap-rails'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

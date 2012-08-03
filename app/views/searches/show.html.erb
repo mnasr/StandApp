@@ -1,8 +1,10 @@
 <h1>Results</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
+  	<div class="page-header">
     <th>Found <%= pluralize(@results.size, "result") %></th>
+  </div>
   </tr>
 
 <% @results.each do |result| %>
