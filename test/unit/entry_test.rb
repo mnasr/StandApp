@@ -4,6 +4,7 @@ class EntryTest < ActiveSupport::TestCase
   setup do
     @user = users(:one)
     @user_two = users(:two)
+    ActionMailer::Base.deliveries.clear
   end
 
   test "A user should not be able to have more than one entry for the same day" do
@@ -22,7 +23,8 @@ class EntryTest < ActiveSupport::TestCase
 
   test "should return a single user when all other users have created entries today" do
     entry = users(:three).entries.first
-    entry.update_attribute(:created_at, 2.days.ago)
+    entry.created_at = 2.days.ago
+    entry.save
     assert_equal [users(:three)], Entry.check_for_users_with_no_entries
   end
 
@@ -32,14 +34,22 @@ class EntryTest < ActiveSupport::TestCase
   end
   
   test "should send an email for late users" do
-    Entry.send_email_on_late_submission
-    assert_equal 0, MailReminder.deliveries.size
+    User.all.each { |user| user.entries.delete_all }
+
+    Timecop.travel(Time.local(2012, 9, 1, (Settings.deadline_time + 1), 0, 0)) do
+      Entry.send_email_on_late_submission
+      assert_equal User.count, MailReminder.deliveries.size
+    end
   end
   
-  test "Should send only 1 email" do
-    entry = users(:three).entries.first
-    entry.update_attribute(:created_at, 2.days.ago)
-    Entry.send_email_on_late_submission
-    assert_equal 1, MailReminder.deliveries.size
+  test "Should send only 1 email" do 
+
+    Timecop.travel(Time.local(2012, 9, 1, (Settings.deadline_time + 1), 0, 0)) do
+      entry = users(:three).entries.first
+      entry.created_at = 2.days.ago
+      entry.save
+      Entry.send_email_on_late_submission
+      assert_equal Entry.check_for_users_with_no_entries.size, MailReminder.deliveries.size
+    end
   end
-end 
+end
