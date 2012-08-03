@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   
   setup do
-    @user = users(:two)
+    @user = users(:three)
     sign_in @user
   end
 

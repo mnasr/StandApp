@@ -8,4 +8,4 @@ one:
 two:
   user_id: 3
   start_date: <%= (Time.now.beginning_of_week).to_s(:db) %>
-  end_date: <%= (Time.now).to_s(:db) %>
+  end_date: <%= (Time.now).to_s(:db) %> 

@@ -42,7 +42,8 @@ class EntryTest < ActiveSupport::TestCase
     end
   end
   
-  test "Should send only 1 email" do
+  test "Should send only 1 email" do 
+
     Timecop.travel(Time.local(2012, 9, 1, (Settings.deadline_time + 1), 0, 0)) do
       entry = users(:three).entries.first
       entry.created_at = 2.days.ago

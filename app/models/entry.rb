@@ -29,4 +29,6 @@ class Entry < ActiveRecord::Base
   def records_for_today?
     Entry.exists?(:user_id => self.user_id, :created_at => Date.today)
   end
+  
 end
+
