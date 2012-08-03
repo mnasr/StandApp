@@ -2,7 +2,9 @@ require 'test_helper'
 
 class AbsencesControllerTest < ActionController::TestCase
   setup do
-    @absence = absences(:one)
+    @absence = absences(:three)
+    @user = User.create(:email => "example@monaqasat.com", :fullname => "Bryan Adams", :password => "12345678", :password_confirmation => "12345678")
+    sign_in @user
   end
 
   test "should get index" do
@@ -18,7 +20,7 @@ class AbsencesControllerTest < ActionController::TestCase
 
   test "should create absence" do
     assert_difference('Absence.count') do
-      post :create, absence: {  }
+      post :create, absence: {:description => @absence.description}
     end
 
     assert_redirected_to absence_path(assigns(:absence))
@@ -35,7 +37,7 @@ class AbsencesControllerTest < ActionController::TestCase
   end
 
   test "should update absence" do
-    put :update, id: @absence, absence: {  }
+    put :update, id: @absence, absence: {:description => @absence.description}
     assert_redirected_to absence_path(assigns(:absence))
   end
 

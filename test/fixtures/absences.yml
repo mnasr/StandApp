@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  user: mona
-  description: holiday
+  user: one
+  description: MyText
 
 two:
   user: two
+  description: MyText
+
+three:
+  user: three
   description: MyText
