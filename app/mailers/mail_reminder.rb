@@ -1,5 +1,5 @@
 class MailReminder < ActionMailer::Base
-  default from: "<depot@example.com>"
+  default from: "<careers@beirutrb.org>"
 
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -8,7 +8,7 @@ class MailReminder < ActionMailer::Base
   #   en.mail_reminder.late.subject
   #
   def late(user)
-   @user = user
-   mail to: user.email, subject: "StandApp Reminder"
+    @user = user
+    mail to: user.email, subject: "StandApp Reminder"
   end
 end
