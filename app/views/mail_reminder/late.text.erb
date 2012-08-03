@@ -1,5 +1,9 @@
-Dear 
+Dear <%= @user.fullname %>
 
-This is to remind you that your did not submit an entry for <%= Time.now %>
+This is a reminder to submit an entry for <%= Date.today %>
 
-Your previous entry was
+<%= "Click here to "%><%= link_to "submit an entry", Settings.application_url %>
+
+Currently the scrum master is  <%= User.scrum_master %>
+
+
