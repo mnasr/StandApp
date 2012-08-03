@@ -24,12 +24,21 @@ class User < ActiveRecord::Base
     track = Track.where("start_date >= ? AND end_date <= ?", Time.now.beginning_of_week, Time.now + Settings.scrum_master_period.to_i.week).first
     track.user if track.present?
   end
+  
 
   def check_and_assign_if_date_expired
     track = self.tracks.first
     if track.present? && track.end_date <= DateTime.now
       new_scrum_master_id = pick_user_as_new_scrum_master
       Track.create(:start_date => track.end_date, :end_date => (track.end_date + Settings.scrum_master_period.to_i.week), :user_id => new_scrum_master_id)
+    end
+  end
+
+  def self.absent
+    absences = Absence.today
+    if absences.present?
+      user_ids = absences.collect {|absence| absence.user_id}
+      User.where("id IN (?)", user_ids)
     end
   end
 
@@ -51,4 +60,5 @@ class User < ActiveRecord::Base
     end
   end
 
-end
+
+end 

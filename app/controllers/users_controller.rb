@@ -101,4 +101,12 @@ before_filter :check_if_scrum_master, :only => [:index]
       redirect_to entries_path, :alert => 'Only the scrum master is allowed to access users'
     end
   end
+
+  def manage_list_of_absences
+    if current_user.is_scrum_master?
+      redirect_to users_path, :note => ''
+    
+    end
+  end
+
 end
