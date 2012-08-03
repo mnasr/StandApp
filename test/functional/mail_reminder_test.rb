@@ -6,6 +6,6 @@ class MailReminderTest < ActionMailer::TestCase
     assert_equal "StandApp Reminder", mail.subject
     assert_equal ["nasr@monaqasat.com"], mail.to
     assert_equal ["careers@beirutrb.org"], mail.from
-    assert_match /2012-08-03/, mail.body.encoded
+    assert_match /MyString/, mail.body.encoded
   end
 end
