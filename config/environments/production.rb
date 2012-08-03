@@ -1,6 +1,5 @@
 StandApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-
   # Code is not reloaded between requests
   config.cache_classes = true
 
@@ -61,7 +60,18 @@ StandApp::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.smtp_settings = {
+                                                address:"smtp.gmail.com",
+                                                port:587,
+                                                authentication: "plain",
+                                                domain: "user3",
+                                                user_name: "careers@beirutrb.org",
+                                                password: "monaqasat2012",
+                                                enable_starttls_auto: true }
 
 
   # Log the query plan for queries taking more than this (works
