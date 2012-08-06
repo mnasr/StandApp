@@ -1,8 +1,11 @@
-<h3>Dear </h3><%= @user.fullname %>
+<h3>Dear <%= @user.fullname %></h3>
 <p>
-This is a reminder to submit an entry for
+	This is a reminder to submit an entry for <%= Date.today %>
+</p> 
+<p>
+	Click here to <%= link_to "submit an entry", Settings.application_url %>
+</p> 
+<p>
+	Currently the scrum master is <%= User.scrum_master %>
 </p>
-<%= Date.today %>
-<p>
-Click here to
-</p> <%= link_to "submit an entry", Settings.application_url %>
+<p>MQ dev team</p>
