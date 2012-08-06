@@ -2,7 +2,7 @@ Dear <%= @user.fullname %>
 
 This is a reminder to submit an entry for <%= Date.today %>
 
-<%= "Click here to "%><%= link_to "submit an entry", Settings.application_url %>
+Click here to <%= link_to "submit an entry", Settings.application_url %>
 
 Currently the scrum master is  <%= User.scrum_master %>
 

@@ -1,0 +1,8 @@
+<h3>Dear </h3><%= @user.fullname %>
+<p>
+This is a reminder to submit an entry for
+</p>
+<%= Date.today %>
+<p>
+Click here to
+</p> <%= link_to "submit an entry", Settings.application_url %>
