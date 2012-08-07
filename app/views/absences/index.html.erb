@@ -1,7 +1,7 @@
  <% content_for :title, @title %>
 
 <div class="page-header">
-  <h1><%= @title %></h1>
+  <h1>Absences</h1>
 </div>
 
 <table class="table table-striped">
@@ -15,13 +15,13 @@
 
 <% @absences.each do |absence| %>
   <tr>
-    <td><%= link_to absence.description, absence %></td>
-    <td><%= button_to('Edit', edit_entry_path(entry), :class => 'btn btn-primary') %></td>
-    <td><%= button_to('Destroy', entry, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger') %></i> </td>
+    <td><%= absence.user_id %></td>
+    <td><%= absence.description %></td>
+    <td><%= link_to('Edit', edit_absence_path(absence), :class => 'btn btn-primary') %></td>
+    <td><%= link_to('Destroy', absence, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger') %></i> </td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Absence', new_entry_path %>
+ 

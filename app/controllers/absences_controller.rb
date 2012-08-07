@@ -1,6 +1,7 @@
 class AbsencesController < ApplicationController
   # GET /absences
   # GET /absences.json
+
   def index
     @absences = Absence.all
 

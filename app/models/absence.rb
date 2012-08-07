@@ -1,5 +1,5 @@
 class Absence < ActiveRecord::Base
-  attr_accessible :description, :user
+  attr_accessible :description, :user_id
 
   belongs_to :user
   validates :description, :presence => true
