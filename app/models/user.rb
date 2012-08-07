@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
+  DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -9,11 +10,14 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :fullname, :admin
+  validates :password, confirmation: true
+
   validates :fullname, uniqueness: true 
   validates :fullname, presence: true
   validates :email, uniqueness: true
   validates :email, presence: true
-  validates_format_of :email, :with => /^([^@\s]+)@((?:[monaqasat]+\.)+[a-z]{2,})$/i
+  validates :email, format: { :with => /^([^@\s]+)@((?:[monaqasat]+\.)+[a-z]{2,})$/i }
+
   before_destroy :ensure_an_admin_remains
   
   has_many :entries
