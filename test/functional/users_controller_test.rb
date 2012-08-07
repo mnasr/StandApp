@@ -1,4 +1,4 @@
-require 'test_helper' 
+require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
@@ -32,6 +32,23 @@ class UsersControllerTest < ActionController::TestCase
   test "should get edit" do
     get :edit, :id => @user
     assert_response :success
+  end
+
+  test "should only allow current user to edit his info" do
+    @user_two = users(:two) 
+    sign_in @user_two
+    get :edit, :id => @user
+    assert_response 302
+  end
+
+  test "should only allow the admin to delete accounts" do
+    @user_one = users(:one)
+    assert_difference('User.count', -1) do
+      session[:user_id] = @user_one.id
+      delete :destroy, :id => @user_one
+    end
+
+    assert_redirected_to users_path
   end
 
   test "should update user" do
