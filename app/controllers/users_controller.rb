@@ -30,6 +30,7 @@ before_filter :check_if_scrum_master, :only => [:index]
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    show_page unless current_user.id != @user.id
   end
 
   # POST /users
