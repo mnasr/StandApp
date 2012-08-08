@@ -24,7 +24,7 @@
 
   <div class="field">
     <%= f.label :Week_starts_on %><br />
-    <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all.sort, :model => ActiveSupport::TimeZone %>
+    <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all.sort, :model => ActiveSupport::TimeZone, :default => "Athens" %>
   </div>
   <div class="actions">
     <%= f.submit %>
