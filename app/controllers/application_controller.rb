@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
       current_user.check_and_assign_if_date_expired
     end
   end
+
   def set_user_time_zone
-  Time.zone = current_user.timezone if user_signed_in?
+    Time.zone = current_user.timezone if user_signed_in?
   end
 end

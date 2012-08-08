@@ -34,7 +34,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should only allow current user to edit his info" do
+  test "should not allow current user to edit other's info" do
     @user_two = users(:two) 
     sign_in @user_two
     get :edit, :id => @user
@@ -62,6 +62,19 @@ class UsersControllerTest < ActionController::TestCase
     put :update, :id => user_with_invalid_email, :user => { :email => "mnasr@hotmail.com" }
     assert ! user_with_invalid_email.valid?
     assert_equal ["Email is invalid"], user_with_invalid_email.errors.full_messages
+  end
+
+  test "should be able to set a timezone" do
+    user_to_update_timezone = users(:one)
+
+    put :update, :id => user_to_update_timezone, :user => { :timezone => "(GMT+02:00) Athens" } 
+    assert  user_to_update_timezone.valid?
+  end
+  
+  test "should be able to set a starting day for the week" do
+
+    put :update, :id => @user, :user => { :week_pattern => "Monday" } 
+    assert  @user.valid?
   end
 
   test "should destroy user" do
