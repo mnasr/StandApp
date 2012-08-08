@@ -9,8 +9,7 @@ class User < ActiveRecord::Base
 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :fullname, :admin
-  validates :password, confirmation: true
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :fullname, :admin, :week_pattern, :timezone
 
   validates :fullname, uniqueness: true 
   validates :fullname, presence: true
@@ -46,7 +45,7 @@ class User < ActiveRecord::Base
       User.where("id IN (?)", user_ids)
     end
   end
-
+  
   def pick_user_as_new_scrum_master
     users = User.all - [User.scrum_master]
     user_ids = users.map {|user| user.id}
