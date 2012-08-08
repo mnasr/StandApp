@@ -4,12 +4,20 @@ class EntryTest < ActiveSupport::TestCase
   setup do
     @user = users(:one)
     @user_two = users(:two)
+    @entry = @user.entries.create(user_id: @user.id, category: 1, description: "hello Ghina and Mona")
     ActionMailer::Base.deliveries.clear
   end
 
   test "A user should not be able to have more than one entry for the same day" do
     entry = Entry.create(user_id: @user.id, category: 1, description: "hello Ghina and Mona")
     assert_equal ['User has already an entry for today. Come back tomorrow'], entry.errors.full_messages
+  end
+
+  test "A user should be able to have more than one entry not for the same day" do
+    entry_2 = Entry.new(user_id: @user.id, category: 1, description: "hello Ghina and Mona")
+    entry_2.created_at = (Time.now - 10.days)
+    entry_2.save
+    assert_equal [], entry_2.errors.full_messages
   end
   
   test "should not allow an empty entry" do
@@ -41,7 +49,7 @@ class EntryTest < ActiveSupport::TestCase
       assert_equal User.count, MailReminder.deliveries.size
     end
   end
-  
+
   test "Should send only 1 email" do 
 
     Timecop.travel(Time.local(2012, 9, 1, (Settings.deadline_time + 1), 0, 0)) do

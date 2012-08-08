@@ -9,9 +9,9 @@ class Entry < ActiveRecord::Base
   validates :category, :presence => true
   validates :user_id, :presence => true
 
-  validates :user_id, :uniqueness => {:message => 'has already an entry for today. Come back tomorrow'}, :unless => :records_for_today?
+  validate :records_for_today?
 
-  scope :today, where('created_at >= ? AND created_at <= ?', Date.today.beginning_of_day, Date.today.end_of_day)
+  scope :today, where('created_at >= ? AND created_at <= ?', Time.now.beginning_of_day, Time.now.end_of_day)
 
   def self.send_email_on_late_submission
     if Time.now.hour > Settings.deadline_time
@@ -29,7 +29,18 @@ class Entry < ActiveRecord::Base
   end
 
   def records_for_today?
-    Entry.exists?(:user_id => self.user_id, :created_at => Date.today)
+    entry = Entry.scoped
+    if self.created_at
+      entry = entry.where("user_id = ? AND created_at >= ? AND created_at <= ?", self.user_id, self.created_at, self.created_at)
+    else
+      entry = entry.today
+    end
+
+    unless entry.empty?
+      self.errors.add :base, 'User has already an entry for today. Come back tomorrow'
+      return false
+    end
+    true
   end
   
 end
