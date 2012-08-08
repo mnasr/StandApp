@@ -4,15 +4,20 @@ one:
   fullname: MyString
   email: nasr@monaqasat.com
   admin: false
+  week_pattern: "Tuesday"
+  timezone: "(GMT+00:00) UTC" 
 
 two:
   id: 2
   fullname: yourstring
   email: mona@hotmail.com
   admin: false
+  week_pattern: "Tuesday"
 
 three:
   id: 3
   fullname: Admin
   email: admin@monaqasat.com
   admin: true 
+  week_pattern: "Tuesday"
+  timezone: "(GMT+00:00) UTC" 

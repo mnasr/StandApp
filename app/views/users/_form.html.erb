@@ -9,6 +9,23 @@
     <%= f.label :email %><br />
     <%= f.text_field :email %>
   </div>
+  <div class="field">
+    <%= f.label :new_password %><br />
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.text_field :password_confirmation %>
+  </div>
+  <div class="field">
+    <%= f.label :Week_starts_on %><br />
+    <%= f.select(:week_pattern, User::DAYS_OF_WEEK, {:prompt => 'Select a day'}) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Week_starts_on %><br />
+    <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all.sort, :model => ActiveSupport::TimeZone, :default => "Athens" %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
