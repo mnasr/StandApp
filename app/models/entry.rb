@@ -1,4 +1,6 @@
 class Entry < ActiveRecord::Base
+  default_scope :order => 'created_at DESC'
+
   CATEGORIES = ["Bug", "Chore", "Feature", "Support", "R&D"]
   attr_accessible :category, :description, :ticket_id, :user_id
   belongs_to :user
@@ -31,3 +33,4 @@ class Entry < ActiveRecord::Base
   end
   
 end
+ 
