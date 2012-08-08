@@ -11,11 +11,11 @@
   </div>
   <div class="field">
     <%= f.label :new_password %><br />
-    <%= f.text_field :password %>
+    <%= f.text_field :password, :value => ""%>
   </div>
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.text_field :password_confirmation %>
+    <%= f.text_field :password_confirmation, :value => "" %>
   </div>
   <div class="field">
     <%= f.label :Week_starts_on %><br />
@@ -24,7 +24,7 @@
 
   <div class="field">
     <%= f.label :Week_starts_on %><br />
-    <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all.sort, :model => ActiveSupport::TimeZone, :default => "Athens" %>
+    <%= f.time_zone_select :timezone, ActiveSupport::TimeZone.all.sort, :model => ActiveSupport::TimeZone, :prompt => 'Select your Time Zone' %>
   </div>
   <div class="actions">
     <%= f.submit %>

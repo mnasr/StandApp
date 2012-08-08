@@ -59,7 +59,7 @@
             </div>
             <% if user_signed_in? %>
               <div class="authoriza-menu">
-                Welcome <%= link_to current_user.email, current_user %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %>
+                Welcome <%= link_to current_user.email, edit_user_path(current_user) %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %>
               </div>
             <% end %>
           </div><!--/.nav-collapse -->
