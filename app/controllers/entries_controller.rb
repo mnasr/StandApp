@@ -19,7 +19,7 @@ class EntriesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @entry }
-    end
+    end 
   end
 
   # GET /entries/new

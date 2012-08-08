@@ -16,6 +16,14 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
+  def show
+    @users = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @user }
+    end 
+  end
 
 
   # GET /users/new
@@ -34,8 +42,8 @@ class UsersController < ApplicationController
     if current_user.id != params[:id]
       @user = User.find(params[:id])
     end
-  end
 
+  end
   # POST /users
   # POST /users.json
   def create

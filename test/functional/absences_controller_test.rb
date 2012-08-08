@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AbsencesControllerTest < ActionController::TestCase
   setup do
-    @absence = absences(:three)
+    @absence = absences(:one)
     @user = User.create(:email => "example@monaqasat.com", :fullname => "Bryan Adams", :password => "12345678", :password_confirmation => "12345678")
     sign_in @user
   end
