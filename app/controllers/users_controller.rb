@@ -2,7 +2,7 @@ class UsersController < ApplicationController
  
     before_filter :manage_editing_account_info, :only => [:edit]
     before_filter :check_if_admin, :except => [:index , :edit, :destroy, :update]
-    before_filter :check_if_scrum_master, :only => [:index]
+    #before_filter :check_if_scrum_master, :only => [:index]
     before_filter :manage_destroying_accounts, :only => [:destroy]
 
   def index
@@ -39,10 +39,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if current_user.id != params[:id]
-      @user = User.find(params[:id])
-    end
-
+    @user = User.find(params[:id])
   end
   # POST /users
   # POST /users.json
