@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class EntryTest < ActiveSupport::TestCase
+
   setup do
+    @user_four = users(:four)
     @user = users(:one)
     @user_two = users(:two)
     @entry = @user.entries.create(user_id: @user.id, category: 1, description: "hello Ghina and Mona")
@@ -30,10 +32,10 @@ class EntryTest < ActiveSupport::TestCase
   end
 
   test "should return a single user when all other users have created entries today" do
-    entry = users(:three).entries.first
-    entry.created_at = 2.days.ago
-    entry.save
-    assert_equal [users(:three)], Entry.check_for_users_with_no_entries
+    entry = Entry.where(user_id: users(:two).id).first
+    entry.update_attributes(created_at: 2.days.ago)
+
+    assert_equal [users(:two)], Entry.check_for_users_with_no_entries
   end
 
   test "should return a list of users who did not create entries today" do
@@ -49,6 +51,12 @@ class EntryTest < ActiveSupport::TestCase
       assert_equal User.count, MailReminder.deliveries.size
     end
   end
+
+  test "should Logged in user should see a list of his or her entry, ordered by newest entries, by default" do
+     entry1 = @user_four.entries.create(category: "chore", description: "MyText", created_at: Time.now )
+     entry2 = @user_four.entries.create(category: "Bug", description: "MyText", created_at: Time.now - 3.days)
+     assert_equal [entries(:four), entry1 , entry2], users(:four).entries
+   end
 
   test "Should send only 1 email" do 
 

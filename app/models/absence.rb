@@ -6,4 +6,4 @@ class Absence < ActiveRecord::Base
 
   scope :today, where('created_at >= ? AND created_at <= ?', Date.today.beginning_of_day, Date.today.end_of_day)
 
-end
+end 
