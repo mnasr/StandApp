@@ -41,6 +41,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_response 302
   end
 
+
   test "should only allow the admin to delete accounts" do
     @user_one = users(:one)
     assert_difference('User.count', -1) do

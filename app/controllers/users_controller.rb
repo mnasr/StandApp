@@ -2,9 +2,9 @@ class UsersController < ApplicationController
  
     before_filter :manage_editing_account_info, :only => [:edit]
     before_filter :check_if_admin, :except => [:edit, :destroy, :update ]
-    before_filter :check_if_scrum_master, :only => [:index , :show]
+    #before_filter :check_if_scrum_master, :only => [:index , :show]
     before_filter :manage_destroying_accounts, :only => [:destroy]
-
+  
   def index
     @users = User.all
 
@@ -119,8 +119,6 @@ class UsersController < ApplicationController
   def manage_list_of_absences
     if current_user.is_scrum_master?
       redirect_to users_path, :note => ''
-    
     end
   end
-
 end
