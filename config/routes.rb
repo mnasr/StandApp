@@ -1,13 +1,17 @@
 StandApp::Application.routes.draw do
   resources :customizations
 
-  devise_for :users
+  devise_for :users 
 
   resource :search
 
   resources :entries
 
-  resources :absences
+  resources :absences do
+    collection do
+      get 'today'
+    end
+  end
   
   resources :users do
     resources :absences, :controller => "users/absences"
