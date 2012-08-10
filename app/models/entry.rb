@@ -3,8 +3,10 @@ class Entry < ActiveRecord::Base
   default_scope :order => 'created_at DESC'
 
   CATEGORIES = ["Bug", "Chore", "Feature", "Support", "R&D"]
+
   attr_accessible :category, :description, :ticket_id, :user_id, :created_at
   belongs_to :user
+
 
   validates :description, :presence => true
   validates :category, :presence => true

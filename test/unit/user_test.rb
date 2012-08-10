@@ -80,6 +80,17 @@ class UserTest < ActiveSupport::TestCase
  
   end
 
+  test "Entries should be deleted when corresponding user is deleted" do
+    user2 = users(:two)
+    entry = user2.entries.create(user_id: user2.id, category: 1, description: "hello Ghina and Mona")
+    assert_not_equal [], user2.entries
+
+    User.destroy(user2.id)
+
+    assert_nil User.where(id: user2).first
+    assert_nil Entry.where(id: entry).first
+  end
+
   test "user is scrum master" do
     assert @user.is_scrum_master?
   end

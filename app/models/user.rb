@@ -21,8 +21,8 @@ class User < ActiveRecord::Base
 
   before_destroy :ensure_an_admin_remains
   
-  has_many :entries
-  has_many :tracks
+  has_many :entries, :dependent => :destroy
+  has_many :tracks 
   has_many :absences
 
   def self.scrum_master
@@ -38,6 +38,8 @@ class User < ActiveRecord::Base
       Track.create(:start_date => track.end_date, :end_date => (track.end_date + Settings.scrum_master_period.to_i.week), :user_id => new_scrum_master_id)
     end
   end
+
+  
 
   def self.absent
     absences = Absence.today
