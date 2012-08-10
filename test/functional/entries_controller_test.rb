@@ -43,7 +43,7 @@ class EntriesControllerTest < ActionController::TestCase
   end
 
   test "should update entry" do
-    put :update, :id => @entry, entry: {:category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @entry.user_id, :created_at => @entry.created_at }
+    put :update, :id => @entry, entry: {:category => "Bug", :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @user.id, :created_at => @entry.created_at }
     assert_redirected_to entry_path(assigns(:entry))
   end
 

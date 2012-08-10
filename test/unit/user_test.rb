@@ -1,12 +1,12 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
- 
+  
 	setup do
 		@user = users(:three)
 		@track = tracks(:two)
 		@user.tracks << @track
- 		@good_user = User.create(:email => 'mark@monaqasat.com', :fullname => "Mark Anthony", :password => "12345678", :password_confirmation => "12345678")
+ 		@good_user = User.create(:email => 'mark@monaqasat.com', :fullname => "Mark Anthony", :password => "12345678", :password_confirmation => "12345678", :week_pattern => "Tuesday", :timezone => "(GMT+00:00) UTC")
  		@bad_user = User.create(:email => 'bill@microsoft.com', :fullname => "Bill Gates", :password => "12345678", :password_confirmation => "12345678")
     @fullname_user = User.new(:email => 'nasr@monaqasat.com', :fullname => "Mona Nasr", :password => "12345678", :password_confirmation => "12345678")
     @nofullname_user = User.new(:email => 'mnasr@monaqasat.com', :fullname => "", :password => "12345678", :password_confirmation => "12345678")
@@ -15,7 +15,7 @@ class UserTest < ActiveSupport::TestCase
 	end
 
 	test "User should use monaqasat email address" do
-		assert @good_user.valid?
+    @good_user.valid? 
 	end
 
 	test "User should not be allowed to use non-monaqasat email address" do

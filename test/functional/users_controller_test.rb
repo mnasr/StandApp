@@ -53,7 +53,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should update user" do
-    put :update, :id => @user, :user => { :email => "mnasr@monaqasat.com" }
+    put :update, :id => @user, :user => { :email => "mona@monaqasat.com", :fullname => "mona", :password => "12345678", :password_confirmation => "12345678"  }
     assert_redirected_to user_path(assigns(:user))
   end
 
