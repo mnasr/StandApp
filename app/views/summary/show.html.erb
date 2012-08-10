@@ -1,0 +1,24 @@
+<h1>Summary</h1>
+
+<h2>Users without entries</h2>
+
+<table class="table table-striped">
+
+<% @users_without_entries.each do |user| %>
+  <tr>
+			<td>User: <%= user.fullname %></td>
+  </tr>
+<% end %>
+</table>
+
+<h2>Users with entries</h2>
+
+<table class="table table-striped">
+
+<% @users_with_entries.each do |user| %>
+  <tr>
+			<td>User: <%= user.fullname %></td>
+  </tr>
+<% end %>
+</table>
+

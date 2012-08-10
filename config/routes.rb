@@ -1,11 +1,12 @@
 StandApp::Application.routes.draw do
-  resources :summaries
-
-  resources :customizations
+  get 'summary/role'
 
   devise_for :users 
 
   resource :search
+
+  resource :summary, :controller => 'summary'
+
 
   resources :entries
 
@@ -68,6 +69,7 @@ StandApp::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
+
   root :to => 'entries#index'
 
   # See how all your routes lay out with "rake routes"

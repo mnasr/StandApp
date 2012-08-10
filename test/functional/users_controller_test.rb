@@ -41,6 +41,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_response 302
   end
 
+
   test "should only allow the admin to delete accounts" do
     @user_one = users(:one)
     assert_difference('User.count', -1) do
@@ -61,7 +62,7 @@ class UsersControllerTest < ActionController::TestCase
     
     put :update, :id => user_with_invalid_email, :user => { :email => "mnasr@hotmail.com" }
     assert ! user_with_invalid_email.valid?
-    assert_equal ["Email is invalid"], user_with_invalid_email.errors.full_messages
+    assert_equal ["Email is invalid","Timezone can't be blank"], user_with_invalid_email.errors.full_messages
   end
 
   test "should be able to set a timezone" do

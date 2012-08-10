@@ -58,7 +58,7 @@
               </ul>
             </div>
             <% if user_signed_in? %>
-              <div class="authoriza-menu">
+              <div class="authorization-menu">
                 Welcome <%= link_to current_user.email, edit_user_path(current_user) %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %>
               </div>
             <% end %>
@@ -71,10 +71,11 @@
     <div class="container">
       <div class="row-fluid">
         <div class="span12">
-          
-
-          <p id="notice"><%= notice %></p>
-          <p id="alert"><%= alert %></p>
+          <% if notice %>
+            <div id="notice" class="alert alert-success"><%= notice %></div>
+          <% elsif alert %>
+            <div id="alert" class="alert alert-error"><%= alert %></div>
+          <% end %>
         </div>
         <%= yield %>
       </div><!--/row-->

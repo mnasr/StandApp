@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
  
     before_filter :manage_editing_account_info, :only => [:edit]
-    before_filter :check_if_admin, :except => [:index , :edit, :destroy, :update]
-    before_filter :check_if_scrum_master, :only => [:index]
+    before_filter :check_if_admin, :except => [:edit, :destroy, :update]
+    before_filter :check_if_scrum_master, :only => [ :show ]
     before_filter :manage_destroying_accounts, :only => [:destroy]
-
+  
   def index
     @users = User.all
  
@@ -99,7 +99,7 @@ class UsersController < ApplicationController
   end
 
   def check_if_scrum_master
-    unless current_user.is_scrum_master?
+    if current_user.is_scrum_master? && current_user.id != params[:id].to_i
       redirect_to entries_path, :alert => 'Only the scrum master is allowed to access users'
     end
   end
@@ -113,6 +113,12 @@ class UsersController < ApplicationController
   def manage_destroying_accounts
     if current_user.admin.blank?
       redirect_to users_path, :alert => 'Only the admin can delete accounts'
+    end
+  end
+
+  def manage_list_of_absences
+    if current_user.is_scrum_master?
+      redirect_to users_path, :note => ''
     end
   end
 end

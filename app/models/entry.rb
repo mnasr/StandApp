@@ -30,7 +30,6 @@ class Entry < ActiveRecord::Base
   end
 
   def records_for_today?
-    if self.user_id.present?
       entry = Entry.scoped
       if self.created_at
         entry = entry.where("user_id = ? AND created_at >= ? AND created_at <= ?", self.user_id, self.created_at, self.created_at)
@@ -41,7 +40,6 @@ class Entry < ActiveRecord::Base
       unless entry.empty?
         self.errors.add :base, 'User has already an entry for today. Come back tomorrow'
         return false
-      end
     end
     true
   end
