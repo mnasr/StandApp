@@ -6,7 +6,7 @@ one:
   user_id: 1
   created_at: <%= (Time.now).to_s(:db) %>
 
-two:
+two: 
   id: 2
   description: MyText
   category: bug
@@ -18,4 +18,11 @@ three:
   description: MyText
   category: bug
   user_id: 3
-  created_at: <%= (Time.now).to_s(:db) %>  
+  created_at: <%= (Time.now).to_s(:db) %>
+
+four:
+  id: 4
+  description: MyText
+  category: bug
+  user_id: 4
+  created_at: <%= (Time.now).to_s(:db) %> 

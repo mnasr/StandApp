@@ -10,22 +10,25 @@
     <th>Email</th>
     <th></th>
     <th></th>
-    <th></th>
+    <th></th> 
   </tr>
-
 
 <% @users.each do |user| %>
   <tr>
     <td><%= link_to user.fullname, user %></td>
     <td><%= user.email %></td>
+<<<<<<< HEAD
    
+=======
+    <td><%= link_to 'Show', user %></td>
+    <td><%= link_to('Absences', user_absences_path(user)) %></td>
+>>>>>>> d10ff72244938126521fe8bae302c489c48d00da
     <td><%= link_to('Edit', edit_user_path(user), :class => 'btn btn-primary') %></td>
     <td><%= link_to('Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger') %></i> </td>
 
   </tr>
 <% end %>
 </table>
-
 <br />
 
 <%= link_to 'New User', new_user_path %>

@@ -1,7 +1,7 @@
 StandApp::Application.routes.draw do
   get 'summary/role'
 
-  devise_for :users
+  devise_for :users 
 
   resource :search
 
@@ -10,7 +10,11 @@ StandApp::Application.routes.draw do
 
   resources :entries
 
-  resources :absences
+  resources :absences do
+    collection do
+      get 'today'
+    end
+  end
   
   resources :users do
     resources :absences, :controller => "users/absences"

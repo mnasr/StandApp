@@ -1,9 +1,12 @@
 class Entry < ActiveRecord::Base
+
   default_scope :order => 'created_at DESC'
 
   CATEGORIES = ["Bug", "Chore", "Feature", "Support", "R&D"]
-  attr_accessible :category, :description, :ticket_id, :user_id
-  belongs_to :user 
+
+  attr_accessible :category, :description, :ticket_id, :user_id, :created_at
+  belongs_to :user
+
 
   validates :description, :presence => true
   validates :category, :presence => true
@@ -29,17 +32,18 @@ class Entry < ActiveRecord::Base
   end
 
   def records_for_today?
-    
-    entry = Entry.scoped
-    if self.created_at
-      entry = entry.where("user_id = ? AND created_at >= ? AND created_at <= ?", self.user_id, self.created_at, self.created_at)
-    else
-      entry = entry.today
-    end
+    if self.user_id.present?
+      entry = Entry.scoped
+      if self.created_at
+        entry = entry.where("user_id = ? AND created_at >= ? AND created_at <= ?", self.user_id, self.created_at, self.created_at)
+      else
+        entry = entry.today
+      end
 
-    unless entry.empty?
-      self.errors.add :base, 'User has already an entry for today. Come back tomorrow'
-      return false
+      unless entry.empty?
+        self.errors.add :base, 'User has already an entry for today. Come back tomorrow'
+        return false
+      end
     end
     true
   end

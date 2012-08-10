@@ -1,7 +1,7 @@
 class AbsencesController < ApplicationController
   # GET /absences
   # GET /absences.json
-
+ 
   def index
     @absences = Absence.all
 
@@ -21,7 +21,7 @@ class AbsencesController < ApplicationController
       format.json { render json: @absence }
     end
   end
-
+ 
   # GET /absences/new
   # GET /absences/new.json
   def new
@@ -81,4 +81,17 @@ class AbsencesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def today
+    @absences = Absence.today
+    
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @absences }
+    end 
+  end
+
+
+
 end
+ 

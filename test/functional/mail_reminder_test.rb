@@ -8,4 +8,5 @@ class MailReminderTest < ActionMailer::TestCase
     assert_equal ["careers@beirutrb.org"], mail.from
     assert_match /MyString/, mail.body.encoded
   end
+
 end

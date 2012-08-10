@@ -21,3 +21,11 @@ three:
   admin: true 
   week_pattern: "Tuesday"
   timezone: "(GMT+00:00) UTC" 
+
+four:
+  id: 4
+  fullname: mnasr
+  email: mnasr@monaqasat.com
+  admin: false
+  week_pattern: "Tuesday"
+  timezone: "(GMT+00:00) UTC" 

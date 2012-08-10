@@ -17,3 +17,4 @@ class SearchesController < ApplicationController
     render :action => :show, :locals => {:results => @results}
   end
 end
+ 
