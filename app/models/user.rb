@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   DAYS_OF_WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable
 
   # Setup accessible (or protected) attributes for your model
 
@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
   validates :email, presence: true
   validates :email, format: { :with => /^([^@\s]+)@((?:[monaqasat]+\.)+[a-z]{2,})$/i }
+  validates_presence_of :week_pattern, :on => :update
+  validates_presence_of :timezone, :on => :update
 
   before_destroy :ensure_an_admin_remains
   

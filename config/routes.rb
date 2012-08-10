@@ -1,4 +1,6 @@
 StandApp::Application.routes.draw do
+  resources :summaries
+
   resources :customizations
 
   devise_for :users 

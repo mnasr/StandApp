@@ -1,5 +1,49 @@
 <%= form_for(@entry) do |f| %>
   <%= display_error(@entry).html_safe %>
+  <hr>
+  <ul class="wysihtml5-toolbar" style>
+    <li class="dropdown">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="icon-font"></i>
+        <span class="current-font">Normal text</span>
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu"
+      <li>
+      <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="div" href="javascript:;" unselectable="on">Normal text</a>
+      </li>
+      <li>
+        <a data-wysihtml5-command="formatBlock" data-wysihtml5-commandvalue="h1" href="javascript:;" unselectable="on">Heading 1</a>
+      </li>
+      <li>
+        <a data-wysihtml5-command="formatBlock" data-wysihtml5-commandvalue="h2" href="javascript:;" unselectable="on">Heading 2</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <div class="btn-group">
+      <a class="btn" data-wysihtml5-command="bold" title="CTRL+B" href="javascript:;" unselectable="on">Bold</a>
+      <a class="btn" data-wysihtml5-command="italic" title="CTRL+I" href="javascript:;" unselectable="on">Italic</a>
+      <a class="btn" data-wysihtml5-command="underline" title="CTRL+U" href="javascript:;" unselectable="on">Underline</a>
+    </div>
+  </li>
+  <li>
+    <div class="btn-group">
+    <a class="btn" data-wysihtml5-command="insertUnorderedList" title="Unordered List" href="javascript:;" unselectable="on">
+      <i class="icon-list"></li>
+      </a>
+      <a class="btn" data-wysihtml5-command="insertOrderedList" title="Ordered List" href="javascript:;" unselectable="on">
+      <i class="icon-th-list"></li>
+      </a>
+      <a class="btn" data-wysihtml5-command="Outdent" title="Outdent" href="javascript:;" unselectable="on">
+      <i class="icon-indent-right"></li>
+      </a>
+      <a class="btn" data-wysihtml5-command="Indent" title="Indent" href="javascript:;" unselectable="on">
+      <i class="icon-indent-left"></li>
+      </a>
+    </div>
+    </li>
+
 
   <div class="field">
     <%= f.label :description %><br />

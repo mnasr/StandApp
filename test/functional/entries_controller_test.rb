@@ -20,7 +20,7 @@ class EntriesControllerTest < ActionController::TestCase
 
   test "should create entry" do
     assert_difference('Entry.count') do
-      post :create, :entry => { :category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @user.id }
+      post :create, :entry => { :category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @user.id, :created_at => @entry.created_at }
     end
 
     assert_redirected_to entry_path(assigns(:entry))
@@ -28,7 +28,7 @@ class EntriesControllerTest < ActionController::TestCase
 
   test "should not be able to create an entry for the same user" do
     assert_difference('Entry.count', 0) do
-      post :create, :entry => { :category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @entry.user_id }
+      post :create, :entry => { :category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @entry.user_id, :created_at => @entry.created_at }
     end
   end
 
@@ -43,7 +43,7 @@ class EntriesControllerTest < ActionController::TestCase
   end
 
   test "should update entry" do
-    put :update, :id => @entry, :entry => { :category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @entry.user_id }
+    put :update, :id => @entry, entry: {:category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @entry.user_id, :created_at => @entry.created_at }
     assert_redirected_to entry_path(assigns(:entry))
   end
 
@@ -55,3 +55,4 @@ class EntriesControllerTest < ActionController::TestCase
     assert_redirected_to entries_path
   end
 end 
+ 

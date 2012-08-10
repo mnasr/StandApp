@@ -6,7 +6,7 @@ one:
   user_id: 1
   created_at: <%= (Time.now).to_s(:db) %>
 
-two:
+two: 
   id: 2
   description: MyText
   category: bug

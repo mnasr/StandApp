@@ -15,7 +15,14 @@ class AbsencesControllerTest < ActionController::TestCase
 
   test "should get new" do
     get :new
+    assert_response :success 
+  end
+
+
+  test "should get today" do 
+    get :index
     assert_response :success
+    assert_not_nil assigns(:absences)
   end
 
   test "should create absence" do
