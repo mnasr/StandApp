@@ -15,7 +15,7 @@ class UserTest < ActiveSupport::TestCase
 	end
 
 	test "User should use monaqasat email address" do
-    @good_user.valid? 
+    assert @good_user.valid? 
 	end
 
 	test "User should not be allowed to use non-monaqasat email address" do
