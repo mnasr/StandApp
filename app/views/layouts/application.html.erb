@@ -36,7 +36,7 @@
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'images/favicon.ico', :rel => 'shortcut icon' %>
   </head>
-  <body>
+  <body >
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -90,6 +90,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
-
+    <script type="text/javascript">
+      $('#editor').wysihtml5();
+    </script>
   </body>
 </html>
