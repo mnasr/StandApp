@@ -2,15 +2,15 @@ class UsersController < ApplicationController
  
     before_filter :manage_editing_account_info, :only => [:edit]
     before_filter :check_if_admin, :except => [:index , :edit, :destroy, :update]
-    #before_filter :check_if_scrum_master, :only => [:index]
+    before_filter :check_if_scrum_master, :only => [:index]
     before_filter :manage_destroying_accounts, :only => [:destroy]
 
   def index
     @users = User.all
-
+ 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @users }
+      format.json { render :json => @users } 
     end
   end
 
@@ -99,7 +99,7 @@ class UsersController < ApplicationController
   end
 
   def check_if_scrum_master
-    if current_user.is_scrum_master?
+    unless current_user.is_scrum_master?
       redirect_to entries_path, :alert => 'Only the scrum master is allowed to access users'
     end
   end

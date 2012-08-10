@@ -1,7 +1,7 @@
 class AbsencesController < ApplicationController
   # GET /absences
   # GET /absences.json
-
+ 
   def index
     @absences = Absence.all
 
@@ -90,5 +90,8 @@ class AbsencesController < ApplicationController
       format.json { render json: @absences }
     end 
   end
+
+
+
 end
  
