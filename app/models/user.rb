@@ -65,6 +65,4 @@ class User < ActiveRecord::Base
       self.errors.add(:base, "Cant delete the last user that is also an admin")
     end
   end
-
-
 end 
