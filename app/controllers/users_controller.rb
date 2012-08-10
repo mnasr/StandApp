@@ -2,7 +2,7 @@ class UsersController < ApplicationController
  
     before_filter :manage_editing_account_info, :only => [:edit]
     before_filter :check_if_admin, :except => [:edit, :destroy, :update ]
-    before_filter :check_if_scrum_master, :only => [ :show ]
+    before_filter :check_if_scrum_master, :only => [ :show]
     before_filter :manage_destroying_accounts, :only => [:destroy]
   
   def index
