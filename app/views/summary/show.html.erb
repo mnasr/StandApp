@@ -4,9 +4,15 @@
 
 <table class="table table-striped">
 
+  <tr>
+    <th>User</th>
+    <th>Email</th>
+  </tr>
+
 <% @users_without_entries.each do |user| %>
   <tr>
-			<td>User: <%= user.fullname %></td>
+			<td><%= user.fullname %></td>
+      <td><%= user.email %></td>
   </tr>
 <% end %>
 </table>
@@ -15,9 +21,33 @@
 
 <table class="table table-striped">
 
+  <tr>
+    <th>User</th>
+    <th>Email</th>
+  </tr>
+
 <% @users_with_entries.each do |user| %>
   <tr>
-			<td>User: <%= user.fullname %></td>
+			<td><%= user.fullname %></td>
+      <td><%= user.email %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<h2>Absent users</h2>
+
+<table class="table table-striped">
+
+  <tr>
+    <th>User</th>
+    <th>Description</th>
+  </tr>
+
+<% @absence.each do |absence| %>
+  <tr>
+    <td><%= absence.fullname %></td>
+    <td><%= absence.description %></td>
   </tr>
 <% end %>
 </table>

@@ -7,7 +7,6 @@ StandApp::Application.routes.draw do
 
   resource :summary, :controller => 'summary'
 
-
   resources :entries
 
   resources :absences do
