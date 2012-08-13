@@ -36,28 +36,29 @@
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'images/favicon.ico', :rel => 'shortcut icon' %>
   </head>
-  <body >
+  <body>
+	<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+	<div class="container">
+	  <ul id="global-actions" class="nav js-global-actions">
+			<a class="brand" href="#">StandApp</a>
+			<li><%= link_to "All entries", entries_path %></li>
+			<li><%= link_to "All users", users_path %></li>
+			<li><%= link_to "Absences", absences_path %></li>
+			<li><%= link_to "Search", new_search_path %></li>
+		</ul>
 
-<div class="navbar navbar-fixed-top">
-<div class="navbar-inner">
-<div class="container">
-          <ul id="global-actions" class="nav js-global-actions">
-             <a class="brand" href="#">StandApp</a>
-               <li><%= link_to "All entries", entries_path %></li>
-               <li><%= link_to "All users", users_path %></li>
-               <li><%= link_to "Absences", absences_path %></li>
-               <li><%= link_to "Search", new_search_path %></li>
-              </ul>
-          <div class="pull-right" style="padding-top:10px">
-            <ul class="nav">
-            <% if user_signed_in? %>
-             Welcome <%= link_to current_user.email, edit_user_path(current_user) %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %>
-            <% end %>
-          </ul>
-          </div><!--/.nav-collapse --> 
-</div>
-</div>
-</div>
+		<!-- user details when a session is established -->
+		<% if user_signed_in? %>
+		  <div class="pull-right" style="padding-top:10px">
+		    <ul class="nav">
+		     Welcome <%= link_to current_user.email, edit_user_path(current_user) %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %>
+				</ul>
+		  </div>
+		<% end %>
+	</div>
+	</div>
+	</div>
 
     <div class="container">
       <div class="row-fluid">
