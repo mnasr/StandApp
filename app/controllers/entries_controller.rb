@@ -6,6 +6,7 @@ class EntriesController < ApplicationController
   def index
     @entries = Entry.all(:order => "created_at DESC")
     @title   = "Listing entries"
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @entries }
@@ -16,6 +17,7 @@ class EntriesController < ApplicationController
   # GET /entries/1.json
   def show
     @entry = Entry.find(params[:id], :order => "created_at DESC")
+    @title = "Entry #{@entry.id} for #{@entry.created_at}"
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,6 +29,7 @@ class EntriesController < ApplicationController
   # GET /entries/new.json
   def new
     @entry = Entry.new
+    @title = "New entry"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,14 +41,9 @@ class EntriesController < ApplicationController
   def edit
     @entry = Entry.find(params[:id])
 
-     respond_to do |format|
-      if @entry.save
-        format.html { redirect_to entries_url, :notice => 'Entry was successfully created.' }
-        format.json { render :json => @entry, :status => :created, :location => @entry }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @entry.errors, :status => :unprocessable_entity }
-      end
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render :json => @entry }
     end
   end
 
@@ -53,10 +51,11 @@ class EntriesController < ApplicationController
   # POST /entries.json
   def create
     @entry = Entry.new(params[:entry])
+    @title = "New entry"
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to @entry, :notice => 'Entry was successfully created.' }
+        format.html { redirect_to entries_path, :notice => 'Entry was successfully created.' }
         format.json { render :json => @entry, :status => :created, :location => @entry }
       else
         format.html { render :action => "new" }
@@ -88,7 +87,7 @@ class EntriesController < ApplicationController
     @entry.destroy
 
     respond_to do |format|
-      format.html { redirect_to entries_url }
+      format.html { redirect_to entries_url, :notice => 'Entry was deleted successfully.' }
       format.json { head :no_content }
     end
   end

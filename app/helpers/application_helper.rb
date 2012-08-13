@@ -15,4 +15,9 @@ module ApplicationHelper
   	end
   	error_message
 	end
+  
+  def display_no_records(object_type = "")
+    object_type.blank? ? msg = "" : msg = " for <strong>#{object_type}</strong>"
+    content_tag(:div, "There are no records found#{msg}".html_safe, :id => "alert", :class => "alert alert-error")
+  end
 end

@@ -84,14 +84,11 @@ class AbsencesController < ApplicationController
 
   def today
     @absences = Absence.today
-    
+    @title = "today's absences"
     respond_to do |format|
-      format.html # show.html.erb
+      format.html 
       format.json { render json: @absences }
     end 
   end
-
-
-
 end
  

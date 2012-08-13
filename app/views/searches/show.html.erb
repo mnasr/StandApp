@@ -1,19 +1,27 @@
-<h1>Results</h1>
+<div class="page-header">
+	<div class="row-fluid">
+		<div class="span10"><h3><%= @title.titleize %><% if @keywords.present? %> for <%= @keywords %> <% end %></h3></div>
+  	<div class="span2" id="entry_align">
+			<% if @results.present? %>
+				found <%= pluralize(@results.size, "result") %>
+			<% end %>
+		</div>
+	</div>
+</div>
 
-<table class="table table-striped">
-  <tr>
-  	<div class="page-header">
-    <th>Found <%= pluralize(@results.size, "result") %></th>
-  </div>
-  </tr>
 
-<% @results.each do |result| %>
-  <tr>
-		<% if result.is_a?(User)%>
-			<td>User: <%= result.email %></td>
-		<% elsif result.is_a?(Entry) %>
-			<td>Entry: <%= result.description %></td>
+<% if @results.present? %>
+	<ul>
+		<% @results.each do |result| %>
+			<li>
+				<% if result.is_a?(User)%>
+				<%= link_to result.email, result %>
+				<% elsif result.is_a?(Entry) %>
+					<%= link_to result.description, result %>
+				<% end %>
+			</li>
 		<% end %>
-  </tr>
+	</ul>
+<% else %>
+	<%= display_no_records(@keywords) %>
 <% end %>
-</table>

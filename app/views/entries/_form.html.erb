@@ -1,23 +1,39 @@
-<%= form_for(@entry) do |f| %>
-  <%= display_error(@entry).html_safe %>
+<%= form_for(@entry, :html => {:class => "form-horizontal"}) do |f| %>
+  <div class="control-group">
+		<div class="controls">
+			<%= display_error(@entry).html_safe %>
+		</div>
+	</div>
+	
+  <div class="control-group">
+	  <%= f.label :description, :class => "control-label" %>
+		<div class="controls">
+			<%= f.text_area :description, :id => "editor" %>
+		</div>
+	</div>
 
-  <div class="field" >
-    <%= f.label :description %><br />
-    <%= f.text_area :description, id: "editor" %>
-  </div>
-  <div class="field">
-    <%= f.label :category %><br />
-    <%= f.select(:category, Entry::CATEGORIES, {:prompt => 'Select a category'}) %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.select(:user_id, all_users.map{|user| [user.email, user.id]}, :selected => current_user.id ) %>
-  </div>
-  <div class="field">
-    <%= f.label :ticket_id %><br />
-    <%= f.number_field :ticket_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <div class="control-group">
+	  <%= f.label :category, :class => "control-label" %>
+		<div class="controls">
+			<%= f.select(:category, Entry::CATEGORIES, {:prompt => 'Select a category'}) %>
+		</div>
+	</div>
+
+  <div class="control-group">
+	  <%= f.label :user_id, :class => "control-label" %>
+		<div class="controls">
+			<%= f.select(:user_id, all_users.map{|user| [user.email, user.id]}, :selected => current_user.id ) %>
+		</div>
+	</div>
+
+  <div class="control-group">
+	  <%= f.label :ticket_id, :class => "control-label" %>
+		<div class="controls">
+			<%= f.number_field :ticket_id %>
+		</div>
+	</div>
+	
+  <div class="form-actions">
+		<%= f.submit :class => "btn btn-primary" %>
+	</div>
 <% end %>

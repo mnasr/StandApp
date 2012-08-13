@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
  
-    before_filter :manage_editing_account_info, :only => [:edit]
-    before_filter :check_if_admin, :except => [:edit, :destroy, :update]
+    before_filter :manage_editing_account_info, :only => [:edit, :update]
+    # before_filter :check_if_admin, :except => [:edit, :destroy, :update]
     before_filter :check_if_scrum_master, :only => [ :show ]
     before_filter :manage_destroying_accounts, :only => [:destroy]
   
@@ -64,7 +64,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, :notice => 'User was successfully updated.' }
+        format.html { redirect_to entries_path, :notice => 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
@@ -93,7 +93,7 @@ class UsersController < ApplicationController
   
   private
   def check_if_admin
-    if current_user.admin.blank?
+    unless current_user.admin?
       redirect_to entries_path, :alert => 'You are not allowed to access users content.'
     end
   end

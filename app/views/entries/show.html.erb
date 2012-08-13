@@ -1,22 +1,29 @@
-<p> 
-  <b>Description:</b>
-  <%= @entry.description %>
-</p>
+<div class="page-header">
+	<h1><%= @title.titleize %></h1>
+</div>
 
-<p>
-  <b>Category:</b>
-  <%= @entry.category %>
-</p>
+<dl class="dl-horizontal">
+	<p>
+		<dt><b>User identification</b></dt>
+		<dd><%= @entry.user.email %></dd>
+	</p>
+	
+	<p>
+		<dt><b>Redmine ticket url</b></dt>
+		<dd><%= link_to(@entry.ticket_id, format_ticket_id_to_url(@entry.ticket_id)) %></dd>
+	</p>
+	
+	<p>
+		<dt><b>Category</b></dt>
+		<dd><%= link_to @entry.category, search_path(:search => @entry.category), :method => :post %></dd>
+	</p>
+	
+	<p>
+		<dt><b>Description</b></dt>
+		<dd><%= @entry.description.html_safe %></dd>
+	</p>
+</dl>
 
-<p>
-  <b>User:</b>
-  <%= @entry.user.email %>
-</p>
-
-<p>
-  <b>Ticket:</b>
-  <%= link_to(@entry.ticket_id, format_ticket_id_to_url(@entry.ticket_id)) %>
-</p>
-
-
-<%= link_to 'Back', entries_path %>   
+<%= link_to '&larr; Back'.html_safe, entries_path, :class => "btn" %>
+<br/>
+<br/>

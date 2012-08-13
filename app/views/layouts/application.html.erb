@@ -45,10 +45,11 @@
 							<%= render "shared/menu" %>
 						</ul>
 					<% if user_signed_in? %>
+						<%= render "shared/search" %>
 						<!-- user details when a session is established -->
 					  <div class="pull-right" id="user_menu">
 					    <ul class="nav">
-					     Welcome <%= link_to current_user.email, edit_user_path(current_user) %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %>
+					    	Welcome <%= link_to current_user.email, edit_user_path(current_user) %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %>
 							</ul>
 					  </div>
 					<% else %>

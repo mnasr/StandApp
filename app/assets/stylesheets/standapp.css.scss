@@ -1,11 +1,3 @@
-#notice {
-  color: green; }
-
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table; }
-
 #error_explanation {
   width: 450px;
   border: 2px solid red;
@@ -28,4 +20,16 @@
 
 #user_menu{
 	padding-top: 10px;
+}
+
+#entry_align{
+	text-align:right;
+}
+
+textarea#editor {
+  width: 600px;
+}
+
+.align_right {
+	float:right;
 }

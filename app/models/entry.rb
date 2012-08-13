@@ -12,7 +12,7 @@ class Entry < ActiveRecord::Base
   validates :category, :presence => true
   validates :user_id, :presence => true
 
-  validate :records_for_today?
+  validate :records_for_today?, :on => :create
 
   scope :today, where('created_at >= ? AND created_at <= ?', Time.now.beginning_of_day, Time.now.end_of_day)
 

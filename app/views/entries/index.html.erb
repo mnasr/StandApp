@@ -1,30 +1,37 @@
 <% content_for :title, @title %>
 
 <div class="page-header">
-  <h1><%= @title %></h1>
+	<div class="row-fluid">
+		<div class="span10"><h1><%= @title %></h1></div>
+  	<div class="span2" id="entry_align">
+			<%= button_to('New Entry', new_entry_path, :method => :get, :class => 'btn btn-primary') %>
+		</div>
+	</div>
 </div>
 
-<table class="table table-striped">
-  <tr>
-    <th>Description</th>
-    <th>Category</th>
-    <th>User</th>
-    <th>Ticket</th>
-    <th></th>
-  </tr>
-
-	<% @entries.each do |entry| %>
+<% if @entries.present? %>
+	<table class="table table-striped">
 	  <tr>
-	    <td><%= link_to entry.description, edit_entry_path(entry) %></td>
-	    <td><%= entry.category %></td>
-	    <td><%= entry.user.email %></td>
-	    <td><%= entry.ticket_id %></td>
-	    <td><%= button_to('Destroy', entry, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger') %></i> </td>
+	    <th>Description</th>
+	    <th>Category</th>
+	    <th>User</th>
+	    <th>Ticket</th>
+	    <th></th>
+	    <th></th>
 	  </tr>
-	<% end %>
-</table>
-
-<br />
-
-<%= button_to('New Entry', new_entry_path, :method => :get, :class => 'btn btn-primary')%>
-   
+			<% @entries.each do |entry| %>
+			  <tr>
+			    <td><%= link_to truncate(entry.description).html_safe, entry_path(entry) %></td>
+			    <td><%= entry.category %></td>
+			    <td><%= entry.user.email %></td>
+			    <td><%= entry.ticket_id %></td>
+					<% if entry.user_id == current_user.id %>
+					<td><%= link_to('Modify', edit_entry_path(entry), :method => :get, :class => 'btn btn-primary align_right') %></td>
+						<td><%= button_to('Destroy', entry, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger align_right') %></td>
+					<% end %>
+			  </tr>
+			<% end %>
+	</table>
+<% else %>
+	<%= display_no_records("entries") %>
+<% end %>

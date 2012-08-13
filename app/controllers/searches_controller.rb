@@ -1,20 +1,17 @@
 class SearchesController < ApplicationController
-  def show
-    
-  end
-
-  def new
-    
-  end
-  
   def create
-    keywords = params[:search]
+    @title = "Search results"
+    @keywords = params[:search]
     @results = Array.new
-    @results << User.where("email LIKE ? OR fullname LIKE ?", keywords, keywords).all
-    @results << Entry.where("category LIKE ? OR description LIKE ?", keywords, keywords).all
-    @results = @results.compact.flatten
+    if @keywords.present?
+      search_keywords = "%#{@keywords}%"
+      @results << User.where("email LIKE ? OR fullname LIKE ?", search_keywords, search_keywords).all
+      @results << Entry.where("category LIKE ? OR description LIKE ?", search_keywords, search_keywords).all
+      @results = @results.compact.flatten
+    end
 
-    render :action => :show, :locals => {:results => @results}
+    render :action => :show, :locals => {:results => @results, :keywords => @keywords}
   end
+
+  def show; end
 end
- 
