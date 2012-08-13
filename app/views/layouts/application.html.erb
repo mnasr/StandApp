@@ -51,6 +51,12 @@
 					     Welcome <%= link_to current_user.email, edit_user_path(current_user) %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %>
 							</ul>
 					  </div>
+					<% else %>
+					  <div class="pull-right" id="user_menu">
+					    <ul class="nav">
+					    	<%= link_to "Sign up", new_user_registration_path %>
+							</ul>
+					  </div>
 					<% end %>
 				</div>
 			</div>
