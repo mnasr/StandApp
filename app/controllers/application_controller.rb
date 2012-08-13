@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   before_filter :check_valid_user
   before_filter :set_user_time_zone
 
-
   def check_valid_user
     if user_signed_in?
       current_user.check_and_assign_if_date_expired

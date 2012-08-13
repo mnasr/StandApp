@@ -1,4 +1,5 @@
 class EntriesController < ApplicationController
+  skip_before_filter :authenticate_user!, :only => [:welcome]
 
   # GET /entries
   # GET /entries.json
@@ -90,5 +91,9 @@ class EntriesController < ApplicationController
       format.html { redirect_to entries_url }
       format.json { head :no_content }
     end
+  end
+  
+  def welcome
+    
   end
 end
