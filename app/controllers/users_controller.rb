@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
  
     before_filter :manage_editing_account_info, :only => [:edit, :update]
-    # before_filter :check_if_admin, :except => [:edit, :destroy, :update]
+    before_filter :check_if_admin, :only => [:index, :show, :new, :create]
     before_filter :check_if_scrum_master, :only => [ :show ]
     before_filter :manage_destroying_accounts, :only => [:destroy]
   
@@ -105,7 +105,7 @@ class UsersController < ApplicationController
   end
 
   def manage_editing_account_info
-    if current_user.id != params[:id].to_i
+     if current_user.id.to_s != params[:id]
       redirect_to users_path, :alert => 'Only that user is allowed to edit his info'
     end
   end 
