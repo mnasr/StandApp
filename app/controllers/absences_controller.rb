@@ -3,7 +3,7 @@ class AbsencesController < ApplicationController
   # GET /absences.json
  
   def index
-    @absences = Absence.all
+    @absences = Absence.paginate(:page => params[:page], :order => "created_at DESC")
     @title = "Absences"
     respond_to do |format|
       format.html # index.html.erb
@@ -84,8 +84,8 @@ class AbsencesController < ApplicationController
   end
 
   def today
-    @absences = Absence.today
-    @title = "today's absences"
+    @absences = Absence.paginate(:page => params[:page]).today
+    @title = "Absences"
     respond_to do |format|
       format.html 
       format.json { render json: @absences }

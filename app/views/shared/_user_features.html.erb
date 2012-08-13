@@ -1,0 +1,28 @@
+<% if user_signed_in? %><%= render "shared/search" %><% end %>
+
+<!-- user details when a session is established -->
+<ul class="nav pull-right" style="width:150px">
+	<li class="dropdown">
+		<% if user_signed_in? %>
+			<%= link_to "<i class='icon-user icon-white'></i> #{current_user.fullname} <b class='caret'></b>".html_safe, "#", :class =>"dropdown-toggle", "data-toggle" => "dropdown" %>
+		<% else %>
+			<%= link_to "<i class='icon-user icon-white'></i> Sign in <b class='caret'></b>".html_safe, "#", :class =>"dropdown-toggle", "data-toggle" => "dropdown" %>
+		<% end %>
+		<ul class="dropdown-menu">
+			<% if user_signed_in? %>
+				<li><%= link_to "<i class=' icon-pencil icon-white'></i> User details".html_safe, edit_user_path(current_user) %></li>
+				<li><%= link_to "<i class='icon-ban-circle icon-white'></i> Sign out".html_safe, destroy_user_session_path, :method => :delete %></li>
+			<% else %>
+				<li>
+					<%= form_for([User.new], :url => session_path(User), :class => "well form-inline") do |f| %>
+							<%= field_set_tag nil, :class => 'textbox', :id => "sign_in_field_set" do %>
+							<%= f.email_field :email, :id => "user_username", :placeholder => "Email", :id => "sign_in_fields" %>
+							<%= f.password_field :password, :id => "user_password", :placeholder => "Password", :id => "sign_in_fields" %>
+							<%= f.submit "Sign in", :class => "btn btn-primary" %>
+						<% end %>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+	</li>
+</ul>

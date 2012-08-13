@@ -23,7 +23,11 @@
 		<dd><%= @entry.description.html_safe %></dd>
 	</p>
 </dl>
+
 <% if @entry.user_id == current_user.id %>
-	<%= link_to '&larr; Back'.html_safe, entries_path, :class => "btn" %>
 	<%= link_to('Edit entry', edit_entry_path, :class => 'btn btn-primary ') %>
 <% end %>
+
+<%= back_button %>
+
+<br/><br/>

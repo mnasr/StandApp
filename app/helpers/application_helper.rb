@@ -20,4 +20,8 @@ module ApplicationHelper
     object_type.blank? ? msg = "" : msg = " for <strong>#{object_type}</strong>"
     content_tag(:div, "There are no records found#{msg}".html_safe, :id => "alert", :class => "alert alert-error")
   end
+  
+  def back_button
+    link_to('<i class="icon-arrow-left icon-white"></i> Back to previous page'.html_safe, :back, :class => 'btn')
+  end
 end

@@ -4,7 +4,7 @@ class EntriesController < ApplicationController
   # GET /entries
   # GET /entries.json
   def index
-    @entries = Entry.all(:order => "created_at DESC")
+    @entries = Entry.paginate(:page => params[:page], :order => "created_at DESC")
     @title   = "Listing entries"
 
     respond_to do |format|

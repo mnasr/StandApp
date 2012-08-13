@@ -14,6 +14,10 @@
 		  </tr>
 		<% end %>
 	</table>
+	
+	<div class="pagination">
+		<%= will_paginate @absences %>
+	</div>
 <% else %>
 	<%= display_no_records("absences") %>
 <% end %>
