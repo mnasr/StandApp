@@ -8,6 +8,7 @@ gem 'bootstrap-wysihtml5-rails'
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'puma'
 end
 
 group :test do
