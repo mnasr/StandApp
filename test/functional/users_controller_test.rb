@@ -54,7 +54,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should update user" do
     put :update, :id => @user, :user => { :email => "mona@monaqasat.com", :fullname => "mona", :password => "12345678", :password_confirmation => "12345678"  }
-    assert_redirected_to user_path(assigns(:user))
+    assert_redirected_to entries_path
   end
 
   test "should not be able to update user" do
@@ -68,7 +68,7 @@ class UsersControllerTest < ActionController::TestCase
   test "should be able to set a timezone" do
     user_to_update_timezone = users(:one)
 
-    put :update, :id => user_to_update_timezone, :user => { :timezone => "(GMT+02:00) Athens" } 
+    put :update, :id => user_to_update_timezone, :user => { :timezone => "Athens" } 
     assert  user_to_update_timezone.valid?
   end
   
