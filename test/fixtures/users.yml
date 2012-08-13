@@ -5,7 +5,7 @@ one:
   email: nasr@monaqasat.com
   admin: false
   week_pattern: "Tuesday"
-  timezone: "(GMT+00:00) UTC" 
+  timezone: "UTC" 
 
 two:
   id: 2
@@ -20,7 +20,7 @@ three:
   email: admin@monaqasat.com
   admin: true 
   week_pattern: "Tuesday"
-  timezone: "(GMT+00:00) UTC" 
+  timezone: "UTC" 
 
 four:
   id: 4
@@ -28,4 +28,4 @@ four:
   email: mnasr@monaqasat.com
   admin: false
   week_pattern: "Tuesday"
-  timezone: "(GMT+00:00) UTC" 
+  timezone: "UTC" 

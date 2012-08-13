@@ -17,7 +17,7 @@ class EntriesController < ApplicationController
   # GET /entries/1.json
   def show
     @entry = Entry.find(params[:id], :order => "created_at DESC")
-    @title = "Entry #{@entry.id} for #{@entry.created_at}"
+    @title = "Entry #{@entry.id} for  #{@entry.created_at.strftime('%A-%d of %B %Y')}"
 
     respond_to do |format|
       format.html # show.html.erb
@@ -55,7 +55,7 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to entries_path, :notice => 'Entry was successfully created.' }
+        format.html { redirect_to @entry, :notice => 'Entry was successfully created.' }
         format.json { render :json => @entry, :status => :created, :location => @entry }
       else
         format.html { render :action => "new" }
