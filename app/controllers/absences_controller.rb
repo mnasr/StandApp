@@ -4,18 +4,18 @@ class AbsencesController < ApplicationController
  
   def index
     @absences = Absence.all
-
+    @title = "Absences"
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @absences }
-    end
+    end 
   end
 
   # GET /absences/1
   # GET /absences/1.json
   def show
     @absence = Absence.find(params[:id])
-
+    @title = "User #{@absence.user_id} Absence" 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @absence }
@@ -26,6 +26,7 @@ class AbsencesController < ApplicationController
   # GET /absences/new.json
   def new
     @absence = Absence.new
+    @title = "New Absence"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,7 +43,7 @@ class AbsencesController < ApplicationController
   # POST /absences.json
   def create
     @absence = Absence.new(params[:absence])
-
+    @title = "New Absence"
     respond_to do |format|
       if @absence.save
         format.html { redirect_to @absence, notice: 'Absence was successfully created.' }

@@ -6,7 +6,7 @@
   	<div class="span2" id="entry_align">
 			<%= button_to('New Entry', new_entry_path, :method => :get, :class => 'btn btn-primary') %>
 		</div>
-	</div>
+	</div> 
 </div>
 
 <% if @entries.present? %>
@@ -34,4 +34,4 @@
 	</table>
 <% else %>
 	<%= display_no_records("entries") %>
-<% end %>
+<% end %>  

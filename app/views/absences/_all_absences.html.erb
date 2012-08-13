@@ -4,16 +4,13 @@
 	    <th>User</th>
 	    <th>Description</th>
 	    <th></th>
-	    <th></th>
-	    <th></th>
 	  </tr>
 
 		<% @absences.each do |absence| %>
 		  <tr>
 		    <td><%= absence.user_id %></td>
-		    <td><%= absence.description %></td>
+		    <td><%= link_to truncate(absence.description).html_safe, absence_path(absence) %></td>
 		    <td><%= link_to('Edit', edit_absence_path(absence), :class => "btn btn-primary") %></td>
-		    <td><%= link_to('Destroy', absence, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger') %></i> </td>
 		  </tr>
 		<% end %>
 	</table>

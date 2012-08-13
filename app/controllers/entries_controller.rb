@@ -12,7 +12,7 @@ class EntriesController < ApplicationController
       format.json { render :json => @entries }
     end
   end
-
+ 
   # GET /entries/1
   # GET /entries/1.json
   def show
