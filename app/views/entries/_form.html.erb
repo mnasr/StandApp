@@ -1,9 +1,9 @@
 <%= form_for(@entry) do |f| %>
   <%= display_error(@entry).html_safe %>
 
-  <div class="field">
+  <div class="field" >
     <%= f.label :description %><br />
-    <textarea id="entry_description" rows="10" name="entry[description]" cols="10"></textarea>
+    <%= f.text_area :description %>
   </div>
   <div class="field">
     <%= f.label :category %><br />

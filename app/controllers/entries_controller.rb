@@ -36,6 +36,16 @@ class EntriesController < ApplicationController
   # GET /entries/1/edit
   def edit
     @entry = Entry.find(params[:id])
+
+     respond_to do |format|
+      if @entry.save
+        format.html { redirect_to entries_url, :notice => 'Entry was successfully created.' }
+        format.json { render :json => @entry, :status => :created, :location => @entry }
+      else
+        format.html { render :action => "new" }
+        format.json { render :json => @entry.errors, :status => :unprocessable_entity }
+      end
+    end
   end
 
   # POST /entries
@@ -45,7 +55,7 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to entries_url, :notice => 'Entry was successfully created.' }
+        format.html { redirect_to @entry, :notice => 'Entry was successfully created.' }
         format.json { render :json => @entry, :status => :created, :location => @entry }
       else
         format.html { render :action => "new" }

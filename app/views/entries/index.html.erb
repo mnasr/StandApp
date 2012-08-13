@@ -10,17 +10,14 @@
     <th>User</th>
     <th>Ticket</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @entries.each do |entry| %>
   <tr>
-    <td><%= link_to entry.description, entry %></td>
+    <td><%= link_to entry.description, edit_entry_path(entry) %></td>
     <td><%= entry.category %></td>
     <td><%= entry.user.email %></td>
     <td><%= entry.ticket_id %></td>
-    <td><%= button_to('Edit', edit_entry_path(entry), :class => 'btn btn-primary') %></td>
     <td><%= button_to('Destroy', entry, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger') %></i> </td>
   </tr>
 <% end %>
