@@ -50,7 +50,7 @@
 
 		<!-- user details when a session is established -->
 		<% if user_signed_in? %>
-		  <div class="pull-right" style="padding-top:10px">
+		  <div class="pull-right" id="user_menu">
 		    <ul class="nav">
 		     Welcome <%= link_to current_user.email, edit_user_path(current_user) %>! | <%= link_to "Sign out!", destroy_user_session_path, :method => :delete %>
 				</ul>
