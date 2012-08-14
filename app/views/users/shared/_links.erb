@@ -1,17 +1,13 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Sign in", new_session_path(resource_name)%>&nbsp;
+  <%= link_to "Sign in", new_session_path(resource_name)%> |
 <% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-	<ics class="icon-user">
 		<%= link_to "Sign up", new_registration_path(resource_name)%> | 
-	</ics>
 <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
-	<ics class="icon-ban-circle">
   	<%= link_to "Forgot your password?", new_password_path(resource_name)%>&nbsp;
-	</ics>
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
