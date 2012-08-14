@@ -46,7 +46,7 @@
 
 <% @absence.each do |absence| %>
   <tr>
-    <td><%= absence.fullname %></td>
+    <td><%= absence.user.fullname %></td>
     <td><%= absence.description %></td>
   </tr>
 <% end %>
