@@ -19,9 +19,13 @@
 							<%= f.email_field :email, :id => "user_username", :placeholder => "Email", :id => "sign_in_fields" %>
 							<%= f.password_field :password, :id => "user_password", :placeholder => "Password", :id => "sign_in_fields" %>
 							<%= f.submit "Sign in", :class => "btn btn-primary" %>
+
 						<% end %>
 					<% end %>
 				</li>
+				<li class="divider"></li>
+				<li><%= link_to "Sign up", new_user_registration_path %></li>
+				<li><%= link_to "Forgot your password?", new_user_password_path %></li>
 			<% end %>
 		</ul>
 	</li>
