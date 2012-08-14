@@ -10,7 +10,7 @@ class Entry < ActiveRecord::Base
 
   validates :description, :presence => true
   validates :category, :presence => true
-  validates :user_id, :presence => true
+  
 
   validate :records_for_today?, :on => :create
 

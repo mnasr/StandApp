@@ -7,8 +7,8 @@
 	
   <div class="control-group">
 	  <%= f.label :description, :class => "control-label" %>
-		<div class="controls">
-			<%= f.text_area :description, :id => "editor" %>
+		<div class="controls" , id="entrytext">
+			<%= f.text_area :description, :id => "editor" , :value => "Yesterday:<br/><ul><li></li></ul> <ul><li></li></ul><br/> Today:<br/> <ul><li></li></ul> <ul><li></li></ul> <br/>Roadblocks: (please write none if there is nothing) <ul><li></li></ul> <ul><li></li></ul>" %>
 		</div>
 	</div>
 
@@ -16,13 +16,6 @@
 	  <%= f.label :category, :class => "control-label" %>
 		<div class="controls">
 			<%= f.select(:category, Entry::CATEGORIES, {:prompt => 'Select a category'}) %>
-		</div>
-	</div>
-
-  <div class="control-group">
-	  <%= f.label :user_id, :class => "control-label" %>
-		<div class="controls">
-			<%= f.select(:user_id, all_users.map{|user| [user.email, user.id]}, :selected => current_user.id ) %>
 		</div>
 	</div>
 

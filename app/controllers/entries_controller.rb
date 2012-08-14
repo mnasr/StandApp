@@ -6,6 +6,7 @@ class EntriesController < ApplicationController
   def index
     @entries = Entry.paginate(:page => params[:page], :order => "created_at DESC")
     @title   = "Listing entries"
+  
 
     respond_to do |format|
       format.html # index.html.erb
@@ -31,6 +32,7 @@ class EntriesController < ApplicationController
     @entry = Entry.new
     @title = "New entry"
 
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @entry }
@@ -51,6 +53,8 @@ class EntriesController < ApplicationController
   # POST /entries.json
   def create
     @entry = Entry.new(params[:entry])
+    @entry.user_id = current_user.id
+
     @title = "New entry"
 
     respond_to do |format|
