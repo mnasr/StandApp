@@ -17,7 +17,7 @@ class EntriesController < ApplicationController
   # GET /entries/1.json
   def show
     @entry = Entry.find(params[:id], :order => "created_at DESC")
-    @title = "Entry #{@entry.id} for  #{@entry.created_at.strftime('%A-%d of %B %Y')}"
+    @title = "Entry #{@entry.id} for  #{@entry.created_at.strftime('%A %d %B %Y')}"
 
     respond_to do |format|
       format.html # show.html.erb
