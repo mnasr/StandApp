@@ -8,7 +8,7 @@
 
 		<% @absences.each do |absence| %>
 		  <tr>
-		    <td><%= absence.user_id %></td>
+		    <td><%= absence.user.fullname %></td>
 		    <td><%= link_to truncate(absence.description).html_safe, absence_path(absence) %></td>
 		    <td><%= link_to('<i class="icon-pencil icon-white"></i> Modify'.html_safe, edit_absence_path(absence), :method => :get, :class => 'btn btn-primary align_right') %></td>
 		  </tr>

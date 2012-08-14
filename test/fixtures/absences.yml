@@ -1,13 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  user: one
+  user_id: 1
   description: MyText
+  created_at: <%= (Time.now - 3.weeks).to_s(:db) %>
 
 two:
-  user: two
+  user_id: 1
   description: MyText
+  created_at: <%= (Time.now  - 1.week).to_s(:db) %>
 
 three:
-  user: three
+  user_id: 3
   description: MyText
+  created_at: <%= (Time.now - 1.day).to_s(:db) %>

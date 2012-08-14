@@ -39,8 +39,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  
-
   def self.absent
     absences = Absence.today
     if absences.present?

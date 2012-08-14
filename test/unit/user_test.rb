@@ -98,4 +98,10 @@ class UserTest < ActiveSupport::TestCase
   test "user is not scrum master" do
     assert ! users(:one).is_scrum_master?
   end
+
+  test "should return users who are absent" do
+    users(:one).absences.create(description: "hey there")
+    assert_equal 1, User.absent.size
+    assert User.absent.include?(users(:one))
+  end
 end
