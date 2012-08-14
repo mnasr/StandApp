@@ -12,3 +12,4 @@ test:
 
 production:
   <<: *defaults
+  application_url: "http://standapp.herokuapp.com"
