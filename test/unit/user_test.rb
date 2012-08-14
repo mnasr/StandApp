@@ -85,7 +85,7 @@ class UserTest < ActiveSupport::TestCase
     entry = user2.entries.create(user_id: user2.id, category: 1, description: "hello Ghina and Mona")
     assert_not_equal [], user2.entries
 
-    User.destroy(user2.id)
+    User.destroy(user2)
 
     assert_nil User.where(id: user2).first
     assert_nil Entry.where(id: entry).first
