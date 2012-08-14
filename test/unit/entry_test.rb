@@ -24,7 +24,7 @@ class EntryTest < ActiveSupport::TestCase
   
   test "should not allow an empty entry" do
     entry = Entry.create
-    assert_equal ["Description can't be blank", "Category can't be blank", "User can't be blank"], entry.errors.full_messages
+    assert_equal ["Description can't be blank", "Category can't be blank"], entry.errors.full_messages
   end
 
   test "should return [] if all users created entries today" do
