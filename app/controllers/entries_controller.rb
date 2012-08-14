@@ -11,7 +11,7 @@ class EntriesController < ApplicationController
       format.html # index.html.erb
       format.json { render :json => @entries }
     end
-  end
+  end 
  
   # GET /entries/1
   # GET /entries/1.json

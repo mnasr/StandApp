@@ -1,7 +1,8 @@
 class AbsencesController < ApplicationController
   # GET /absences
   # GET /absences.json
- 
+  before_filter :check_if_admin_or_scrum_master, :only => [:edit, :update, :new, :create, :destroy]
+
   def index
     @absences = Absence.paginate(:page => params[:page], :order => "created_at DESC")
     @title = "Absences"
@@ -37,6 +38,7 @@ class AbsencesController < ApplicationController
   # GET /absences/1/edit
   def edit
     @absence = Absence.find(params[:id])
+
   end
 
   # POST /absences
@@ -90,6 +92,12 @@ class AbsencesController < ApplicationController
       format.html 
       format.json { render json: @absences }
     end 
+  end
+
+  def check_if_admin_or_scrum_master
+    unless current_user.admin? || current_user.is_scrum_master? && current_user.id != params[:id].to_i
+      redirect_to entries_path, :alert => 'You are not allowed to access users content.'
+    end
   end
 end
  
