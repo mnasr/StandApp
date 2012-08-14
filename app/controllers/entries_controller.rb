@@ -52,9 +52,9 @@ class EntriesController < ApplicationController
   # POST /entries
   # POST /entries.json
   def create
-    @entry = Entry.new(params[:entry])
-    @entry.user_id = current_user.id
+    params[:entry][:user_id] = current_user.id unless params[:entry].key?(:user_id)
 
+    @entry = Entry.new(params[:entry])
     @title = "New entry"
 
     respond_to do |format|
