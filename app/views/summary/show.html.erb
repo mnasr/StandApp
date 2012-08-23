@@ -1,54 +1,61 @@
 <h1>Summary</h1>
 
-<h2>Users without entries</h2>
+<% if @users_without_entries.count > 0 %>
 
-<table class="table table-striped">
+  <h2>Users without entries</h2>
 
-  <tr>
-    <th>User</th>
-    <th>Email</th>
-  </tr>
+  <table class="table table-striped">
 
-<% @users_without_entries.each do |user| %>
-  <tr>
-			<td><%= user.fullname %></td>
-      <td><%= user.email %></td>
-  </tr>
+    <tr>
+      <th>User</th>
+      <th>Email</th>
+    </tr>
+
+  <% @users_without_entries.each do |user| %>
+    <tr>
+			  <td><%= user.fullname %></td>
+        <td><%= user.email %></td>
+    </tr>
+  <% end %>
+  </table>
 <% end %>
-</table>
 
-<h2>Users with entries</h2>
+<% if @users_with_entries.count > 0 %>
 
-<table class="table table-striped">
+  <h2>Users with entries</h2>
 
-  <tr>
-    <th>User</th>
-    <th>Email</th>
-  </tr>
+  <table class="table table-striped">
 
-<% @users_with_entries.each do |user| %>
-  <tr>
-			<td><%= user.fullname %></td>
-      <td><%= user.email %></td>
-  </tr>
+    <tr>
+      <th>User</th>
+      <th>Email</th>
+    </tr>
+
+  <% @users_with_entries.each do |user| %>
+    <tr>
+        <td><%= user.fullname %></td>
+        <td><%= user.email %></td>
+    </tr>
+  <% end %>
+  </table>
 <% end %>
-</table>
 
+<% if @absence.count > 0 %>
 
-<h2>Absent users</h2>
+  <h2>Absent users</h2>
 
-<table class="table table-striped">
+  <table class="table table-striped">
 
-  <tr>
-    <th>User</th>
-    <th>Description</th>
-  </tr>
+    <tr>
+      <th>User</th>
+      <th>Descriptiom</th>
+    </tr>
 
-<% @absence.each do |absence| %>
-  <tr>
-    <td><%= absence.user.fullname %></td>
-    <td><%= absence.description %></td>
-  </tr>
+  <%  @absence.each do |absence| %>
+    <tr>
+        <td><%= absence.user.fullname %></td>
+        <td><%= absence.description %></td>
+    </tr>
+  <% end %>
+  </table>
 <% end %>
-</table>
-
