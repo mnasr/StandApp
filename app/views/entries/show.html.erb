@@ -7,12 +7,12 @@
 		<dt><b>User identification</b></dt>
 		<dd><%= @entry.user.email %></dd>
 	</p>
-	
+
 	<p>
 		<dt><b>Redmine ticket url</b></dt>
 		<dd><%= link_to(@entry.ticket_id, format_ticket_id_to_url(@entry.ticket_id)) %></dd>
 	</p>
-	
+
 	<p>
 		<dt><b>Category</b></dt>
 		<dd><%= link_to @entry.category, search_path(:search => @entry.category), :method => :post %></dd>
@@ -24,7 +24,7 @@
 	</p>
 </dl>
 
-<%= link_to '&larr; Back'.html_safe, entries_path, :class => "btn" %>
+<%= back_button %>
 <% if @entry.user_id == current_user.id %>
 	<%= link_to('Edit entry', edit_entry_path, :class => 'btn btn-primary ') %>
 <% end %>

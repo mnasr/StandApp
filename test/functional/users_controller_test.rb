@@ -4,7 +4,7 @@ class UsersControllerTest < ActionController::TestCase
   setup do
     @user = users(:three)
     sign_in @user
-  end
+  end 
 
   test "should get index" do 
     get :index
