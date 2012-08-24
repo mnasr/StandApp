@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
  
     before_filter :manage_editing_account_info, :only => [:edit, :update]
-    before_filter :check_if_admin, :only => [:index, :show, :new, :create]
+    before_filter :check_if_admin, :only => [:index, :show, :new, :create, :destroy]
     before_filter :check_if_scrum_master, :only =>  [:index]
-    before_filter :manage_destroying_accounts, :only => [:destroy]
   
   def index
    @users = User.paginate(:page => params[:page])
@@ -99,7 +98,7 @@ class UsersController < ApplicationController
   end
 
   def check_if_scrum_master
-    unless current_user.admin? || (current_user.is_scrum_master? && current_user.id != params[:id].to_i)
+    unless current_user.admin? || (current_user.is_scrum_master? && current_user.id != params[:id].to_i)    
       redirect_to entries_path, :alert => 'Only the scrum master is allowed to access users'
     end
   end
@@ -109,10 +108,4 @@ class UsersController < ApplicationController
       redirect_to users_path, :alert => 'Only that user is allowed to edit his info'
     end
   end 
-
-  def manage_destroying_accounts
-    if current_user.admin.blank?
-      redirect_to users_path, :alert => 'Only the admin can delete accounts'
-    end
-  end
 end
