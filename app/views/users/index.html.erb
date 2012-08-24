@@ -16,7 +16,7 @@
 	  <tr>
 	    <td><%= link_to user.fullname, user %></td>
 	    <td><%= user.email %></td>
-	    <td><%= link_to('Absences', user_absences_path(user)) %></td>
+	    <td><%= link_to('Absences', absence_path(user)) %></td>
 	    <td><%= link_to('<i class="icon-file icon-white"></i> Add an absence'.html_safe, new_absence_path, :class => 'btn') %></td>
 	    <td><%= link_to('<i class="icon-pencil icon-white"></i> Modify'.html_safe, edit_user_path(user), :class => 'btn btn-primary') %></td>
 	  </tr>
