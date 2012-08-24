@@ -17,7 +17,7 @@
 				<% if result.is_a?(User)%>
 				<%= link_to result.email, result %>
 				<% elsif result.is_a?(Entry) %>
-					<%= link_to result.description, result %>
+					<%= link_to result.description.html_safe, result %>
 				<% end %>
 			</li>
 		<% end %>
