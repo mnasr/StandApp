@@ -8,10 +8,12 @@
 		<dd><%= @entry.user.email %></dd>
 	</p>
 
-	<p>
-		<dt><b>Redmine ticket url</b></dt>
-		<dd><%= link_to(@entry.ticket_id, format_ticket_id_to_url(@entry.ticket_id)) %></dd>
-	</p>
+	<% if @entry.ticket_id.present? %>
+	  <p>
+		  <dt><b>Redmine ticket url</b></dt>
+		  <dd><%= link_to(@entry.ticket_id, format_ticket_id_to_url(@entry.ticket_id)) %></dd>
+	  </p>
+	<% end %>
 
 	<p>
 		<dt><b>Category</b></dt>
