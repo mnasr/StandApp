@@ -7,6 +7,7 @@
 		<dt><b>User identification</b></dt>
 		<dd><%= @entry.user.email %></dd>
 	</p>
+<% @entry.ticket_id = @entry.description.scan(/\d\d\d\d/).join %> 
 
 	<% if @entry.ticket_id.present? %>
 	  <p>
