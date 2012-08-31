@@ -12,7 +12,7 @@
 <% if @entries.present? %>
 	<table class="table table-striped">
 	  <tr>
-	    <th>Description</th>
+	    <th>Date</th>
 	    <th>Category</th>
 	    <th>User</th>
 	    <th>Ticket</th>
@@ -21,7 +21,7 @@
 	  </tr>
 			<% @entries.each do |entry| %>
 			  <tr>
-			    <td><%= link_to truncate(entry.description).html_safe, entry_path(entry) %></td>
+			    <td><%= link_to (entry.created_at.to_date), entry_path(entry) %></td>
 			    <td><%= entry.category %></td>
 			    <td><%= entry.user.email %></td>
 			    <td><%= entry.ticket_id %></td>
