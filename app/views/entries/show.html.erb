@@ -7,12 +7,15 @@
 		<dt><b>User identification</b></dt>
 		<dd><%= @entry.user.email %></dd>
 	</p>
-<% @entry.ticket_id = @entry.description.scan(/\d\d\d\d/).join %> 
+
+<% @entry.ticket_id = @entry.description.scan(/\d/).join %> 
 
 	<% if @entry.ticket_id.present? %>
 	  <p>
 		  <dt><b>Redmine ticket url</b></dt>
-		  <dd><%= link_to(@entry.ticket_id, format_ticket_id_to_url(@entry.ticket_id)) %></dd>
+		  	<% @entry.description.scan(/\d\d\d\d/).count do |i| %>
+		 		 <dd><%= link_to(@entry.description[i], format_ticket_id_to_url(@entry.description[i])) %></dd>
+		  	<% end %>
 	  </p>
 	<% end %>
 

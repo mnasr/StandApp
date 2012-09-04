@@ -31,6 +31,15 @@ class Entry < ActiveRecord::Base
     end
   end
 
+  def extract_ticket_number_from_description 
+     description.match(/\d+/).each do |i| 
+         c = description[i]
+         puts'___________________'
+         puts c
+         puts '****************'
+    end 
+  end
+
   def records_for_today?
     if self.user_id.present?
       if self.created_at
