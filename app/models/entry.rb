@@ -32,12 +32,9 @@ class Entry < ActiveRecord::Base
   end
 
   def extract_ticket_number_from_description 
-     description.match(/\d+/).each do |i| 
-         c = description[i]
-         puts'___________________'
-         puts c
-         puts '****************'
-    end 
+    ticket_id = description.gsub(/\D+/,'').gsub(/.{4}/, ' \0')
+    ticket_id = ticket_id[1..-1]
+    return ticket_id
   end
 
   def records_for_today?
