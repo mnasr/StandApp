@@ -8,16 +8,10 @@
 		<dd><%= @entry.user.email %></dd>
 	</p>
 
-<% @entry.ticket_id = @entry.description.scan(/\d/).join %> 
-
-	<% if @entry.ticket_id.present? %>
-	  <p>
-		  <dt><b>Redmine ticket url</b></dt>
-		  	<% @entry.description.scan(/\d\d\d\d/).count do |i| %>
-		 		 <dd><%= link_to(@entry.description[i], format_ticket_id_to_url(@entry.description[i])) %></dd>
-		  	<% end %>
-	  </p>
-	<% end %>
+	<p>
+		<dt><b>Redmine ticket url</b></dt>
+		<dd><%= link_to(@entry.extract_ticket_number_from_description, format_ticket_id_to_url(@entry.extract_ticket_number_from_description)) %></dd>
+	</p>
 
 	<p>
 		<dt><b>Category</b></dt>
@@ -33,4 +27,4 @@
 <%= back_button %>
 <% if @entry.user_id == current_user.id %>
 	<%= link_to('Edit entry', edit_entry_path, :class => 'btn btn-primary ') %>
-<% end %>
+<% end %> 
