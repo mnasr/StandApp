@@ -7,7 +7,8 @@
 		<dt><b>User identification</b></dt>
 		<dd><%= @entry.user.email %></dd>
 	</p>
-
+	
+	<% if @entry.description.scan(/\d\d\d\d/).count > 0%>
 	<p>
 		<dt><b>Redmine ticket url</b></dt>
 		<% times = 0..(@entry.description.scan(/\d\d\d\d/).count-1) %>
@@ -15,6 +16,7 @@
 				<dd><%= link_to(@entry.extract_ticket_number_from_description[i], @entry.extract_ticket_number_from_description[i]) %></dd>
 			<% end %>
 	</p>
+	<% end %>
 
 	<p>
 		<dt><b>Category</b></dt>
