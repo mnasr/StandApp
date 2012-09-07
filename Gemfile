@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem  'rails', '3.2.7'
 gem 'bootstrap-wysihtml5-rails'
+gem 'redcarpet', '1.17.2'
 
 group :development, :test do
   gem 'sqlite3'
