@@ -18,10 +18,12 @@
 	</p>
 	<% end %>
 
+	<% if @entry.extract_category_from_description.present? %>
 	<p>
 		<dt><b>Category</b></dt>
 		<dd><%= link_to @entry.extract_category_from_description, search_path(:search => @entry.extract_category_from_description), :method => :post %></dd>
 	</p>
+	<% end %>
 	
 	<p>
 		<dt><b>Description</b></dt>
