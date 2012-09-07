@@ -64,6 +64,13 @@ class EntryTest < ActiveSupport::TestCase
     assert_equal ["1234", "3456"], ticket_number
   end
 
+  test "should_extract_category_from the_description" do 
+    entry_4 = Entry.create(user_id: @user.id, description: "I have been working on a bug")
+    entry_4.category = entry_4.extract_category_from_description
+
+    assert_equal "bug", entry_4.category
+  end
+
   test "should Logged in user should see a list of his or her entry, ordered by newest entries, by default" do
      entry1 = @user_four.entries.create(category: "chore", description: "MyText", created_at: Time.now )
      entry2 = @user_four.entries.create(category: "Bug", description: "MyText", created_at: Time.now - 3.days)

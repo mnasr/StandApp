@@ -2,14 +2,14 @@ class Entry < ActiveRecord::Base
 
   default_scope :order => 'created_at DESC'
 
-  CATEGORIES = ["Bug", "Chore", "Feature", "Support", "R&D"]
+  CATEGORIES = ['bug', 'chore', 'feature', 'support', 'R&D']
 
   attr_accessible :category, :description, :ticket_id, :user_id, :created_at
   belongs_to :user
 
 
   validates :description, :presence => true
-  validates :category, :presence => true
+  #validates :category, :presence => true
   
 
   validate :records_for_today?, :on => :create
@@ -29,6 +29,10 @@ class Entry < ActiveRecord::Base
     User.all.select do |user|
       user.entries.today.blank?
     end
+  end
+
+  def extract_category_from_description
+    category = description[Regexp.union(CATEGORIES)]
   end
 
   def extract_ticket_number_from_description
