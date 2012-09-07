@@ -6,6 +6,7 @@ class EntriesController < ApplicationController
   def index
     @entries = Entry.paginate(:page => params[:page], :order => "created_at DESC")
     @title   = "Listing entries"
+    @entry_months = @entries.group_by { |e| e.created_at.beginning_of_month }
   
 
     respond_to do |format|
