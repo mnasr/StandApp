@@ -54,14 +54,14 @@ class EntryTest < ActiveSupport::TestCase
 
   test "shoud_extract_one_ticket_number" do 
     entry_3 = Entry.create(user_id: @user.id, category: 1, description: "I have been working on ticket (#1234)")
-    number = entry_3.extract_ticket_number_from_description
-    assert_equal "1234", number
+    ticket_number = entry_3.extract_ticket_number_from_description
+    assert_equal ["1234"], ticket_number
   end
 
   test "should_extract_more_than_one_ticket_number" do 
     entry_4 = Entry.create(user_id: @user.id, category: 1, description: "I have been working on tickets (#1234) and (#3456)")
-    number = entry_4.extract_ticket_number_from_description
-    assert_equal "1234 3456", number
+    ticket_number = entry_4.extract_ticket_number_from_description
+    assert_equal ["1234", "3456"], ticket_number
   end
 
   test "should Logged in user should see a list of his or her entry, ordered by newest entries, by default" do
