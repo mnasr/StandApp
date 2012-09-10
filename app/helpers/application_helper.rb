@@ -22,7 +22,7 @@ module ApplicationHelper
   end
   
   def back_button
-    link_to('<i class="icon-arrow-left icon-white"></i> Back to previous page'.html_safe, :back, :class => 'btn')
+    link_to('<i class="icon-arrow-left icon-white"></i> Back to previous page'.html_safe, :back, :class => 'btn', remote: true)
   end
 
   def markdown(text)
