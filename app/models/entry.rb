@@ -45,8 +45,8 @@ class Entry < ActiveRecord::Base
   end
 
   def check_entry_update_time?
-   self.errors.add :base, "User can\'t update his entry anymore." unless
-       self.updated_at < self.created_at + 12.hours
+    self.errors.add :base, "User can\'t update his entry anymore." unless
+      self.updated_at < self.created_at + 12.hours
   end
 
   def records_for_today?
