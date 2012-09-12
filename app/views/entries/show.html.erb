@@ -29,6 +29,11 @@
 		<dt><b>Description</b></dt>
 		<dd><%= markdown @entry.description %></dd>
 	</p>
+
+	<p>
+		<dt><b>Last Updated</b></dt>
+		<dd><%= @entry.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></dd>
+	</p>
 </dl>
 
 <%= back_button %>

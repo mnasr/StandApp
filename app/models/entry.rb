@@ -4,16 +4,17 @@ class Entry < ActiveRecord::Base
 
   CATEGORIES = ['bug', 'chore', 'feature', 'support', 'R&D']
 
-  attr_accessible :category, :description, :ticket_id, :user_id, :created_at
+  attr_accessible :category, :description, :ticket_id, :user_id, :created_at, :updated_at
   belongs_to :user
 
 
   validates :description, :presence => true
-  
 
   validate :records_for_today?, :on => :create
 
   scope :today, where('created_at >= ? AND created_at <= ?', Time.now.beginning_of_day, Time.now.end_of_day)
+
+  validate :check_entry_update_time?, :on => :update
 
   def self.send_email_on_late_submission
     if Time.now.hour > Settings.deadline_time
@@ -41,6 +42,11 @@ class Entry < ActiveRecord::Base
       ticket_ids = ticket_id.scan(/\d\d\d\d/)
       return ticket_ids
     end
+  end
+
+  def check_entry_update_time?
+    self.errors.add :base, "User can\'t update his entry anymore." unless
+      self.updated_at < self.created_at + 12.hours
   end
 
   def records_for_today?
