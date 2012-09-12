@@ -8,7 +8,7 @@
   <div class="control-group">
 	  <%= f.label :description, :class => "control-label" %>
 		<div class="controls" , id="entrytext">
-			<%= f.text_area :description, :id => "editor" , :value => "Yesterday:<br/><ul><li></li></ul> <ul><li></li></ul><br/> Today:<br/> <ul><li></li></ul> <ul><li></li></ul> <br/>Roadblocks: (please write none if there is nothing) <ul><li></li></ul> <ul><li></li></ul>" %>
+			<%= f.text_area :description, :id => "editor" , :value => (render 'entries/edit_help') %>
 		</div>
 	</div>
 
