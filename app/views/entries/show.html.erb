@@ -19,10 +19,13 @@
 	</p>
 	<% end %>
 
-	<% if @entry.extract_category_from_description.present? %>
+	<% if @entry.description.scan(/\(([^\)]+)\)/).count > 0 %>
 	<p>
 		<dt><b>Category</b></dt>
-		<dd><%= link_to @entry.extract_category_from_description, search_path(:search => @entry.extract_category_from_description), :method => :post %></dd>
+		<% times = 0..(@entry.description.scan(/\(([^\)]+)\)/).count-2) %>
+			<% for i in times do %>
+		<dd><%= link_to @entry.extract_category_from_description[i], search_path(:search => @entry.extract_category_from_description), :method => :post %></dd>
+			<% end %>
 	</p>
 	<% end %>
 	

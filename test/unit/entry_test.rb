@@ -64,10 +64,15 @@ class EntryTest < ActiveSupport::TestCase
   end
 
   test "should_extract_category_from the_description" do 
-    entry_4 = Entry.create(user_id: @user.id, description: "I have been working on a bug")
-    entry_4.category = entry_4.extract_category_from_description
+    entry_4 = Entry.create(user_id: @user.id, description: "I have been working on a (bug)")
+    category = entry_4.extract_category_from_description
+    assert_equal ["bug"], category
+  end
 
-    assert_equal "bug", entry_4.category
+  test "should_extract_more_than_one_category_from the_description" do 
+    entry_4 = Entry.create(user_id: @user.id, description: "I have been working on a (bug) and (feature)")
+    category = entry_4.extract_category_from_description
+    assert_equal ["bug","feature"], category
   end
 
   test "logged in user should see a list of his or her entry, ordered by newest entries, by default" do
