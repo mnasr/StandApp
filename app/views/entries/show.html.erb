@@ -30,8 +30,8 @@
 	
 	<p>
 		<dt><b>Description</b></dt>
-		<dd><%= markdown @entry.description %></dd>
-	</p>
+				<dd><%= linkify(@entry.description) %></dd>
+			</p>
 
 	<p>
 		<dt><b>Last Updated</b></dt>
