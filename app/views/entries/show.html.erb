@@ -7,13 +7,7 @@
 		<dt><b>User identification</b></dt>
 		<dd><%= @entry.user.email %></dd>
 	</p>
-<<<<<<< HEAD
 
-	<p>
-		<dt><b>Redmine ticket url</b></dt>
-		<dd><%= link_to(@entry.extract_ticket_number_from_description, format_ticket_id_to_url(@entry.extract_ticket_number_from_description)) %></dd>
-	</p>
-=======
 	
 	<% if @entry.description.scan(/\d\d\d\d/).count > 0%>
 	<p>
@@ -24,7 +18,6 @@
 			<% end %>
 	</p>
 	<% end %>
->>>>>>> origin/master
 
 	<% if @entry.extract_category_from_description.present? %>
 	<p>
