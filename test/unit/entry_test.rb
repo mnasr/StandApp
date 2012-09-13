@@ -24,7 +24,7 @@ class EntryTest < ActiveSupport::TestCase
   
   test "should not allow an empty entry" do
     entry = Entry.create
-    assert_equal ["Description can't be blank", "Category can't be blank"], entry.errors.full_messages
+    assert_equal ["Description can't be blank"], entry.errors.full_messages
   end
 
   test "should return [] if all users created entries today" do
@@ -34,7 +34,7 @@ class EntryTest < ActiveSupport::TestCase
   test "should return a single user when all other users have created entries today" do
     entry = Entry.where(user_id: users(:two).id).first
     entry.update_attributes(created_at: 2.days.ago)
-
+    entry.update_attributes(updated_at: 46.hours.ago)
     assert_equal [users(:two)], Entry.check_for_users_with_no_entries
   end
 
@@ -64,7 +64,14 @@ class EntryTest < ActiveSupport::TestCase
     assert_equal "1234 3456", number
   end
 
-  test "should Logged in user should see a list of his or her entry, ordered by newest entries, by default" do
+  test "should_extract_category_from the_description" do 
+    entry_4 = Entry.create(user_id: @user.id, description: "I have been working on a bug")
+    entry_4.category = entry_4.extract_category_from_description
+
+    assert_equal "bug", entry_4.category
+  end
+
+  test "logged in user should see a list of his or her entry, ordered by newest entries, by default" do
      entry1 = @user_four.entries.create(category: "chore", description: "MyText", created_at: Time.now )
      entry2 = @user_four.entries.create(category: "Bug", description: "MyText", created_at: Time.now - 3.days)
      assert_equal [entries(:four), entry1 , entry2], users(:four).entries

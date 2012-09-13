@@ -8,24 +8,10 @@
   <div class="control-group">
 	  <%= f.label :description, :class => "control-label" %>
 		<div class="controls" , id="entrytext">
-			<%= f.text_area :description, :id => "editor" , :value => "Yesterday:<br/><ul><li></li></ul> <ul><li></li></ul><br/> Today:<br/> <ul><li></li></ul> <ul><li></li></ul> <br/>Roadblocks: (please write none if there is nothing) <ul><li></li></ul> <ul><li></li></ul>" %>
+			<%= f.text_area :description, :id => "editor" , :placeholder => (render 'entries/edit_help') %>
 		</div>
 	</div>
 
-  <div class="control-group">
-	  <%= f.label :category, :class => "control-label" %>
-		<div class="controls">
-			<%= f.select(:category, Entry::CATEGORIES, {:prompt => 'Select a category'}) %>
-		</div>
-	</div>
-
-  <div class="control-group">
-	  <%= f.label :ticket_id, :class => "control-label" %>
-		<div class="controls">
-			<%= f.number_field :ticket_id %>
-		</div>
-	</div>
-	
   <div class="form-actions">
 		<%= f.submit :class => "btn btn-primary" %>
 		<%= back_button %>

@@ -7,20 +7,40 @@
 		<dt><b>User identification</b></dt>
 		<dd><%= @entry.user.email %></dd>
 	</p>
+<<<<<<< HEAD
 
 	<p>
 		<dt><b>Redmine ticket url</b></dt>
 		<dd><%= link_to(@entry.extract_ticket_number_from_description, format_ticket_id_to_url(@entry.extract_ticket_number_from_description)) %></dd>
 	</p>
+=======
+	
+	<% if @entry.description.scan(/\d\d\d\d/).count > 0%>
+	<p>
+		<dt><b>Redmine ticket url</b></dt>
+		<% times = 0..(@entry.description.scan(/\d\d\d\d/).count-1) %>
+			<% for i in times do %>
+				<dd><%= link_to(@entry.extract_ticket_number_from_description[i], format_ticket_id_to_url(@entry.extract_ticket_number_from_description[i])) %></dd>
+			<% end %>
+	</p>
+	<% end %>
+>>>>>>> origin/master
 
+	<% if @entry.extract_category_from_description.present? %>
 	<p>
 		<dt><b>Category</b></dt>
-		<dd><%= link_to @entry.category, search_path(:search => @entry.category), :method => :post %></dd>
+		<dd><%= link_to @entry.extract_category_from_description, search_path(:search => @entry.extract_category_from_description), :method => :post %></dd>
 	</p>
+	<% end %>
 	
 	<p>
 		<dt><b>Description</b></dt>
-		<dd><%= @entry.description.html_safe %></dd>
+		<dd><%= markdown @entry.description %></dd>
+	</p>
+
+	<p>
+		<dt><b>Last Updated</b></dt>
+		<dd><%= @entry.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></dd>
 	</p>
 </dl>
 
