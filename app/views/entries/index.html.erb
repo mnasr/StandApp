@@ -21,6 +21,8 @@
 				<th>Category</th>
 				<th>User</th>
 				<th>Ticket</th>
+			  <th></th>
+			  <th></th>
 			</tr>
 				<% entries.each do |entry| %>
 					<tr>
@@ -29,13 +31,18 @@
 		        <td><%= entry.user.email %></td>
 		        <% if entry.extract_ticket_number_from_description.present? %>
 		        <td><%= entry.extract_ticket_number_from_description.inject(:+) %></td>
+		        <% elsif %>
+		        <td></td>
 		        <% end %>
 			      <% if entry.user_id == current_user.id %>
             <td><%= link_to('<i class="icon-pencil icon-white"></i> Modify'.html_safe, edit_entry_path(entry), :method => :get, :class => 'btn btn-primary align_right') %></td>
             	<td><%= link_to('<i class="icon-trash icon-white"></i> Destroy'.html_safe, entry, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger align_right') %>
             	</td>
-            <% end %> 
-          </tr>
+            <% elsif %>
+          	<td></td>
+          	<td></td>
+           	<% end %>
+          </tr> 
         <% end %> 
       <% end %>	
     </table>
