@@ -13,7 +13,7 @@
 		<dt><b>Redmine ticket url</b></dt>
 		<% times = 0..(@entry.description.scan(/\d\d\d\d/).count-1) %>
 			<% for i in times do %>
-				<dd><%= link_to(@entry.extract_ticket_number_from_description[i], @entry.extract_ticket_number_from_description[i]) %></dd>
+				<dd><%= link_to(@entry.extract_ticket_number_from_description[i], format_ticket_id_to_url(@entry.extract_ticket_number_from_description[i])) %></dd>
 			<% end %>
 	</p>
 	<% end %>
