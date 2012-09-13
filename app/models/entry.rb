@@ -35,11 +35,10 @@ class Entry < ActiveRecord::Base
   end
 
   def extract_ticket_number_from_description
-    ticket_id = description.gsub(/\D+/,'').gsub(/.{4}/, ' \0')
+    ticket_id = description.scan(/\#\d+/)
     if ticket_id.present?
-      ticket_id = ticket_id[1..-1]
-      ticket_ids = ticket_id.scan(/\d\d\d\d/)
-      return ticket_ids
+       # ticket_ids = ticket_id.scan(/\#\d+/)
+      return ticket_id
     end
   end
 
