@@ -31,7 +31,8 @@ class Entry < ActiveRecord::Base
   end
 
   def extract_category_from_description
-    category = description[Regexp.union(CATEGORIES)]
+    category = description.scan(/\(([^\)]+)\)/)
+    return category.collect { |element| element.count() ==  1 ? element[0] : element }
   end
 
   def extract_ticket_number_from_description
