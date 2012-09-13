@@ -34,7 +34,6 @@ class EntryTest < ActiveSupport::TestCase
   test "should return a single user when all other users have created entries today" do
     entry = Entry.where(user_id: users(:two).id).first
     entry.update_attributes(created_at: 2.days.ago)
-    entry.update_attributes(updated_at: 46.hours.ago)
     assert_equal [users(:two)], Entry.check_for_users_with_no_entries
   end
 
