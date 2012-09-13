@@ -22,11 +22,11 @@ module ApplicationHelper
   end
   
   def back_button
-    link_to('<i class="icon-arrow-left icon-white"></i> Back to previous page'.html_safe, :back, :class => 'btn', remote: true)
+    link_to('<i class="icon-arrow-left icon-white"></i> Back to previous page'.html_safe, :back, :class => 'btn')
   end
 
   def markdown(text)
-    options = [:hard_wrap, :filter_html, :autolink, :no_intraemphasis, :fenced_code, :gh_blockcode]
+    options = [:hard_wrap, :filter_html, :autolink, :no_intraemphasis, :fenced_code, :gh_blockcode, :tables, :smart]
     Redcarpet.new(text, *options).to_html.html_safe
   end
 end
