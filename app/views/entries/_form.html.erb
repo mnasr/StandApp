@@ -8,13 +8,16 @@
   <div class="control-group">
 	  <%= f.label :description, :class => "control-label" %>
 		<div class="controls" , id="entrytext">
-			<%= f.text_area :description, :id => "editor" , :placeholder => (render 'entries/edit_help') %>
+			<%= f.text_area :description, :id => "editor" %>
 		</div>
 	</div>
+
+	<div class="help">
+		<a href="//docs.moodle.org/23/en/Markdown" target="_blank">Text formatting</a>
+  </div>
 
   <div class="form-actions">
 		<%= f.submit :class => "btn btn-primary" %>
 		<%= back_button %>
 	</div>
 <% end %>
-  

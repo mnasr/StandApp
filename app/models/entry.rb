@@ -30,6 +30,7 @@ class Entry < ActiveRecord::Base
     end
   end
 
+
   def extract_category_from_description
     category = description.scan(/\(([^\)]+)\)/)
     return category.collect { |element| element.count() ==  1 ? element[0] : element }
@@ -39,6 +40,7 @@ class Entry < ActiveRecord::Base
     ticket_id = description.scan(/\#\d+/)
     return ticket_id.map!{|id| id.gsub(/#/,'')}
   end
+
 
   def records_for_today?
     if self.user_id.present?
