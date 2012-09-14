@@ -2,27 +2,23 @@
 one:
   id: 1
   description: MyText
-  category: chore
   user_id: 1
   created_at: <%= (Time.now).to_s(:db) %>
 
 two: 
   id: 2
   description: MyText
-  category: bug
   user_id: 2
   created_at: <%= (Time.now).to_s(:db) %>
 
 three:
   id: 3
   description: MyText
-  category: bug
   user_id: 3
   created_at: <%= (Time.now).to_s(:db) %>
 
 four:
   id: 4
   description: MyText
-  category: bug
   user_id: 4
   created_at: <%= (Time.now).to_s(:db) %> 

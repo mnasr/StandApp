@@ -20,7 +20,7 @@ class EntriesControllerTest < ActionController::TestCase
 
   test "should create entry with the user ID being passed in the params" do
     assert_difference('Entry.count') do
-      post :create, :entry => { :category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @user.id, :created_at => @entry.created_at }
+      post :create, :entry => { :description => @entry.description, :user_id => @user.id, :created_at => @entry.created_at }
     end
 
     assert_redirected_to entry_path(assigns(:entry))
@@ -28,7 +28,7 @@ class EntriesControllerTest < ActionController::TestCase
   
   test "should create entry and assign the user ID from the logged in user details" do
     assert_difference('Entry.count') do
-      post :create, :entry => { :category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :created_at => @entry.created_at }
+      post :create, :entry => { :description => @entry.description, :created_at => @entry.created_at }
     end
     entry = assigns(:entry)
     assert_equal @user.id, entry.user_id 
@@ -38,7 +38,7 @@ class EntriesControllerTest < ActionController::TestCase
 
   test "should not be able to create an entry for the same user" do
     assert_difference('Entry.count', 0) do
-      post :create, :entry => { :category => @entry.category, :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @entry.user_id, :created_at => @entry.created_at }
+      post :create, :entry => { :description => @entry.description, :user_id => @entry.user_id, :created_at => @entry.created_at }
     end
     assert_response :success
   end
@@ -54,7 +54,7 @@ class EntriesControllerTest < ActionController::TestCase
   end
 
   test "should update entry" do
-    put :update, :id => @entry, entry: {:category => "Bug", :description => @entry.description, :ticket_id => @entry.ticket_id, :user_id => @user.id, :created_at => @entry.created_at }
+    put :update, :id => @entry, entry: {:description => @entry.description, :user_id => @user.id, :created_at => @entry.created_at }
     assert_redirected_to entry_path(assigns(:entry))
   end
 
