@@ -4,7 +4,7 @@ class Entry < ActiveRecord::Base
 
   CATEGORIES = ['bug', 'chore', 'feature', 'support', 'R&D']
 
-  attr_accessible :category, :description, :ticket_id, :user_id, :created_at, :updated_at
+  attr_accessible :description, :ticket_id, :user_id, :created_at, :updated_at
   belongs_to :user
 
 
@@ -21,7 +21,7 @@ class Entry < ActiveRecord::Base
       users.each do |user|
         MailReminder.late(user).deliver
       end 
-    end
+    end 
   end
 
   def self.check_for_users_with_no_entries
@@ -29,18 +29,6 @@ class Entry < ActiveRecord::Base
       user.entries.today.blank?
     end
   end
-
-
-  def extract_category_from_description
-    category = description.scan(/\(([^\)]+)\)/)
-    return category.collect { |element| element.count() ==  1 ? element[0] : element }
-  end
-
-  def extract_ticket_number_from_description
-    ticket_id = description.scan(/\#\d+/)
-    return ticket_id.map!{|id| id.gsub(/#/,'')}
-  end
-
 
   def records_for_today?
     if self.user_id.present?
@@ -56,6 +44,29 @@ class Entry < ActiveRecord::Base
       end
     end
     true
+  end
+
+  def formatted_description
+    extract_ticket_ids
+    extract_categories
+    self.description
+  end
+
+  def extract_ticket_ids
+    ticket_ids = self.description.scan(/\#\d+/).map{|id| id.gsub(/#/,'')}
+
+    ticket_ids.each do |tid|
+      self.description.gsub!(/#{tid}/,"<a href=\'http://dev.nuserv.com/issues/#{tid}\'>#{tid}</a>")
+    end
+    self.description
+  end
+
+  def extract_categories
+    categories = self.description.scan(/\(([^\)]+)\)/).collect { |element| element.count() ==  1 ? element[0] : element }
+    categories.each do |category|
+      self.description.gsub!(/#{category}/,"<a href=\'http://localhost:3000/search?search[]=#{category}\'>#{category}</a>")
+    end
+    self.description
   end
 end
  
