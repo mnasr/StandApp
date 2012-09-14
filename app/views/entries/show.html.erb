@@ -8,29 +8,9 @@
 		<dd><%= @entry.user.email %></dd>
 	</p>
 	
-	<% if @entry.description.scan(/\d\d\d\d/).count > 0%>
-	<p>
-		<dt><b>Redmine ticket url</b></dt>
-		<% times = 0..(@entry.description.scan(/\d\d\d\d/).count-1) %>
-			<% for i in times do %>
-				<dd><%= link_to(@entry.extract_ticket_number_from_description[i], format_ticket_id_to_url(@entry.extract_ticket_number_from_description[i])) %></dd>
-			<% end %>
-	</p>
-	<% end %>
-
-	<% if @entry.description.scan(/\(([^\)]+)\)/).count > 0 %>
-	<p>
-		<dt><b>Category</b></dt>
-		<% times = 0..(@entry.description.scan(/\(([^\)]+)\)/).count-2) %>
-			<% for i in times do %>
-		<dd><%= link_to @entry.extract_category_from_description[i], search_path(:search => @entry.extract_category_from_description), :method => :post %></dd>
-			<% end %>
-	</p>
-	<% end %>
-	
 	<p>
 		<dt><b>Description</b></dt>
-				<dd><%= linkify(@entry.description) %></dd>
+				<dd><%= @entry.formatted_description.html_safe %></dd>
 			</p>
 
 	<p>
