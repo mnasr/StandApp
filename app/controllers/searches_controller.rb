@@ -13,5 +13,7 @@ class SearchesController < ApplicationController
     render :action => :show, :locals => {:results => @results, :keywords => @keywords}
   end
 
-  def show; end
+  def show
+  @title = "Search results"
+  end
 end
