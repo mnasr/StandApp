@@ -10,8 +10,9 @@
 
 	<p>
 		<dt><b>Description</b></dt>
-				<dd><%= @entry.formatted_description.html_safe %></dd>
-			</p>
+
+				<dd><%= markdown(@entry.formatted_description.html_safe) %></dd>
+	</p>
 
 	<p>
 		<dt><b>Last Updated</b></dt>
