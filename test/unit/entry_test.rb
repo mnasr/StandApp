@@ -91,11 +91,11 @@ class EntryTest < ActiveSupport::TestCase
 
   test "should detect and substitute all categories and ticket names with the whole url" do
     entry = Entry.create(user_id: @user.id, description: "I have been working on a (chore)")
-    assert_equal  "I have been working on a (<a href='http://localhost:3000/search?search[]=chore\'>chore</a>)", entry.extract_categories
+    assert_equal  "I have been working on a (<a href='http://localhost:3000/search?search[]=chore\'>chore</a>)", entry.extract_category
   end  
 
   test "should detect and substitute all categories" do
     entry = Entry.create(user_id: @user.id, description: "I have been working on a (chore,feature)")
-    assert_equal  "I have been working on a (<a href='http://localhost:3000/search?search[]=chore\'>chore</a>,<a href='http://localhost:3000/search?search[]=feature\'>feature</a>)", entry.extract_categories
+    assert_equal  "I have been working on a (<a href='http://localhost:3000/search?search[]=chore\'>chore</a>,<a href='http://localhost:3000/search?search[]=feature\'>feature</a>)", entry.extract_category
   end  
 end
