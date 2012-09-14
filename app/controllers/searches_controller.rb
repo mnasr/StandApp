@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
-  def create
+  def search
     @title = "Search results"
     @keywords = params[:search]
     @results = Array.new
@@ -14,6 +14,6 @@ class SearchesController < ApplicationController
   end
 
   def show
-  @title = "Search results"
+    @title = "Search results"
   end
 end

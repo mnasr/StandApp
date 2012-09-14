@@ -31,6 +31,31 @@ class EntryTest < ActiveSupport::TestCase
     assert_equal [], Entry.check_for_users_with_no_entries
   end
 
+  test "shoud_extract_one_ticket_number" do 
+    entry_3 = Entry.create(user_id: @user.id, description: "I have been working on ticket (#1234)")
+    number = entry_3.extract_ticket_number_from_description
+    assert_equal ["1234"], number
+  end
+
+
+  test "should_extract_more_than_one_ticket_number" do 
+    entry_4 = Entry.create(user_id: @user.id, description: "I have been working on tickets (#1234) and (#3456)")
+    number = entry_4.extract_ticket_number_from_description
+    assert_equal ["1234", "3456"], number
+  end
+
+  test "should_extract_category_from the_description" do 
+    entry_4 = Entry.create(user_id: @user.id, description: "I have been working on a (bug)")
+    category = entry_4.extract_category_from_description
+    assert_equal ["bug"], category
+  end
+
+  test "should_extract_more_than_one_category_from the_description" do 
+    entry_4 = Entry.create(user_id: @user.id, description: "I have been working on a (bug) and (feature)")
+    category = entry_4.extract_category_from_description
+    assert_equal ["bug","feature"], category
+  end
+
   test "should return a single user when all other users have created entries today" do
     entry = Entry.where(user_id: users(:two).id).first
     entry.update_attributes(created_at: 2.days.ago)

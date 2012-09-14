@@ -27,11 +27,11 @@
 				<% entries.each do |entry| %>
 					<tr>
 		      	<td><%= link_to (entry.created_at.to_date), entry_path(entry) %></td>
-		        <td><% %></td> 
+		        <td><%= linkify_categories(entry.description).html_safe %></td> 
 		        <td><%= entry.user.email %></td>
-		        <td><% %></td>
+		        <td><%= linkify_ticket_ids(entry.description).html_safe %></td>
 			      <% if entry.user_id == current_user.id %>
-            <td><%= link_to('<i class="icon-pencil icon-white"></i> Modify'.html_safe, edit_entry_path(entry), :method => :get, :class => 'btn btn-primary align_right') %></td>
+            	<td><%= link_to('<i class="icon-pencil icon-white"></i> Modify'.html_safe, edit_entry_path(entry), :method => :get, :class => 'btn btn-primary align_right') %></td>
             	<td><%= link_to('<i class="icon-trash icon-white"></i> Destroy'.html_safe, entry, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-danger align_right') %>
             	</td>
             <% elsif %>

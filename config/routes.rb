@@ -3,7 +3,10 @@ StandApp::Application.routes.draw do
 
   devise_for :users 
 
-  resource :search
+  resource :search do
+    get :search
+    post :search
+  end
 
   resource :summary, :controller => 'summary'
 
