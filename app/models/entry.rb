@@ -1,10 +1,11 @@
 class Entry < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
 
   default_scope :order => 'created_at DESC'
 
   CATEGORIES = ['bug', 'chore', 'feature', 'support', 'R&D']
 
-  attr_accessible :description, :ticket_id, :user_id, :created_at, :updated_at
+  attr_accessible :description, :user_id, :created_at, :updated_at
   belongs_to :user
 
 
@@ -28,6 +29,18 @@ class Entry < ActiveRecord::Base
     User.all.select do |user|
       user.entries.today.blank?
     end
+  end
+
+  def extract_category_from_description
+    categories = description.scan(/\(([^\)]+)\)/).collect { |element| element.count() ==  1 ? element[0] : element }
+    categories.each do |category|
+       category.split(",").map(&:strip)
+    end
+  end
+
+  def extract_ticket_number_from_description
+    ticket_id = description.scan(/\#\d+/)
+    return ticket_id.map!{|id| id.gsub(/#/,'')}
   end
 
   def records_for_today?
@@ -66,7 +79,7 @@ class Entry < ActiveRecord::Base
     all_categories.each do |categories|
       categories = categories.split(",").map(&:strip)
       categories.each do |category|
-        self.description.gsub!(/#{category}/,"<a href=\'http://localhost:3000/search?search[]=#{category}\'>#{category}</a>")
+        self.description.gsub!(/#{category}/, "<a href=\'http://#{Settings.application_url}/search/search?search=#{category}\'>#{category}</a>")
       end
     end
     self.description
