@@ -6,17 +6,17 @@ class EntryTest < ActiveSupport::TestCase
     @user_four = users(:four)
     @user = users(:one)
     @user_two = users(:two)
-    @entry = @user.entries.create(user_id: @user.id, category: 1, description: "hello Ghina and Mona")
+    @entry = @user.entries.create(user_id: @user.id, description: "hello Ghina and Mona")
     ActionMailer::Base.deliveries.clear
   end
 
   test "A user should not be able to have more than one entry for the same day" do
-    entry = Entry.create(user_id: @user.id, category: 1, description: "hello Ghina and Mona")
+    entry = Entry.create(user_id: @user.id, description: "hello Ghina and Mona")
     assert_equal ['User has already an entry for today. Come back tomorrow'], entry.errors.full_messages
   end
 
   test "A user should be able to have more than one entry not for the same day" do
-    entry_2 = Entry.new(user_id: @user.id, category: 1, description: "hello Ghina and Mona")
+    entry_2 = Entry.new(user_id: @user.id, description: "hello Ghina and Mona")
     entry_2.created_at = (Time.now - 10.days)
     entry_2.save
     assert_equal [], entry_2.errors.full_messages
@@ -51,33 +51,9 @@ class EntryTest < ActiveSupport::TestCase
     end
   end
 
-  test "shoud_extract_one_ticket_number" do 
-    entry_3 = Entry.create(user_id: @user.id, category: 1, description: "I have been working on ticket (#1234)")
-    number = entry_3.extract_ticket_number_from_description
-    assert_equal "1234", number
-  end
-
-  test "should_extract_more_than_one_ticket_number" do 
-    entry_4 = Entry.create(user_id: @user.id, category: 1, description: "I have been working on tickets (#1234) and (#3456)")
-    number = entry_4.extract_ticket_number_from_description
-    assert_equal "1234 3456", number
-  end
-
-  test "should_extract_category_from the_description" do 
-    entry_4 = Entry.create(user_id: @user.id, description: "I have been working on a (bug)")
-    category = entry_4.extract_category_from_description
-    assert_equal ["bug"], category
-  end
-
-  test "should_extract_more_than_one_category_from the_description" do 
-    entry_4 = Entry.create(user_id: @user.id, description: "I have been working on a (bug) and (feature)")
-    category = entry_4.extract_category_from_description
-    assert_equal ["bug","feature"], category
-  end
-
   test "logged in user should see a list of his or her entry, ordered by newest entries, by default" do
-     entry1 = @user_four.entries.create(category: "chore", description: "MyText", created_at: Time.now )
-     entry2 = @user_four.entries.create(category: "Bug", description: "MyText", created_at: Time.now - 3.days)
+     entry1 = @user_four.entries.create(description: "MyText", created_at: Time.now )
+     entry2 = @user_four.entries.create(description: "MyText", created_at: Time.now - 3.days)
      assert_equal [entries(:four), entry1 , entry2], users(:four).entries
    end
 
@@ -91,4 +67,30 @@ class EntryTest < ActiveSupport::TestCase
       assert_equal Entry.check_for_users_with_no_entries.size, MailReminder.deliveries.size
     end
   end
+
+  test "should detect and substitute ticket names" do
+    entry = Entry.create(user_id: @user.id, description: "I have been working on ticket #1234 ")
+    assert_match  /#<a href\='/, entry.formatted_description
+  end
+
+  test "should detect and substitute all ticket names" do
+    entry = Entry.create(user_id: @user.id, description: "I have been working on ticket #1234 and she is working on #2445")
+    assert_match  /#<a href\='/, entry.formatted_description
+    assert_match  /#<a href\='/, entry.formatted_description
+  end
+
+  test "should detect and substitute all categories names" do
+    entry = Entry.create(user_id: @user.id, description: "I have been working on ticket #1234 this is a (chore)")
+    assert_match  /#<a href\='/, entry.formatted_description
+  end
+
+   test "should detect and substitute the whole url" do
+    entry = Entry.create(user_id: @user.id, description: "I have been working on ticket #1234")
+    assert_equal  "I have been working on ticket #<a href=\'http://dev.nuserv.com/issues/1234\'>1234</a>", entry.extract_ticket_ids
+  end
+
+  test "should detect and substitute all categories and ticket names with the whole url" do
+    entry = Entry.create(user_id: @user.id, description: "I have been working on a (chore)")
+    assert_equal  "I have been working on a (<a href='http://localhost:3000/search?search[]=chore\'>chore</a>)", entry.extract_categories
+  end  
 end

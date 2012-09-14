@@ -6,7 +6,7 @@ class SearchesController < ApplicationController
     if @keywords.present?
       search_keywords = "%#{@keywords}%"
       @results << User.where("email LIKE ? OR fullname LIKE ?", search_keywords, search_keywords).all
-      @results << Entry.where("category LIKE ? OR description LIKE ?", search_keywords, search_keywords).all
+      @results << Entry.where("description LIKE ?", search_keywords).all
       @results = @results.compact.flatten
     end
 

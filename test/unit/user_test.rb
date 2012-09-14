@@ -82,7 +82,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "Entries should be deleted when corresponding user is deleted" do
     user2 = users(:two)
-    entry = user2.entries.create(user_id: user2.id, category: 1, description: "hello Ghina and Mona")
+    entry = user2.entries.create(user_id: user2.id, description: "hello Ghina and Mona")
     assert_not_equal [], user2.entries
 
     User.destroy(user2)
