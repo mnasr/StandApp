@@ -69,4 +69,5 @@ class Entry < ActiveRecord::Base
     self.description
   end
 end
+
  
