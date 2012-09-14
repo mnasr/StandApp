@@ -60,8 +60,8 @@ class Entry < ActiveRecord::Base
   end
 
   def formatted_description
-    extract_ticket_ids
     extract_category
+    extract_ticket_ids
     self.description
   end
 
@@ -69,7 +69,7 @@ class Entry < ActiveRecord::Base
     ticket_ids = self.description.scan(/\#\d+/).map{|id| id.gsub(/#/,'')}
 
     ticket_ids.each do |tid|
-      self.description.gsub!(/#{tid}/,"<a href=\'http://dev.nuserv.com/issues/#{tid}\'>#{tid}</a>")
+      self.description.gsub!(/##{tid}/,"[##{tid}](#{Settings.redmine_url}#{tid})")
     end
     self.description
   end
@@ -79,7 +79,7 @@ class Entry < ActiveRecord::Base
     all_categories.each do |categories|
       categories = categories.split(",").map(&:strip)
       categories.each do |category|
-        self.description.gsub!(/#{category}/, "<a href=\'http://#{Settings.application_url}/search/search?search=#{category}\'>#{category}</a>")
+        self.description.gsub!(/#{category}/, "[#{category}](http://#{Settings.application_url}/search/search?search=#{category})")
       end
     end
     self.description
