@@ -13,13 +13,24 @@
 <% if @results.present? %>
 	<ul>
 		<% @results.each do |result| %>
-			<li>
 				<% if result.is_a?(User)%>
-				<%= link_to result.email, result %>
+					<%= link_to result.email, result %>
 				<% elsif result.is_a?(Entry) %>
-					<%= link_to result.description.html_safe, result %>
+					<table class="table table-striped">
+						<tr>
+				  		<th></th>
+							<th>Category</th>
+							<th>User</th>
+							<th>Ticket</th>
+						</tr>
+								<tr>
+									<td><%= link_to "See result", result %></td>
+					        <td><%= linkify_categories(result.description).html_safe %></td> 
+					        <td><%= result.user.email %></td>
+					        <td><%= linkify_ticket_ids(result.description).html_safe %></td>
+				    		</tr>
+				  </table>
 				<% end %>
-			</li>
 		<% end %>
 	</ul>
 <% else %>
