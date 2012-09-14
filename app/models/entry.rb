@@ -48,7 +48,7 @@ class Entry < ActiveRecord::Base
 
   def formatted_description
     extract_ticket_ids
-    extract_categories
+    extract_category
     self.description
   end
 
@@ -61,13 +61,15 @@ class Entry < ActiveRecord::Base
     self.description
   end
 
-  def extract_categories
-    categories = self.description.scan(/\(([^\)]+)\)/).collect { |element| element.count() ==  1 ? element[0] : element }
-    categories.each do |category|
-      self.description.gsub!(/#{category}/,"<a href=\'http://localhost:3000/search?search[]=#{category}\'>#{category}</a>")
+  def extract_category
+    all_categories = self.description.scan(/\(([^\)]+)\)/).collect { |element| element.count() ==  1 ? element[0] : element }
+    all_categories.each do |categories|
+      categories = categories.split(",").map(&:strip)
+      categories.each do |category|
+        self.description.gsub!(/#{category}/,"<a href=\'http://localhost:3000/search?search[]=#{category}\'>#{category}</a>")
+      end
     end
     self.description
   end
-end
+end 
 
- 
