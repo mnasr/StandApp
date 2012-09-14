@@ -10,9 +10,4 @@ class EntriesHelperTest < ActionView::TestCase
 		assert_equal "", format_ticket_id_to_url(nil)
 		assert_equal "", format_ticket_id_to_url("")
 	end
-
-	test "link to ticket id in the description field"  do
-		assert_equal "<a href=\"http://dev.nuserv.com/issues/\">2345</a>", linkify("my ticket is #2345 ")
-		assert_equal "<a href=\"http://dev.nuserv.com/issues/\">2345</a><a href=\"http://dev.nuserv.com/issues/\">5421</a>", linkify("my ticket is #2345 and #5421")
-	end
 end
