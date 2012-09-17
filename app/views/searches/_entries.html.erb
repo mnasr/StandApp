@@ -12,9 +12,9 @@
 		<% entries.each do |result| %>
 			<tr>
 				<td><%= link_to (result.created_at.to_date), entry_path(result) %></td>
-		    <td><%= linkify_categories(result.description).html_safe %></td> 
+		    <td><%= linkify_categories(result).html_safe %></td> 
 		    <td><%= result.user.email %></td>
-		    <td><%= linkify_ticket_ids(result.description).html_safe %></td>
+		    <td><%= linkify_ticket_ids(result).html_safe %></td>
 			</tr>
 		<% end %>
 	</table>

@@ -32,15 +32,17 @@ class Entry < ActiveRecord::Base
   end
 
   def extract_category_from_description
-    categories = description.scan(/\(([^\)]+)\)/).collect { |element| element.count() ==  1 ? element[0] : element }
+    categories = description.scan(/\[(.*?)\]/).flatten
+    local_categories = []
     categories.each do |category|
-       category.split(",").map(&:strip)
+      local_categories << category.split(",").map(&:strip)
     end
+    local_categories.flatten
   end
 
   def extract_ticket_number_from_description
     ticket_id = description.scan(/\#\d+/)
-    return ticket_id.map!{|id| id.gsub(/#/,'')}
+    ticket_id.map{|id| id.gsub(/#/,'')}
   end
 
   def records_for_today?
@@ -66,21 +68,15 @@ class Entry < ActiveRecord::Base
   end
 
   def extract_ticket_ids
-    ticket_ids = self.description.scan(/\#\d+/).map{|id| id.gsub(/#/,'')}
-
-    ticket_ids.each do |tid|
+    extract_ticket_number_from_description.each do |tid|
       self.description.gsub!(/##{tid}/,"[##{tid}](#{Settings.redmine_url}#{tid})")
     end
     self.description
   end
 
   def extract_category
-    all_categories = self.description.scan(/\(([^\)]+)\)/).collect { |element| element.count() ==  1 ? element[0] : element }
-    all_categories.each do |categories|
-      categories = categories.split(",").map(&:strip)
-      categories.each do |category|
-        self.description.gsub!(/#{category}/, "[#{category}](http://#{Settings.application_url}/search/search?search=#{category})")
-      end
+    extract_category_from_description.each do |category|
+      self.description.gsub!(/#{category}/, "[#{category}](http://#{Settings.application_url}/search/search?search=#{category})")
     end
     self.description
   end
