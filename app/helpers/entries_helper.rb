@@ -25,7 +25,7 @@ module EntriesHelper
   	categories_links = []
     links = entry.extract_category_from_description
     links.each do |link|
-      categories_links << "<a href=\'/search/search?search=#{link}\'>#{link}</a>"
+      categories_links << "<a href=\'#{Settings.application_url}/search/search?search=#{link}\'>#{link}</a>"
     end
     categories_links.join(", ")
   end
