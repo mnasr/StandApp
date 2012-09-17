@@ -32,7 +32,7 @@ class EntriesController < ApplicationController
   def new
     @entry = Entry.new
     @title = "New entry"
-    @entry.description = "### Yesterday: ###\n\n* \n* \n* \n\n### Today: ###\n\n* \n* \n* \n\n\n### Roadblocks: (please write none if there is nothing) ###\n\n* \n* \n* \n"
+    @entry.description = "### Yesterday: ###\n\n* \n* \n* \n\n### Today: ###\n\n* \n* \n* \n\n\n### Roadblocks: please write none if there is nothing ###\n\n* \n* \n* \n"
 
     respond_to do |format|
       format.html # new.html.erb
