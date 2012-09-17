@@ -1,0 +1,17 @@
+<% if absences.present? %>
+	<table class="table table-striped">
+		<tr>
+			<th colspan="6"><h2>Absences</h2></th>
+		</tr>
+		<tr>
+			<th>User</th>
+		  <th>Description</th>
+		</tr>
+		<% absences.each do |result| %>
+			<tr>
+				<td><%= link_to result.user.fullname, result %></td>
+        <td><%= result.description %></td> 
+  		</tr>
+	  <% end %>
+	</table>
+<% end %>

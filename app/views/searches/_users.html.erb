@@ -1,0 +1,17 @@
+<% if users.present? %>
+	<table class="table table-striped">
+		<tr>
+			<th colspan="6"><h2>Users</h2></th>
+		</tr>
+		<tr>
+			<th>Email</th>
+			<th>Fullname</th>
+		</tr>
+		<% users.each do |result| %>
+			<tr>
+				<td><%= link_to result.email, result %></td>
+				<td><%= link_to result.fullname, result %></td>
+			<tr>
+		<% end %>
+	</table>
+<% end %>
