@@ -29,8 +29,4 @@ module ApplicationHelper
     options = [:hard_wrap, :filter_html, :autolink, :no_intraemphasis, :fenced_code, :gh_blockcode, :tables, :smart]
     Redcarpet.new(text, *options).to_html.html_safe
   end
-
-  def placeholder_text
-    "### Yesterday: ###\n\r\n\r* \n\r* \n\r* \n\r\n\r### Today: ###\n\r\n\r* \n\r* \n\r* \n\r\n\r\n\r### Roadblocks: (please write none if there is nothing) ###\n\r\n\r* \n\r* \n\r* \n\r"
-  end
 end
