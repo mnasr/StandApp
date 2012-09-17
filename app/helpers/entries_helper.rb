@@ -27,7 +27,7 @@ module EntriesHelper
   	cats.each do |categories|
       categories = categories.split(",").map(&:strip)
       categories.each do |category|
-        link << "<a href=\'http://#{Settings.application_url}/search/search?search=#{category}\'>#{category}</a>"
+        link << "<a href=\'#{Settings.application_url}/search/search?search=#{category}\'>#{category}</a>"
       end
     end
     link.join(', ')
