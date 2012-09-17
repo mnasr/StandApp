@@ -4,35 +4,23 @@
   	<div class="span2" id="entry_align">
 			<% if @results.present? %>
 				found <%= pluralize(@results.size, "result") %>
+
 			<% end %>
 		</div>
 	</div>
 </div>
 
-
 <% if @results.present? %>
-	<ul>
-		<% @results.each do |result| %>
-				<% if result.is_a?(User)%>
-					<%= link_to result.email, result %>
-				<% elsif result.is_a?(Entry) %>
-					<table class="table table-striped">
-						<tr>
-				  		<th></th>
-							<th>Category</th>
-							<th>User</th>
-							<th>Ticket</th>
-						</tr>
-								<tr>
-									<td><%= link_to "See result", result %></td>
-					        <td><%= linkify_categories(result.description).html_safe %></td> 
-					        <td><%= result.user.email %></td>
-					        <td><%= linkify_ticket_ids(result.description).html_safe %></td>
-				    		</tr>
-				  </table>
-				<% end %>
-		<% end %>
-	</ul>
+	<% @results.each do |key, values| %>
+		
+			<% if key == :entry %>
+				<%= render :partial => 'entries', :locals => {:entries => values} %>
+			<% elsif key == :user %>
+				<%= render :partial => 'users', :locals => {:users => values} %>
+			<% elsif key == :absence %>
+				<%= render :partial => 'absences', :locals => {:absences => values} %>
+			<% end %>
+	<% end %>
 <% else %>
 	<%= display_no_records(@keywords) %>
 <% end %>
