@@ -95,32 +95,32 @@ class EntryTest < ActiveSupport::TestCase
 
   test "should detect and substitute ticket names" do
     entry = Entry.create(user_id: @user.id, description: "I have been working on ticket #1234 ")
-    assert_match  /#<a href\='/, entry.formatted_description
+    assert_match  /http:/, entry.formatted_description
   end
 
   test "should detect and substitute all ticket names" do
     entry = Entry.create(user_id: @user.id, description: "I have been working on ticket #1234 and she is working on #2445")
-    assert_match  /#<a href\='/, entry.formatted_description
-    assert_match  /#<a href\='/, entry.formatted_description
+    assert_match  /http:/, entry.formatted_description
+    assert_match  /http:/, entry.formatted_description
   end
 
   test "should detect and substitute all categories names" do
     entry = Entry.create(user_id: @user.id, description: "I have been working on ticket #1234 this is a (chore)")
-    assert_match  /#<a href\='/, entry.formatted_description
+    assert_equal "I have been working on ticket [#1234](http://dev.nuserv.com/issues/1234) this is a ([chore](http://localhost:3000/search/search?search=chore))", entry.formatted_description
   end
 
    test "should detect and substitute the whole url" do
     entry = Entry.create(user_id: @user.id, description: "I have been working on ticket #1234")
-    assert_equal  "I have been working on ticket #<a href=\'http://dev.nuserv.com/issues/1234\'>1234</a>", entry.extract_ticket_ids
+    assert_equal  "I have been working on ticket [#1234](http://dev.nuserv.com/issues/1234)", entry.extract_ticket_ids
   end
 
   test "should detect and substitute all categories and ticket names with the whole url" do
     entry = Entry.create(user_id: @user.id, description: "I have been working on a (chore)")
-    assert_equal  "I have been working on a (<a href='http://localhost:3000/search?search[]=chore\'>chore</a>)", entry.extract_category
+    assert_equal  "I have been working on a ([chore](http://localhost:3000/search/search?search=chore))", entry.extract_category
   end  
 
   test "should detect and substitute all categories" do
     entry = Entry.create(user_id: @user.id, description: "I have been working on a (chore,feature)")
-    assert_equal  "I have been working on a (<a href='http://localhost:3000/search?search[]=chore\'>chore</a>,<a href='http://localhost:3000/search?search[]=feature\'>feature</a>)", entry.extract_category
+    assert_equal  "I have been working on a ([chore](http://localhost:3000/search/search?search=chore),[feature](http://localhost:3000/search/search?search=feature))", entry.extract_category
   end  
 end
