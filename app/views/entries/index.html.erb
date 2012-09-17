@@ -27,7 +27,7 @@
 			</tr>
 				<% entries.each do |entry| %>
 					<tr>
-		      	<td><%= link_to (entry.created_at.to_date), entry_path(entry) %></td>
+		      	<td><%= link_to (entry.created_at.strftime("%d/%m/%Y")), entry_path(entry) %></td>
 		        <td><%= linkify_categories(entry.description).html_safe %></td> 
 		        <td><%= entry.user.email %></td>
 		        <td><%= linkify_ticket_ids(entry.description).html_safe %></td>

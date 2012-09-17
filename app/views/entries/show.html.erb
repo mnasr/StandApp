@@ -4,22 +4,27 @@
 
 <dl class="dl-horizontal">
 	<p>
-		<dt><b>User identification</b></dt>
+		<dt><b>User</b></dt>
 		<dd><%= @entry.user.email %></dd>
 	</p>
 
 	<p>
-		<dt><b>Description</b></dt>
-		<dd><%= markdown(@entry.formatted_description) %></dd>
-	</p>
-
-	<p>
 		<dt><b>Last Updated</b></dt>
-		<dd><%= @entry.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></dd>
+		<dd><%= @entry.updated_at.strftime("%d/%m/%Y at %H:%M:%S") %></dd>
+	</p>
+  <hr/>
+	<p>
+		<dt></dt>
+		<dd><%= markdown(@entry.formatted_description) %></dd>
 	</p>
 </dl>
 
-<%= back_button %>
-<% if @entry.user_id == current_user.id %>
-	<%= link_to('Edit entry', edit_entry_path, :class => 'btn btn-primary ') %>
-<% end %> 
+<div class="form-actions">
+  <div style="padding-left:120px">
+    <% if @entry.user_id == current_user.id %>
+    	<%= link_to('Edit entry', edit_entry_path, :class => 'btn btn-primary ') %>
+    <% end %>
+	
+  	<%= back_button %>
+  </div>
+</div>
