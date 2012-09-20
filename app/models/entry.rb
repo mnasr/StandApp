@@ -35,14 +35,14 @@ class Entry < ActiveRecord::Base
     categories = description.scan(/\[(.*?)\]/).flatten
     local_categories = []
     categories.each do |category|
-      local_categories << category.split(",").map(&:strip)
+      local_categories << category.split(",").map(&:strip).each(&:downcase)
     end
-    local_categories.flatten
+    local_categories.uniq.flatten
   end
 
   def extract_ticket_number_from_description
     ticket_id = description.scan(/\#\d+/)
-    ticket_id.map{|id| id.gsub(/#/,'')}
+    ticket_id.map{|id| id.gsub(/#/,'')}.uniq
   end
 
   def records_for_today?
