@@ -44,9 +44,9 @@
 	    <% end %>	
 	  </table>
 
-	<div class="pagination">
-		<%= will_paginate @entries %>
-	</div>
+	<div class="apple_pagination">
+    <%= will_paginate @entries %>
+  </div>
 <% else %>
 	<%= display_no_records("entries") %>
 <% end %>	
