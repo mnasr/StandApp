@@ -15,6 +15,8 @@ StandApp::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = true
 
+  #config.action_mailer.delivery_method = :letter_opener
+
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
@@ -42,7 +44,7 @@ StandApp::Application.configure do
                                                 address:"smtp.gmail.com",
                                                 port:587,
                                                 authentication: "plain",
-                                                domain: "user3",
+                                                domain: "standapp.herokuapp.com",
                                                 user_name: "careers@beirutrb.org",
                                                 password: "monaqasat2012",
                                                 enable_starttls_auto: true }
