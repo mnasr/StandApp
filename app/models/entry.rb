@@ -14,6 +14,8 @@ class Entry < ActiveRecord::Base
   validate :records_for_today?, :on => :create
 
   scope :today, where('created_at >= ? AND created_at <= ?', Time.now.beginning_of_day, Time.now.end_of_day)
+ 
+  after_save :announce_entry
 
 
   def self.send_email_on_late_submission
@@ -79,6 +81,13 @@ class Entry < ActiveRecord::Base
       self.description.gsub!(/#{category}/, "[#{category}](http://#{Settings.application_url}/search/search?search=#{category})")
     end
     self.description
+  end
+
+  def announce_entry
+    campfire = Tinder::Campfire.new 'nuserv', :token => Settings.campfire_token
+    room = campfire.find_room_by_id(Settings.camfire_room_id)
+    room.speak("#{user.fullname.capitalize} has submitted a new Standapp Entry")
+    room.paste(description.html_safe)
   end
 end 
 
