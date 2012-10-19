@@ -4,7 +4,7 @@ defaults: &defaults
   deadline_time: 12
   application_url: "localhost:3000"
   campfire_token: '64073638647411f98026fb5895a2ad02aa4b94ac'
-  camfire_room_id : 537258
+  camfire_room_id : 464963
 
 development:
   <<: *defaults
