@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates_presence_of :timezone, :on => :update
 
   before_destroy :ensure_an_admin_remains
-  
+   
   has_many :entries, :dependent => :destroy
   has_many :tracks 
   has_many :absences, :dependent => :destroy
@@ -56,7 +56,19 @@ class User < ActiveRecord::Base
   def is_scrum_master?
     self == User.scrum_master
   end
-    
+
+  def self.get_all_users
+    today = Time.zone.now.strftime("%A").downcase
+    case today
+    when 'sunday' || 'monday'
+      User.where("week_pattern = ? OR week_pattern IS NULL", today).all
+    when 'friday'
+      User.where("week_pattern = ? OR week_pattern IS NULL", 'monday').all
+    else
+      User.all
+    end
+  end
+
   private 
 
   def ensure_an_admin_remains

@@ -6,7 +6,8 @@ class UserTest < ActiveSupport::TestCase
 		@user = users(:three)
 		@track = tracks(:two)
 		@user.tracks << @track
- 		@good_user = User.create(:email => 'mark@monaqasat.com', :fullname => "Mark Anthony", :password => "12345678", :password_confirmation => "12345678", :week_pattern => "Tuesday", :timezone => "(GMT+00:00) UTC")
+    @good_user = User.create(:email => 'mark@monaqasat.com', :fullname => "Mark Anthony", :password => "12345678", :password_confirmation => "12345678", :week_pattern => "monday", :timezone => "(GMT+00:00) UTC")
+ 		@good_user_two = User.create(:email => 'mark0@monaqasat.com', :fullname => "Mark Anthany", :password => "123456780", :password_confirmation => "123456780", :week_pattern => "sunday", :timezone => "(GMT+02:00) UTC")
  		@bad_user = User.create(:email => 'bill@microsoft.com', :fullname => "Bill Gates", :password => "12345678", :password_confirmation => "12345678")
     @fullname_user = User.new(:email => 'nasr@monaqasat.com', :fullname => "Mona Nasr", :password => "12345678", :password_confirmation => "12345678")
     @nofullname_user = User.new(:email => 'mnasr@monaqasat.com', :fullname => "", :password => "12345678", :password_confirmation => "12345678")
@@ -78,6 +79,10 @@ class UserTest < ActiveSupport::TestCase
 
   	assert_not_equal @user, User.scrum_master
  
+  end
+
+  test "set weekend according to weekpattern" do
+    assert_equal [@good_user], User.get_all_users
   end
 
   test "Entries should be deleted when corresponding user is deleted" do

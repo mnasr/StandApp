@@ -17,18 +17,25 @@ class Entry < ActiveRecord::Base
 
 
   def self.send_email_on_late_submission
-    users = Entry.check_for_users_with_no_entries
+    users = Entry.check_for_users_with_no_entries_and_consider_weekend
 
     if Time.zone.now.hour > Settings.deadline_time
       users = users - Absence.today
       users.each do |user|
         MailReminder.late(user).deliver
       end 
-    end 
+    end
+  end
+
+  def self.check_for_users_with_no_entries_and_consider_weekend
+    users = User.get_all_users.select do |user|
+      user.entries.today.blank?
+    end
+    users.uniq
   end
 
   def self.check_for_users_with_no_entries
-    users = User.select do |user|
+    users = User.all.select do |user|
       user.entries.today.blank?
     end
     users.uniq
