@@ -3,7 +3,7 @@ defaults: &defaults
   redmine_url: "http://dev.nuserv.com/issues/"
   deadline_time: 12
   application_url: "localhost:3000"
-  campfire_token: '64073638647411f98026fb5895a2ad02aa4b94ac'
+  campfire_token: 'cbccfeea452bc81fac7021f555471720fb2080dc'
   camfire_room_id : 464963
 
 development:
