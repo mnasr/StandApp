@@ -15,7 +15,7 @@ class Entry < ActiveRecord::Base
 
   scope :today, where('created_at >= ? AND created_at <= ?', Time.now.beginning_of_day, Time.now.end_of_day)
  
-  after_save :announce_entry
+  after_create :announce_entry
 
 
   def self.send_email_on_late_submission
