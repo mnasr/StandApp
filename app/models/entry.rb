@@ -14,8 +14,9 @@ class Entry < ActiveRecord::Base
   validate :records_for_today?, :on => :create
 
   scope :today, where('created_at >= ? AND created_at <= ?', Time.now.beginning_of_day, Time.now.end_of_day)
- 
+
   after_create :announce_entry
+
 
 
   def self.send_email_on_late_submission
@@ -25,7 +26,7 @@ class Entry < ActiveRecord::Base
       users = users - Absence.today
       users.each do |user|
         MailReminder.late(user).deliver
-      end 
+      end
     end
   end
 
@@ -55,6 +56,26 @@ class Entry < ActiveRecord::Base
   def extract_ticket_number_from_description
     ticket_id = description.scan(/\#\d+/)
     ticket_id.map{|id| id.gsub(/#/,'')}.uniq
+  end
+
+  def working_days_count_per_month
+    user = self.user
+    first_day_in_month = Date.new( user.created_at.year, user.created_at.month, 1)
+    last_day_in_month = Date.new( self.created_at.year, self.created_at.month, -1)
+
+    if user.week_pattern == "Sunday"
+      wdays = [5,6]
+      weekdays = (first_day_in_month..last_day_in_month).reject { |d| wdays.include? d.wday}
+    else
+      wdays = [0,6]
+      weekdays = (first_day_in_month..last_day_in_month).reject { |d| wdays.include? d.wday}
+    end
+    weekdays.count if weekdays.present?
+  end
+
+  def count_of_entries
+    entry = Entry.where("user_id = ? AND created_at <= ?", self.user_id, self.created_at)
+    entry.count
   end
 
   def records_for_today?
@@ -99,5 +120,5 @@ class Entry < ActiveRecord::Base
     room.speak("#{user.fullname.capitalize} has submitted a new Standapp Entry")
     room.paste(description.html_safe)
   end
-end 
+end
 

@@ -21,7 +21,7 @@ class EntryTest < ActiveSupport::TestCase
     entry_2.save
     assert_equal [], entry_2.errors.full_messages
   end
-  
+
   test "should not allow an empty entry" do
     entry = Entry.create
     assert_equal ["Description can't be blank"], entry.errors.full_messages
@@ -31,26 +31,26 @@ class EntryTest < ActiveSupport::TestCase
     assert_equal [], Entry.check_for_users_with_no_entries
   end
 
-  test "shoud_extract_one_ticket_number" do 
+  test "shoud_extract_one_ticket_number" do
     entry_3 = Entry.create(user_id: @user.id, description: "I have been working on ticket (#1234)")
     number = entry_3.extract_ticket_number_from_description
     assert_equal ["1234"], number
   end
 
 
-  test "should_extract_more_than_one_ticket_number" do 
+  test "should_extract_more_than_one_ticket_number" do
     entry_4 = Entry.create(user_id: @user.id, description: "I have been working on tickets (#1234) and (#3456)")
     number = entry_4.extract_ticket_number_from_description
     assert_equal ["1234", "3456"], number
   end
 
-  test "should_extract_category_from the_description" do 
+  test "should_extract_category_from the_description" do
     entry_4 = Entry.create(user_id: @user.id, description: "I have been working on a [bug]")
     category = entry_4.extract_category_from_description
     assert_equal ["bug"], category
   end
 
-  test "should_extract_more_than_one_category_from the_description" do 
+  test "should_extract_more_than_one_category_from the_description" do
     entry_4 = Entry.create(user_id: @user.id, description: "I have been working on a [bugs] and [feature]")
     category = entry_4.extract_category_from_description
     assert_equal ["bugs","feature"], category
@@ -66,7 +66,7 @@ class EntryTest < ActiveSupport::TestCase
     User.all.each {|user| user.entries.delete_all }
     assert Entry.check_for_users_with_no_entries.include?(@user_two)
   end
-  
+
   test "should send an email for late users" do
     User.all.each { |user| user.entries.delete_all }
 
@@ -82,7 +82,7 @@ class EntryTest < ActiveSupport::TestCase
      assert_equal [entries(:four), entry1 , entry2], users(:four).entries
    end
 
-  test "Should send only 1 email" do 
+  test "Should send only 1 email" do
 
     Timecop.travel(Time.local(2012, 9, 1, (Settings.deadline_time + 1), 0, 0)) do
       entry = users(:three).entries.first
@@ -96,6 +96,25 @@ class EntryTest < ActiveSupport::TestCase
   test "should detect and substitute ticket names" do
     entry = Entry.create(user_id: @user.id, description: "I have been working on ticket #1234 ")
     assert_match  /http:/, entry.formatted_description
+  end
+
+  test "should return the total number of entries for a user" do
+    entry_two = @user_four.entries.create(description: "MyText", created_at: Time.now - 1.day )
+    entry_three = @user_four.entries.create(description: "MyText", created_at: Time.now - 1.month )
+    assert_equal 1, entry_three.count_of_entries
+    assert_equal 2, entry_two.count_of_entries
+  end
+
+  test "should return the right total number of working days upto the current month" do
+    @first_user = users(:one)
+    entry = @first_user.entries.create(description: "MyText", created_at: Time.now - 1.day )
+    assert_equal 86, entry.working_days_count_per_month
+  end
+
+  test "should return the total number of working days for this month" do
+    user = users(:four)
+    entry = user.entries.create(description: "MyText", created_at: Time.now )
+    assert_equal 21, entry.working_days_count_per_month
   end
 
   test "should detect and substitute all ticket names" do
@@ -117,10 +136,10 @@ class EntryTest < ActiveSupport::TestCase
   test "should detect and substitute all categories and ticket names with the whole url" do
     entry = Entry.create(user_id: @user.id, description: "I have been working on a [chore]")
     assert_equal  "I have been working on a [[chore](http://localhost:3000/search/search?search=chore)]", entry.extract_category
-  end  
+  end
 
   test "should detect and substitute all categories" do
     entry = Entry.create(user_id: @user.id, description: "I have been working on a [chore,feature]")
     assert_equal  "I have been working on a [[chore](http://localhost:3000/search/search?search=chore),[feature](http://localhost:3000/search/search?search=feature)]", entry.extract_category
-  end  
+  end
 end
