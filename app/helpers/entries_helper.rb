@@ -7,7 +7,7 @@ module EntriesHelper
 		ticket_url = ticket_url + ticket_id.to_s
 		ticket_url
 	end
-  
+
   def all_users
     @users = User.all
   end
@@ -21,6 +21,7 @@ module EntriesHelper
     tickets_links.join(', ')
   end
 
+
   def linkify_categories(entry)
   	categories_links = []
     links = entry.extract_category_from_description
@@ -29,4 +30,14 @@ module EntriesHelper
     end
     categories_links.join(", ")
   end
+
+  def working_days(entry)
+    if entry.user.absences.present?
+      total_working_days = entry.working_days_count_per_month - entry.user.absences.count
+    else
+      total_working_days = entry.working_days_count_per_month
+    end
+  end
 end
+
+
