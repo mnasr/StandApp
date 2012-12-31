@@ -78,13 +78,28 @@ class UserTest < ActiveSupport::TestCase
   	end
 
   	assert_not_equal @user, User.scrum_master
-
   end
 
   test "set weekend according to weekpattern" do
     Timecop.travel( Time.local(2012, 12, 28, (Settings.deadline_time + 1), 0, 0)) do
       assert_equal [@good_user], User.get_all_users
     end
+  end
+
+  test "should return the total number of entries for a user if present" do
+    assert_equal 0, @good_user.count_of_entries
+  end
+
+  test "should return the right total number of working days upto the current month" do
+    @first_user = users(:one)
+    entry = @first_user.entries.create(description: "MyText", created_at: Time.now - 1.day )
+    assert_equal 66, @first_user.working_days_count_per_month
+  end
+
+  test "should return the total number of working days for this month" do
+    user = users(:four)
+    entry = user.entries.create(description: "MyText", created_at: Time.now )
+    assert_equal 1, user.working_days_count_per_month
   end
 
   test "Entries should be deleted when corresponding user is deleted" do

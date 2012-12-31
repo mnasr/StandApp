@@ -58,26 +58,6 @@ class Entry < ActiveRecord::Base
     ticket_id.map{|id| id.gsub(/#/,'')}.uniq
   end
 
-  def working_days_count_per_month
-    user = self.user
-    first_day_in_month = Date.new( user.created_at.year, user.created_at.month, 1)
-    last_day_in_month = Date.new( self.created_at.year, self.created_at.month, -1)
-
-    if user.week_pattern == "Sunday"
-      wdays = [5,6]
-      weekdays = (first_day_in_month..last_day_in_month).reject { |d| wdays.include? d.wday}
-    else
-      wdays = [0,6]
-      weekdays = (first_day_in_month..last_day_in_month).reject { |d| wdays.include? d.wday}
-    end
-    weekdays.count if weekdays.present?
-  end
-
-  def count_of_entries
-    entry = Entry.where("user_id = ? AND created_at <= ?", self.user_id, self.created_at)
-    entry.count
-  end
-
   def records_for_today?
     if self.user_id.present?
       if self.created_at
