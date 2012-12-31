@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  
+
 	setup do
 		@user = users(:three)
 		@track = tracks(:two)
@@ -16,7 +16,7 @@ class UserTest < ActiveSupport::TestCase
 	end
 
 	test "User should use monaqasat email address" do
-    assert @good_user.valid? 
+    assert @good_user.valid?
 	end
 
 	test "User should not be allowed to use non-monaqasat email address" do
@@ -54,7 +54,7 @@ class UserTest < ActiveSupport::TestCase
   test "At least one user is assigned as an admin" do
     user = User.destroy(@user.id)
     assert_equal ['Cant delete the last user that is also an admin'], user.errors.full_messages
-  end 
+  end
 
   test "A random user is selected as a scrum master" do
     assert_include(User.all.map{|user| user.id}, @user.pick_user_as_new_scrum_master)
@@ -64,7 +64,7 @@ class UserTest < ActiveSupport::TestCase
   	assert_equal @user, User.scrum_master
   	assert_equal User, User.scrum_master.class
   end
-  
+
   test "return nil if there are no scrum masters assigned" do
     @track.update_attributes(start_date: Time.now - 2.weeks, end_date: Time.now - 1.weeks)
   	assert_equal nil, User.scrum_master
@@ -78,11 +78,13 @@ class UserTest < ActiveSupport::TestCase
   	end
 
   	assert_not_equal @user, User.scrum_master
- 
+
   end
 
   test "set weekend according to weekpattern" do
-    assert_equal [@good_user], User.get_all_users
+    Timecop.travel( Time.local(2012, 12, 28, (Settings.deadline_time + 1), 0, 0)) do
+      assert_equal [@good_user], User.get_all_users
+    end
   end
 
   test "Entries should be deleted when corresponding user is deleted" do
