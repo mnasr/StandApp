@@ -98,25 +98,6 @@ class EntryTest < ActiveSupport::TestCase
     assert_match  /http:/, entry.formatted_description
   end
 
-  test "should return the total number of entries for a user" do
-    entry_two = @user_four.entries.create(description: "MyText", created_at: Time.now - 1.day )
-    entry_three = @user_four.entries.create(description: "MyText", created_at: Time.now - 1.month )
-    assert_equal 1, entry_three.count_of_entries
-    assert_equal 2, entry_two.count_of_entries
-  end
-
-  test "should return the right total number of working days upto the current month" do
-    @first_user = users(:one)
-    entry = @first_user.entries.create(description: "MyText", created_at: Time.now - 1.day )
-    assert_equal 86, entry.working_days_count_per_month
-  end
-
-  test "should return the total number of working days for this month" do
-    user = users(:four)
-    entry = user.entries.create(description: "MyText", created_at: Time.now )
-    assert_equal 21, entry.working_days_count_per_month
-  end
-
   test "should detect and substitute all ticket names" do
     entry = Entry.create(user_id: @user.id, description: "I have been working on ticket #1234 and she is working on #2445")
     assert_match  /http:/, entry.formatted_description

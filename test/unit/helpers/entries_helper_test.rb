@@ -10,14 +10,4 @@ class EntriesHelperTest < ActionView::TestCase
 		assert_equal "", format_ticket_id_to_url(nil)
 		assert_equal "", format_ticket_id_to_url("")
 	end
-
-	test "should return the working days considering the absences of a user" do
-		entry = entries(:three)
-		assert_equal 20, working_days(entry)
-	end
-
-	test "should return working days without absences if user has no absences" do
-		entry = entries(:two)
-		assert_equal 21, working_days(entry)
-	end
 end

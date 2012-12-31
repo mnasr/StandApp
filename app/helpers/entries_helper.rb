@@ -30,14 +30,6 @@ module EntriesHelper
     end
     categories_links.join(", ")
   end
-
-  def working_days(entry)
-    if entry.user.absences.present?
-      total_working_days = entry.working_days_count_per_month - entry.user.absences.count
-    else
-      total_working_days = entry.working_days_count_per_month
-    end
-  end
 end
 
 
