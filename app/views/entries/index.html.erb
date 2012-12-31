@@ -28,7 +28,7 @@
 			</tr>
 				<% entries.each do |entry| %>
 					<tr>
-		      	<td><%= link_to (entry.created_at.strftime("%d/%m/%Y")), entry_path(entry) %></td>
+		      	<td><%= link_to (entry.created_at.strftime("%d/%m/%Y")), entry_path(entry), :title => display_entry(entry), :rel => 'tooltip' %></td>
 		        <td><%= linkify_categories(entry).html_safe %></td>
 		        <td><%= entry.user.email %></td>
 		        <td><%= entry.count_of_entries %>/<%= working_days(entry) %></td>
