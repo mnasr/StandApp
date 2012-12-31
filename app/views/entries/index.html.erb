@@ -21,7 +21,6 @@
 	  		<th>Date</th>
 				<th>Category</th>
 				<th>User</th>
-				<th>Total Entries</th>
 				<th>Ticket</th>
 			  <th></th>
 			  <th></th>
@@ -31,7 +30,6 @@
 		      	<td><%= link_to (entry.created_at.strftime("%d/%m/%Y")), entry_path(entry), :title => display_entry(entry), :rel => 'tooltip' %></td>
 		        <td><%= linkify_categories(entry).html_safe %></td>
 		        <td><%= entry.user.email %></td>
-		        <td><%= entry.count_of_entries %>/<%= working_days(entry) %></td>
 		        <td><%= linkify_ticket_ids(entry).html_safe %></td>
 			      <% if entry.user_id == current_user.id %>
 	          	<td><%= link_to('<i class="icon-pencil icon-white"></i> Modify'.html_safe, edit_entry_path(entry), :method => :get, :class => 'btn btn-primary align_right') %></td>

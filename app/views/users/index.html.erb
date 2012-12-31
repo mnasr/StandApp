@@ -7,6 +7,7 @@
   <tr>
     <th>Fullname</th>
     <th>Email</th>
+    <th>Total Entries</th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,6 +17,7 @@
 	  <tr>
 	    <td><%= link_to user.fullname, user %></td>
 	    <td><%= user.email %></td>
+	    <td><%= pluralize(user.count_of_entries, "entry") %> out of <%= pluralize(working_days(user), "expected entry")%> </td>
 	    <td><%= link_to('Absences', absence_path(user)) %></td>
 	    <td><%= link_to('<i class="icon-file icon-white"></i> Add an absence'.html_safe, new_absence_path, :class => 'btn') %></td>
 	    <td><%= link_to('<i class="icon-pencil icon-white"></i> Modify'.html_safe, edit_user_path(user), :class => 'btn btn-primary') %></td>
