@@ -21,8 +21,9 @@ module ApplicationHelper
     content_tag(:div, "There are no records found#{msg}".html_safe, :id => "alert", :class => "alert alert-error")
   end
 
-  def display_entry(entry)
-    markdown(entry.description.html_safe)
+  def display_entry(entry, html_safe = true)
+    html_safe ? content = entry.description.html_safe : content = entry.description
+    markdown(content.gsub("please write none if there is nothing", "").gsub("#", "").gsub("*", ""))
   end
   
   def back_button
@@ -30,7 +31,7 @@ module ApplicationHelper
   end
 
   def markdown(text)
-    options = [:hard_wrap, :filter_html, :autolink, :no_intraemphasis, :fenced_code, :gh_blockcode, :tables, :smart]
+    options = [:hard_wrap, :filter_html,:no_intraemphasis, :fenced_code, :gh_blockcode, :tables, :smart]
     Redcarpet.new(text, *options).to_html.html_safe
   end
 end
